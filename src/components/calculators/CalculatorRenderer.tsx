@@ -100,6 +100,67 @@ import {
 // Freight & Logistics Density Widgets
 import { FreightDensityWidget } from './FreightDensityWidgets';
 
+// Date & Time Widgets (14)
+import {
+  DateCalculatorWidget,
+  TimeCalculatorWidget,
+  DateTimeCalculatorWidget,
+  TimeAdditionSubtractionCalculatorWidget,
+  HoursCalculatorWidget,
+  DaysCalculatorWidget,
+  WeeksCalculatorWidget,
+  MonthsCalculatorWidget,
+  YearsCalculatorWidget,
+  DayOfTheWeekCalculatorWidget,
+  SecondsToTimeCalculatorWidget,
+  AverageTimeCalculatorWidget,
+  LeapYearCalculatorWidget,
+  MilitaryTimeConverterWidget,
+} from './DateTimeWidgets';
+
+// Time Card, Payroll, Hotel & Lead Time Widgets (4)
+import {
+  TimeCardCalculatorWidget,
+  PayrollHoursCalculatorWidget,
+  HotelDaysCalculatorWidget,
+  LeadTimeCalculatorWidget,
+} from './TimeCardWidgets';
+
+// Tech & Work Time Widgets (6)
+import {
+  DownloadTimeCalculatorWidget,
+  DiscordEpochTimeCalculatorWidget,
+  EpochTimeConverterWidget,
+  UnixEpochTimeCalculatorWidget,
+  AudiobookSpeedCalculatorWidget,
+  WordsToMinutesCalculatorWidget,
+} from './TechTimeWidgets';
+
+// Birthday & Milestone Widgets (9)
+import {
+  BirthdayCalculatorWidget,
+  WeeksAgoCalculatorWidget,
+  BirthYearCalculatorWidget,
+  HalfBirthdayCalculatorWidget,
+  GoldenBirthdayCalculatorWidget,
+  SilverBirthdayCalculatorWidget,
+  DiamondBirthdayCalculatorWidget,
+  SleepCalculatorWidget,
+  AnniversaryCalculatorWidget,
+} from './BirthdayMilestoneWidgets';
+
+// Esoteric Birthday Widgets (5)
+import {
+  RomanNumeralDateWidget,
+  MoonPhaseBirthdayWidget,
+  HebrewBirthdayWidget,
+  SoulmateBirthdayWidget,
+  TwinFlameBirthdayWidget,
+} from './EsotericBirthdayWidgets';
+
+// Swim Time Widget (1)
+import { SwimTimeConverterWidget } from './SwimTimeWidget';
+
 interface CalculatorRendererProps {
   slug: string;
 }
@@ -307,6 +368,96 @@ export const CalculatorRenderer: React.FC<CalculatorRendererProps> = ({ slug }) 
       return <FreightDensityWidget carrier="saia" title="Saia Density Calculator" />;
     case 'xpo-density-calculator':
       return <FreightDensityWidget carrier="xpo" title="XPO Density Calculator" />;
+
+    // Date & Time Calculators (14)
+    case 'date-calculator':
+      return <DateCalculatorWidget />;
+    case 'time-calculator':
+      return <TimeCalculatorWidget />;
+    case 'date-time-calculator':
+      return <DateTimeCalculatorWidget />;
+    case 'time-addition-subtraction-calculator':
+      return <TimeAdditionSubtractionCalculatorWidget />;
+    case 'hours-calculator':
+      return <HoursCalculatorWidget />;
+    case 'days-calculator':
+      return <DaysCalculatorWidget />;
+    case 'weeks-calculator':
+      return <WeeksCalculatorWidget />;
+    case 'months-calculator':
+      return <MonthsCalculatorWidget />;
+    case 'years-calculator':
+      return <YearsCalculatorWidget />;
+    case 'day-of-the-week-calculator':
+      return <DayOfTheWeekCalculatorWidget />;
+    case 'seconds-to-time-calculator':
+      return <SecondsToTimeCalculatorWidget />;
+    case 'average-time-calculator':
+      return <AverageTimeCalculatorWidget />;
+    case 'leap-year-calculator':
+      return <LeapYearCalculatorWidget />;
+    case 'military-time-converter':
+      return <MilitaryTimeConverterWidget />;
+
+    // Time Card, Payroll, Hotel & Lead Time Calculators (4)
+    case 'time-card-calculator':
+      return <TimeCardCalculatorWidget />;
+    case 'payroll-hours-calculator':
+      return <PayrollHoursCalculatorWidget />;
+    case 'hotel-days-calculator':
+      return <HotelDaysCalculatorWidget />;
+    case 'lead-time-calculator':
+      return <LeadTimeCalculatorWidget />;
+
+    // Tech & Work Time Calculators (6)
+    case 'download-time-calculator':
+      return <DownloadTimeCalculatorWidget />;
+    case 'discord-epoch-time-calculator':
+      return <DiscordEpochTimeCalculatorWidget />;
+    case 'epoch-time-converter':
+      return <EpochTimeConverterWidget />;
+    case 'unix-epoch-time-calculator':
+      return <UnixEpochTimeCalculatorWidget />;
+    case 'audiobook-speed-calculator':
+      return <AudiobookSpeedCalculatorWidget />;
+    case 'words-to-minutes-calculator':
+      return <WordsToMinutesCalculatorWidget />;
+
+    // Birthday & Milestone Calculators (9)
+    case 'birthday-calculator':
+      return <BirthdayCalculatorWidget />;
+    case 'weeks-ago-calculator':
+      return <WeeksAgoCalculatorWidget />;
+    case 'birth-year-calculator':
+      return <BirthYearCalculatorWidget />;
+    case 'half-birthday':
+      return <HalfBirthdayCalculatorWidget />;
+    case 'golden-birthday':
+      return <GoldenBirthdayCalculatorWidget />;
+    case 'silver-birthday':
+      return <SilverBirthdayCalculatorWidget />;
+    case 'diamond-birthday':
+      return <DiamondBirthdayCalculatorWidget />;
+    case 'sleep-calculator':
+      return <SleepCalculatorWidget />;
+    case 'anniversary-calculator':
+      return <AnniversaryCalculatorWidget />;
+
+    // Esoteric & Spiritual Birthday Calculators (5)
+    case 'roman-numeral-date':
+      return <RomanNumeralDateWidget />;
+    case 'moon-phase-birthday':
+      return <MoonPhaseBirthdayWidget />;
+    case 'hebrew-birthday':
+      return <HebrewBirthdayWidget />;
+    case 'soulmate-birthday':
+      return <SoulmateBirthdayWidget />;
+    case 'twin-flame-birthday':
+      return <TwinFlameBirthdayWidget />;
+
+    // Swim Time Converter (1)
+    case 'swim-time-converter':
+      return <SwimTimeConverterWidget />;
 
     default:
       return (

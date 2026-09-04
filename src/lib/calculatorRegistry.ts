@@ -7,6 +7,9 @@ import { TRAVEL_CALCULATORS } from './registry/travelCalculators';
 import { MARINE_PROPELLER_CALCULATORS } from './registry/marinePropellerCalculators';
 import { THRUST_CALCULATORS } from './registry/thrustCalculators';
 import { DENSITY_CALCULATORS } from './registry/densityCalculators';
+import { DATE_TIME_CALCULATORS } from './registry/dateTimeCalculators';
+import { BIRTHDAY_CALCULATORS } from './registry/birthdayCalculators';
+import { TECH_AND_WORK_TIME_CALCULATORS } from './registry/techAndWorkTimeCalculators';
 
 export const CALCULATORS: CalculatorDefinition[] = [
   {
@@ -739,6 +742,9 @@ export const CALCULATORS: CalculatorDefinition[] = [
   ...MARINE_PROPELLER_CALCULATORS,
   ...THRUST_CALCULATORS,
   ...DENSITY_CALCULATORS,
+  ...DATE_TIME_CALCULATORS,
+  ...BIRTHDAY_CALCULATORS,
+  ...TECH_AND_WORK_TIME_CALCULATORS,
 ];
 
 // Helper query functions
