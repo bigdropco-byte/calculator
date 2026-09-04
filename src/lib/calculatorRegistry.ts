@@ -11,6 +11,7 @@ import { DATE_TIME_CALCULATORS } from './registry/dateTimeCalculators';
 import { BIRTHDAY_CALCULATORS } from './registry/birthdayCalculators';
 import { TECH_AND_WORK_TIME_CALCULATORS } from './registry/techAndWorkTimeCalculators';
 import { PERCENTAGE_SUITE_CALCULATORS } from './registry/percentageSuiteCalculators';
+import { CONSTRUCTION_AND_WOOD_CALCULATORS } from './registry/constructionAndWoodCalculators';
 
 export const CALCULATORS: CalculatorDefinition[] = [
   {
@@ -747,6 +748,7 @@ export const CALCULATORS: CalculatorDefinition[] = [
   ...BIRTHDAY_CALCULATORS,
   ...TECH_AND_WORK_TIME_CALCULATORS,
   ...PERCENTAGE_SUITE_CALCULATORS,
+  ...CONSTRUCTION_AND_WOOD_CALCULATORS,
 ];
 
 // Helper query functions

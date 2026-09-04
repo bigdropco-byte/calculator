@@ -11,27 +11,45 @@ describe('Calculator Registry Integrity', () => {
     expect(slugs.length).toBe(uniqueSlugs.size);
   });
 
-  it('verifies exact total count is 142 calculators', () => {
-    expect(allCalcs.length).toBe(142);
-    expect(published.length).toBe(142);
+  it('verifies exact total count is 171 calculators', () => {
+    expect(allCalcs.length).toBe(171);
+    expect(published.length).toBe(171);
   });
 
-  it('contains all 13 newly added percentage suite calculators', () => {
+  it('contains all 29 newly added construction, wood, masonry, and pocket calculators', () => {
     const newSlugs = [
-      'discount-percentage-calculator',
-      'win-percentage-calculator',
-      'yearly-percentage-increase-calculator',
-      'percentage-decrease-calculator',
-      'part-time-percentage-calculator',
-      'time-percentage-calculator',
-      'percentage-of-time-calculator',
-      'reverse-percentage-calculator',
-      'growth-percentage-calculator',
-      'tax-percentage-calculator',
-      'vat-percentage-calculator',
-      'slugging-percentage-calculator',
-      'fat-percentage-calculator',
+      'sakrete-calculator',
+      'quikrete-calculator',
+      'concrete-calculator',
+      'calculator',
+      'gravel-calculator',
+      'stone-calculator',
+      'asphalt-calculator',
+      'american-asphalt',
+      'crushed-asphalt',
+      'vulcan-asphalt',
+      'hot-mix-asphalt',
+      'recycled-asphalt',
+      'framing-wood',
+      'wood-calculator',
+      'trestle-wood',
+      'weight-of-wood',
+      'deck-wood',
+      'cord-wood',
+      'cord-of-wood',
+      'cabinet-wood',
+      'firewood-cord',
+      'loose-cord-wood',
+      'shed-wood',
+      'fence-wood',
+      'firewood-calculator',
+      'concrete-slab',
+      'concrete-block',
+      'quikrete-concrete',
+      'material-calculator',
     ];
+
+    expect(newSlugs.length).toBe(29);
 
     for (const slug of newSlugs) {
       const calc = getCalculatorBySlug(slug);

@@ -178,6 +178,33 @@ import {
   FatPercentageWidget,
 } from './PercentageSuiteWidgets';
 
+// 29 Masonry, Concrete, Wood, Lumber & Pocket Calculator Widgets
+import {
+  ConcreteCalculatorWidget,
+  ConcreteSlabWidget,
+  ConcreteBlockWidget,
+  SakreteCalculatorWidget,
+  QuikreteCalculatorWidget,
+  GravelStoneCalculatorWidget,
+  AsphaltCalculatorWidget,
+  MaterialCalculatorWidget,
+} from './MasonryConcreteWidgets';
+import {
+  WoodCalculatorWidget,
+  FramingWoodWidget,
+  TrestleWoodWidget,
+  WeightOfWoodWidget,
+  DeckWoodWidget,
+  CordWoodWidget,
+  CabinetWoodWidget,
+  FirewoodCordWidget,
+  LooseCordWoodWidget,
+  ShedWoodWidget,
+  FenceWoodWidget,
+  FirewoodCalculatorWidget,
+} from './WoodLumberWidgets';
+import { StandardCalculatorWidget } from './StandardCalculatorWidget';
+
 interface CalculatorRendererProps {
   slug: string;
 }
@@ -503,6 +530,66 @@ export const CalculatorRenderer: React.FC<CalculatorRendererProps> = ({ slug }) 
       return <SluggingPercentageWidget />;
     case 'fat-percentage-calculator':
       return <FatPercentageWidget />;
+
+    // 29 Concrete, Masonry, Wood & Pocket Calculator Tools
+    case 'calculator':
+      return <StandardCalculatorWidget />;
+    case 'concrete-calculator':
+      return <ConcreteCalculatorWidget />;
+    case 'concrete-slab':
+      return <ConcreteSlabWidget />;
+    case 'concrete-block':
+      return <ConcreteBlockWidget />;
+    case 'sakrete-calculator':
+      return <SakreteCalculatorWidget />;
+    case 'quikrete-calculator':
+      return <QuikreteCalculatorWidget title="Quikrete Calculator" />;
+    case 'quikrete-concrete':
+      return <QuikreteCalculatorWidget title="Quikrete Concrete Calculator" />;
+    case 'gravel-calculator':
+      return <GravelStoneCalculatorWidget title="Gravel Calculator" defaultType="pea_gravel" />;
+    case 'stone-calculator':
+      return <GravelStoneCalculatorWidget title="Stone Calculator" defaultType="crushed_stone" />;
+    case 'asphalt-calculator':
+      return <AsphaltCalculatorWidget type="standard_hma" title="Asphalt Calculator" />;
+    case 'american-asphalt':
+      return <AsphaltCalculatorWidget type="american" title="American Asphalt Calculator" />;
+    case 'crushed-asphalt':
+      return <AsphaltCalculatorWidget type="crushed_rap" title="Crushed Asphalt Calculator" />;
+    case 'vulcan-asphalt':
+      return <AsphaltCalculatorWidget type="vulcan" title="Vulcan Asphalt Calculator" />;
+    case 'hot-mix-asphalt':
+      return <AsphaltCalculatorWidget type="standard_hma" title="Hot Mix Asphalt Calculator" />;
+    case 'recycled-asphalt':
+      return <AsphaltCalculatorWidget type="recycled" title="Recycled Asphalt Calculator" />;
+    case 'material-calculator':
+      return <MaterialCalculatorWidget />;
+    case 'wood-calculator':
+      return <WoodCalculatorWidget />;
+    case 'framing-wood':
+      return <FramingWoodWidget />;
+    case 'trestle-wood':
+      return <TrestleWoodWidget />;
+    case 'weight-of-wood':
+      return <WeightOfWoodWidget />;
+    case 'deck-wood':
+      return <DeckWoodWidget />;
+    case 'cord-wood':
+      return <CordWoodWidget title="Cord Wood Calculator" />;
+    case 'cord-of-wood':
+      return <CordWoodWidget title="Cord of Wood Calculator" />;
+    case 'cabinet-wood':
+      return <CabinetWoodWidget />;
+    case 'firewood-cord':
+      return <FirewoodCordWidget />;
+    case 'loose-cord-wood':
+      return <LooseCordWoodWidget />;
+    case 'shed-wood':
+      return <ShedWoodWidget />;
+    case 'fence-wood':
+      return <FenceWoodWidget />;
+    case 'firewood-calculator':
+      return <FirewoodCalculatorWidget />;
 
     default:
       return (
