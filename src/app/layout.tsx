@@ -58,10 +58,31 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    shortcut: ['/favicon.ico'],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
+  manifest: '/site.webmanifest',
+  appleWebApp: {
+    title: 'Calculat',
+    statusBarStyle: 'default',
+    capable: true,
+  },
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0284c7',
+  themeColor: '#2563eb',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
@@ -73,10 +94,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const orgSchema = generateOrganizationSchema();
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
   return (
     <html lang="en">
       <head>
+        <link rel="icon" href={`${basePath}/icon.svg`} type="image/svg+xml" />
+        <link rel="icon" href={`${basePath}/favicon.ico`} sizes="any" />
+        <link rel="icon" href={`${basePath}/favicon-48x48.png`} sizes="48x48" type="image/png" />
+        <link rel="icon" href={`${basePath}/favicon-32x32.png`} sizes="32x32" type="image/png" />
+        <link rel="icon" href={`${basePath}/favicon-16x16.png`} sizes="16x16" type="image/png" />
+        <link rel="apple-touch-icon" href={`${basePath}/apple-touch-icon.png`} sizes="180x180" />
+        <link rel="manifest" href={`${basePath}/site.webmanifest`} />
+        <meta name="theme-color" content="#2563eb" />
+        <meta name="apple-mobile-web-app-title" content="Calculat" />
+        <meta name="application-name" content="Calculat" />
+        <meta name="msapplication-TileColor" content="#2563eb" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}

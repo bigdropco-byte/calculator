@@ -17,7 +17,8 @@ export function generateOrganizationSchema() {
     '@type': 'Organization',
     name: SITE_CONFIG.name,
     url: SITE_CONFIG.url,
-    logo: `${SITE_CONFIG.url}/icon.png`,
+    logo: `${SITE_CONFIG.url}/icon-512.png`,
+    image: `${SITE_CONFIG.url}/icon-512.png`,
     description: SITE_CONFIG.description,
     founder: {
       '@type': 'Person',

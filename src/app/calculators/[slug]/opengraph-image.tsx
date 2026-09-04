@@ -53,20 +53,40 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-            <div
-              style={{
-                width: '52px',
-                height: '52px',
-                borderRadius: '14px',
-                background: 'white',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '28px',
-              }}
-            >
-              🧮
-            </div>
+            <svg
+            width="52"
+            height="52"
+            viewBox="0 0 512 512"
+            style={{ borderRadius: '14px' }}
+          >
+            <defs>
+              <linearGradient id="og-grad-slug" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#3b82f6" />
+                <stop offset="100%" stopColor="#1d4ed8" />
+              </linearGradient>
+            </defs>
+            <rect width="512" height="512" rx="115" ry="115" fill="url(#og-grad-slug)" />
+            <rect
+              x="136"
+              y="90"
+              width="240"
+              height="332"
+              rx="40"
+              ry="40"
+              fill="none"
+              stroke="#ffffff"
+              strokeWidth="26"
+            />
+            <rect x="168" y="132" width="176" height="44" rx="10" ry="10" fill="#ffffff" />
+            <rect x="168" y="202" width="46" height="44" rx="10" ry="10" fill="#ffffff" />
+            <rect x="233" y="202" width="46" height="44" rx="10" ry="10" fill="#ffffff" />
+            <rect x="298" y="202" width="46" height="44" rx="10" ry="10" fill="#ffffff" />
+            <rect x="168" y="264" width="46" height="44" rx="10" ry="10" fill="#ffffff" />
+            <rect x="233" y="264" width="46" height="44" rx="10" ry="10" fill="#ffffff" />
+            <rect x="168" y="326" width="46" height="44" rx="10" ry="10" fill="#ffffff" />
+            <rect x="233" y="326" width="46" height="44" rx="10" ry="10" fill="#ffffff" />
+            <rect x="298" y="264" width="46" height="106" rx="12" ry="12" fill="#ffffff" />
+          </svg>
             <span style={{ fontSize: '32px', fontWeight: '900', letterSpacing: '-0.02em' }}>
               Calculat<span style={{ color: '#38bdf8' }}>.dev</span>
             </span>
