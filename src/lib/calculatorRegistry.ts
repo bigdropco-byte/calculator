@@ -4,6 +4,9 @@ import { NUMEROLOGY_CALCULATORS } from './registry/numerologyCalculators';
 import { PAYROLL_CALCULATORS } from './registry/payrollCalculators';
 import { INVESTMENT_CALCULATORS } from './registry/investmentCalculators';
 import { TRAVEL_CALCULATORS } from './registry/travelCalculators';
+import { MARINE_PROPELLER_CALCULATORS } from './registry/marinePropellerCalculators';
+import { THRUST_CALCULATORS } from './registry/thrustCalculators';
+import { DENSITY_CALCULATORS } from './registry/densityCalculators';
 
 export const CALCULATORS: CalculatorDefinition[] = [
   {
@@ -733,6 +736,9 @@ export const CALCULATORS: CalculatorDefinition[] = [
   ...PAYROLL_CALCULATORS,
   ...INVESTMENT_CALCULATORS,
   ...TRAVEL_CALCULATORS,
+  ...MARINE_PROPELLER_CALCULATORS,
+  ...THRUST_CALCULATORS,
+  ...DENSITY_CALCULATORS,
 ];
 
 // Helper query functions

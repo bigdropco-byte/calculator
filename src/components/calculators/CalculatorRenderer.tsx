@@ -68,6 +68,38 @@ import { LtpCalculatorWidget } from './LtpCalculatorWidget';
 
 import { TripBudgetCalculatorWidget } from './TripBudgetCalculatorWidget';
 
+// Marine Propeller Widgets
+import { MarinePropellerWidget } from './MarinePropellerWidget';
+
+// Thrust Widgets
+import {
+  ThrustToWeightWidget,
+  DroneThrustWidget,
+  RocketThrustWidget,
+  GeneralThrustWidget,
+} from './ThrustWidgets';
+
+// Structural, Civil & Fitness Thrust Widgets
+import {
+  PipeThrustWidget,
+  RafterThrustWidget,
+  HipThrustWidget,
+} from './StructuralThrustWidgets';
+
+// Physics, Tech & Medical Density Widgets
+import {
+  GeneralDensityWidget,
+  CubeDensityWidget,
+  WaterDensityWidget,
+  AirDensityWidget,
+  PixelDensityWidget,
+  PopulationDensityWidget,
+  PsaDensityWidget,
+} from './DensityPhysicsWidgets';
+
+// Freight & Logistics Density Widgets
+import { FreightDensityWidget } from './FreightDensityWidgets';
+
 interface CalculatorRendererProps {
   slug: string;
 }
@@ -201,6 +233,80 @@ export const CalculatorRenderer: React.FC<CalculatorRendererProps> = ({ slug }) 
     // Travel
     case 'trip-budget-calculator':
       return <TripBudgetCalculatorWidget />;
+
+    // Marine Propellers
+    case 'suzuki-prop-calculator':
+      return <MarinePropellerWidget brand="suzuki" title="Suzuki Prop Calculator" />;
+    case 'sailboat-propeller-calculator':
+      return <MarinePropellerWidget brand="sailboat" title="Sailboat Propeller Calculator" />;
+    case 'propeller-calculator':
+      return <MarinePropellerWidget brand="general" title="Propeller Calculator" />;
+    case 'mercury-propeller-calculator':
+      return <MarinePropellerWidget brand="mercury" title="Mercury Propeller Calculator" />;
+    case 'michigan-wheel-prop-calculator':
+      return <MarinePropellerWidget brand="michigan-wheel" title="Michigan Wheel Prop Calculator" />;
+    case 'acme-prop-calculator':
+      return <MarinePropellerWidget brand="acme" title="Acme Prop Calculator" />;
+
+    // Aero, Drone, Rocket & Propulsion Thrust
+    case 'thrust-to-weight-ratio-calculator':
+      return <ThrustToWeightWidget />;
+    case 'thrust-calculator':
+      return <GeneralThrustWidget type="general" title="Thrust Calculator" />;
+    case 'propeller-thrust-calculator':
+      return <GeneralThrustWidget type="propeller" title="Propeller Thrust Calculator" />;
+    case 'rocket-thrust-calculator':
+      return <RocketThrustWidget />;
+    case 'drone-thrust-calculator':
+      return <DroneThrustWidget />;
+    case 'static-thrust-calculator':
+      return <GeneralThrustWidget type="static" title="Static Thrust Calculator" />;
+    case 'motor-thrust-calculator':
+      return <GeneralThrustWidget type="motor" title="Motor Thrust Calculator" />;
+    case 'fan-thrust-calculator':
+      return <GeneralThrustWidget type="fan" title="Fan Thrust Calculator" />;
+    case 'rc-thrust-calculator':
+      return <GeneralThrustWidget type="rc" title="RC Thrust Calculator" />;
+    case 'rpm-to-thrust-calculator':
+      return <GeneralThrustWidget type="rpm" title="RPM to Thrust Calculator" />;
+    case 'jet-engine-thrust-calculator':
+      return <GeneralThrustWidget type="jet" title="Jet Engine Thrust Calculator" />;
+
+    // Structural, Civil & Fitness Thrust
+    case 'pipe-thrust-calculator':
+      return <PipeThrustWidget />;
+    case 'rafter-thrust-calculator':
+      return <RafterThrustWidget />;
+    case 'hip-thrust-calculator':
+      return <HipThrustWidget />;
+
+    // Physics, Tech, Demographics & Medical Density
+    case 'density-calculator':
+      return <GeneralDensityWidget />;
+    case 'cube-density-calculator':
+      return <CubeDensityWidget />;
+    case 'water-density-calculator':
+      return <WaterDensityWidget />;
+    case 'air-density-calculator':
+      return <AirDensityWidget />;
+    case 'pixel-density-calculator':
+      return <PixelDensityWidget />;
+    case 'population-density-calculator':
+      return <PopulationDensityWidget />;
+    case 'psa-density-calculator':
+      return <PsaDensityWidget />;
+
+    // Logistics & Freight Density
+    case 'freight-density-calculator':
+      return <FreightDensityWidget carrier="generic" title="Freight Density Calculator" />;
+    case 'ltl-density-calculator':
+      return <FreightDensityWidget carrier="generic" title="LTL Density Calculator" />;
+    case 'bluegrace-density-calculator':
+      return <FreightDensityWidget carrier="bluegrace" title="BlueGrace Density Calculator" />;
+    case 'saia-density-calculator':
+      return <FreightDensityWidget carrier="saia" title="Saia Density Calculator" />;
+    case 'xpo-density-calculator':
+      return <FreightDensityWidget carrier="xpo" title="XPO Density Calculator" />;
 
     default:
       return (
