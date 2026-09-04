@@ -14,7 +14,8 @@ export type CategorySlug =
   | 'statistics'
   | 'probability'
   | 'sports'
-  | 'travel';
+  | 'travel'
+  | 'numerology';
 
 export interface CategoryDefinition {
   slug: CategorySlug;

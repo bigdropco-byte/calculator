@@ -1,5 +1,6 @@
 import { CalculatorDefinition, CategorySlug } from './types';
 import { CATEGORIES } from './categoryRegistry';
+import { NUMEROLOGY_CALCULATORS } from './registry/numerologyCalculators';
 
 export const CALCULATORS: CalculatorDefinition[] = [
   {
@@ -725,6 +726,7 @@ export const CALCULATORS: CalculatorDefinition[] = [
       ],
     },
   },
+  ...NUMEROLOGY_CALCULATORS,
 ];
 
 // Helper query functions

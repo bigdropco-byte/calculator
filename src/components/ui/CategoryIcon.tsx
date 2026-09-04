@@ -22,6 +22,12 @@ import {
   Home,
   Receipt,
   Calculator,
+  Sun,
+  Moon,
+  Flame,
+  Heart,
+  Palette,
+  Compass,
   LucideProps,
 } from 'lucide-react';
 
@@ -48,6 +54,12 @@ const ICON_MAP: Record<string, React.FC<LucideProps>> = {
   Home,
   Receipt,
   Calculator,
+  Sun,
+  Moon,
+  Flame,
+  Heart,
+  Palette,
+  Compass,
 };
 
 interface CategoryIconProps extends LucideProps {

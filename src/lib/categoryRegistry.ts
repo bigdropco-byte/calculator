@@ -129,6 +129,14 @@ export const CATEGORIES: Record<CategorySlug, CategoryDefinition> = {
     icon: 'Plane',
     featured: false,
   },
+  numerology: {
+    slug: 'numerology',
+    name: 'Numerology & Spiritual Calculators',
+    shortName: 'Numerology',
+    description: 'Calculate life path numbers, expression numbers, soul urge, personality numbers, and twin flame resonance charts.',
+    icon: 'Sparkles',
+    featured: true,
+  },
 };
 
 export function getAllCategories(): CategoryDefinition[] {
