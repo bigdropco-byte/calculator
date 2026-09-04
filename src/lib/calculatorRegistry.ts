@@ -1,6 +1,9 @@
 import { CalculatorDefinition, CategorySlug } from './types';
 import { CATEGORIES } from './categoryRegistry';
 import { NUMEROLOGY_CALCULATORS } from './registry/numerologyCalculators';
+import { PAYROLL_CALCULATORS } from './registry/payrollCalculators';
+import { INVESTMENT_CALCULATORS } from './registry/investmentCalculators';
+import { TRAVEL_CALCULATORS } from './registry/travelCalculators';
 
 export const CALCULATORS: CalculatorDefinition[] = [
   {
@@ -727,6 +730,9 @@ export const CALCULATORS: CalculatorDefinition[] = [
     },
   },
   ...NUMEROLOGY_CALCULATORS,
+  ...PAYROLL_CALCULATORS,
+  ...INVESTMENT_CALCULATORS,
+  ...TRAVEL_CALCULATORS,
 ];
 
 // Helper query functions

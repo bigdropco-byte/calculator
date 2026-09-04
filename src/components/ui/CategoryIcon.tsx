@@ -28,6 +28,12 @@ import {
   Heart,
   Palette,
   Compass,
+  Coins,
+  Landmark,
+  Clock,
+  Target,
+  Scale,
+  PieChart,
   LucideProps,
 } from 'lucide-react';
 
@@ -60,6 +66,12 @@ const ICON_MAP: Record<string, React.FC<LucideProps>> = {
   Heart,
   Palette,
   Compass,
+  Coins,
+  Landmark,
+  Clock,
+  Target,
+  Scale,
+  PieChart,
 };
 
 interface CategoryIconProps extends LucideProps {
