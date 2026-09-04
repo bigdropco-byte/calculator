@@ -10,6 +10,7 @@ import { DENSITY_CALCULATORS } from './registry/densityCalculators';
 import { DATE_TIME_CALCULATORS } from './registry/dateTimeCalculators';
 import { BIRTHDAY_CALCULATORS } from './registry/birthdayCalculators';
 import { TECH_AND_WORK_TIME_CALCULATORS } from './registry/techAndWorkTimeCalculators';
+import { PERCENTAGE_SUITE_CALCULATORS } from './registry/percentageSuiteCalculators';
 
 export const CALCULATORS: CalculatorDefinition[] = [
   {
@@ -745,6 +746,7 @@ export const CALCULATORS: CalculatorDefinition[] = [
   ...DATE_TIME_CALCULATORS,
   ...BIRTHDAY_CALCULATORS,
   ...TECH_AND_WORK_TIME_CALCULATORS,
+  ...PERCENTAGE_SUITE_CALCULATORS,
 ];
 
 // Helper query functions

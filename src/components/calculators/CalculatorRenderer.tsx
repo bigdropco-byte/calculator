@@ -161,6 +161,23 @@ import {
 // Swim Time Widget (1)
 import { SwimTimeConverterWidget } from './SwimTimeWidget';
 
+// 13 Percentage, Tax, VAT, Sports & Fitness Widgets
+import {
+  DiscountPercentageWidget,
+  WinPercentageWidget,
+  YearlyPercentageIncreaseWidget,
+  PercentageDecreaseWidget,
+  PartTimePercentageWidget,
+  TimePercentageWidget,
+  PercentageOfTimeWidget,
+  ReversePercentageWidget,
+  GrowthPercentageWidget,
+  TaxPercentageWidget,
+  VatPercentageWidget,
+  SluggingPercentageWidget,
+  FatPercentageWidget,
+} from './PercentageSuiteWidgets';
+
 interface CalculatorRendererProps {
   slug: string;
 }
@@ -458,6 +475,34 @@ export const CalculatorRenderer: React.FC<CalculatorRendererProps> = ({ slug }) 
     // Swim Time Converter (1)
     case 'swim-time-converter':
       return <SwimTimeConverterWidget />;
+
+    // 13 Percentage, Tax, VAT, Sports & Fitness Calculators
+    case 'discount-percentage-calculator':
+      return <DiscountPercentageWidget />;
+    case 'win-percentage-calculator':
+      return <WinPercentageWidget />;
+    case 'yearly-percentage-increase-calculator':
+      return <YearlyPercentageIncreaseWidget />;
+    case 'percentage-decrease-calculator':
+      return <PercentageDecreaseWidget />;
+    case 'part-time-percentage-calculator':
+      return <PartTimePercentageWidget />;
+    case 'time-percentage-calculator':
+      return <TimePercentageWidget />;
+    case 'percentage-of-time-calculator':
+      return <PercentageOfTimeWidget />;
+    case 'reverse-percentage-calculator':
+      return <ReversePercentageWidget />;
+    case 'growth-percentage-calculator':
+      return <GrowthPercentageWidget />;
+    case 'tax-percentage-calculator':
+      return <TaxPercentageWidget />;
+    case 'vat-percentage-calculator':
+      return <VatPercentageWidget />;
+    case 'slugging-percentage-calculator':
+      return <SluggingPercentageWidget />;
+    case 'fat-percentage-calculator':
+      return <FatPercentageWidget />;
 
     default:
       return (
