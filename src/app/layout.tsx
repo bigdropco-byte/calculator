@@ -4,6 +4,7 @@ import { Header } from '@/components/navigation/Header';
 import { StudentBanner } from '@/components/navigation/StudentBanner';
 import { Footer } from '@/components/navigation/Footer';
 import { CookieConsent } from '@/components/ui/CookieConsent';
+import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
 import { SITE_CONFIG, generateOrganizationSchema } from '@/lib/seo';
 
 export const metadata: Metadata = {
@@ -116,6 +117,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-slate-50 text-slate-900 min-h-screen flex flex-col antialiased">
+        <GoogleAnalytics />
         <StudentBanner />
         <Header />
         <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
