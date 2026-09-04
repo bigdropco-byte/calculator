@@ -205,6 +205,43 @@ import {
 } from './WoodLumberWidgets';
 import { StandardCalculatorWidget } from './StandardCalculatorWidget';
 
+// 27 STEM, Fitness, Military, Character Counter & Packaging Widgets
+import {
+  SpherePackingWidget,
+  CubeRootWidget,
+  BestScientificCalculatorWidget,
+  EquationSolverWidget,
+  PartialFractionWidget,
+  GradeCalculatorWidget,
+  StudentTWidget,
+  ChiSquareWidget,
+  HeatIndexWidget,
+  InchCmWidget,
+  IpSubnetWidget,
+  BinPackingWidget,
+} from './StemMathWidgets';
+
+import {
+  WilksWidget,
+  ApftWidget,
+  AcftWidget,
+  BenchPressWidget,
+} from './FitnessMilitaryWidgets';
+
+import {
+  WordCounterWidget,
+  KoreanCharacterWidget,
+  JapaneseCharacterWidget,
+  TwitterCharacterWidget,
+  ChineseCharacterWidget,
+  ShippingBoxSizeWidget,
+  BoxPackingWidget,
+  MovingPackingWidget,
+  AsqWidget,
+  AgeDifferenceWidget,
+  VideoSpeedWidget,
+} from './TextAndPackagingWidgets';
+
 interface CalculatorRendererProps {
   slug: string;
 }
@@ -590,6 +627,62 @@ export const CalculatorRenderer: React.FC<CalculatorRendererProps> = ({ slug }) 
       return <FenceWoodWidget />;
     case 'firewood-calculator':
       return <FirewoodCalculatorWidget />;
+
+    // 27 STEM, Fitness, Military, Character Counter & Packaging Tools
+    case 'sphere-packing-calculator':
+      return <SpherePackingWidget />;
+    case 'asq-calculator':
+      return <AsqWidget />;
+    case 'grade-calculator':
+      return <GradeCalculatorWidget />;
+    case 'student-t-value-calculator':
+      return <StudentTWidget />;
+    case 'wilks-calculator':
+      return <WilksWidget />;
+    case 'apft-calculator':
+      return <ApftWidget />;
+    case 'acft-calculator':
+      return <AcftWidget />;
+    case 'shipping-box-size-calculator':
+      return <ShippingBoxSizeWidget />;
+    case 'heat-index-calculator':
+      return <HeatIndexWidget />;
+    case 'inch-to-cm-converter':
+      return <InchCmWidget />;
+    case 'chi-square-calculator':
+      return <ChiSquareWidget />;
+    case 'word-counter':
+      return <WordCounterWidget />;
+    case 'packing-calculator':
+      return <MovingPackingWidget />;
+    case 'cube-root-calculator':
+      return <CubeRootWidget />;
+    case 'best-scientific-calculator':
+      return <BestScientificCalculatorWidget />;
+    case 'box-packing-calculator':
+      return <BoxPackingWidget />;
+    case 'korean-character-counter':
+      return <KoreanCharacterWidget />;
+    case 'japanese-character-counter':
+      return <JapaneseCharacterWidget />;
+    case 'twitter-character-counter':
+      return <TwitterCharacterWidget />;
+    case 'chinese-character-counter':
+      return <ChineseCharacterWidget />;
+    case 'solver':
+      return <EquationSolverWidget />;
+    case 'partial-fraction-decomposition-calculator':
+      return <PartialFractionWidget />;
+    case 'bench-press-calculator':
+      return <BenchPressWidget />;
+    case 'age-difference-calculator':
+      return <AgeDifferenceWidget />;
+    case 'video-speed-calculator':
+      return <VideoSpeedWidget />;
+    case 'bin-packing-calculator':
+      return <BinPackingWidget />;
+    case 'ip-subnet-calculator':
+      return <IpSubnetWidget />;
 
     default:
       return (
