@@ -9,7 +9,11 @@ import { CategorySlug } from '@/lib/types';
 import { DirectoryFilter } from '@/components/directory/DirectoryFilter';
 import { CategoryCard } from '@/components/directory/CategoryCard';
 import { CategoryIcon } from '@/components/ui/CategoryIcon';
-import { SITE_CONFIG, generateBreadcrumbSchema } from '@/lib/seo';
+import {
+  SITE_CONFIG,
+  generateBreadcrumbSchema,
+  generateCollectionPageSchema,
+} from '@/lib/seo';
 
 interface Props {
   params: Promise<{ category: string }>;
@@ -39,6 +43,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: {
       canonical: `${SITE_CONFIG.url}/categories/${category.slug}`,
     },
+    openGraph: {
+      title: `${category.name} – Free Online ${category.shortName} Calculators`,
+      description: category.description,
+      url: `${SITE_CONFIG.url}/categories/${category.slug}`,
+      type: 'website',
+      siteName: SITE_CONFIG.name,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${category.name} – Free Online Calculators`,
+      description: category.description,
+    },
     robots: {
       // Do not index empty category pages
       index: hasTools,
@@ -65,6 +81,19 @@ export default async function CategoryPage({ params }: Props) {
     { name: category.name, url: `/categories/${category.slug}` },
   ];
 
+  const collectionItems = calculators.map(c => ({
+    name: c.name,
+    url: `/calculators/${c.slug}`,
+    description: c.shortDescription,
+  }));
+
+  const collectionSchema = generateCollectionPageSchema(
+    category.name,
+    category.description,
+    `/categories/${category.slug}`,
+    collectionItems
+  );
+
   return (
     <>
       <script
@@ -73,6 +102,14 @@ export default async function CategoryPage({ params }: Props) {
           __html: JSON.stringify(generateBreadcrumbSchema(breadcrumbs)),
         }}
       />
+      {hasTools && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(collectionSchema),
+          }}
+        />
+      )}
 
       <div className="space-y-8">
         {/* Breadcrumb Navigation */}

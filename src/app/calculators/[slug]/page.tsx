@@ -55,11 +55,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: canonicalUrl,
       type: 'website',
       siteName: SITE_CONFIG.name,
+      images: [
+        {
+          url: `/calculators/${calculator.slug}/opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: `${calculator.name} – Free Online Calculator`,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: calculator.seo.title,
       description: calculator.seo.metaDescription,
+      images: [`/calculators/${calculator.slug}/opengraph-image`],
     },
     other: {
       'application-category': categoryName,

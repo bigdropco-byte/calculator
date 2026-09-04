@@ -2,17 +2,58 @@ import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { Calculator, ShieldCheck, Zap, Layers } from 'lucide-react';
-import { SITE_CONFIG } from '@/lib/seo';
+import { SITE_CONFIG, generateBreadcrumbSchema, generateWebPageSchema } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'About Calculat – The Free Online Calculator Directory',
   description:
     'Learn about Calculat.dev, our mission to build the internet’s cleanest, fastest, and most comprehensive directory of calculation tools.',
+  alternates: {
+    canonical: `${SITE_CONFIG.url}/about`,
+  },
+  openGraph: {
+    title: 'About Calculat – The Free Online Calculator Directory',
+    description:
+      'Learn about Calculat.dev, our mission to build the internet’s cleanest, fastest, and most comprehensive directory of calculation tools.',
+    url: `${SITE_CONFIG.url}/about`,
+    type: 'website',
+    siteName: SITE_CONFIG.name,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About Calculat – Free Online Calculator Directory',
+    description:
+      'Learn about Calculat.dev and our independent student mission to build an ad-free calculator platform.',
+  },
 };
 
 export default function AboutPage() {
+  const breadcrumbs = [
+    { name: 'Home', url: '/' },
+    { name: 'About', url: '/about' },
+  ];
+
+  const pageSchema = generateWebPageSchema(
+    'About Calculat',
+    'Mission, architecture, and story behind Calculat.dev',
+    '/about'
+  );
+
   return (
-    <div className="max-w-3xl mx-auto space-y-8">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateBreadcrumbSchema(breadcrumbs)),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(pageSchema),
+        }}
+      />
+      <div className="max-w-3xl mx-auto space-y-8">
       <div className="border-b border-slate-200 pb-5">
         <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">About Calculat</h1>
         <p className="text-sm text-slate-600 mt-2 leading-relaxed">
@@ -101,5 +142,6 @@ export default function AboutPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

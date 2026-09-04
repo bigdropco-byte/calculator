@@ -4,7 +4,11 @@ import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
 import { getActiveCategoriesWithCount } from '@/lib/calculatorRegistry';
 import { CategoryCard } from '@/components/directory/CategoryCard';
-import { SITE_CONFIG, generateBreadcrumbSchema } from '@/lib/seo';
+import {
+  SITE_CONFIG,
+  generateBreadcrumbSchema,
+  generateCollectionPageSchema,
+} from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Calculator Categories – Browse Online Calculators by Topic',
@@ -12,6 +16,20 @@ export const metadata: Metadata = {
     'Explore calculators organized across 16 major domains: math, finance, health, date & time, everyday life, business, science, education, and unit conversion.',
   alternates: {
     canonical: `${SITE_CONFIG.url}/categories`,
+  },
+  openGraph: {
+    title: 'Calculator Categories – Browse Online Calculators by Topic',
+    description:
+      'Explore calculators organized across 16 major domains: math, finance, health, date & time, everyday life, business, science, education, and unit conversion.',
+    url: `${SITE_CONFIG.url}/categories`,
+    type: 'website',
+    siteName: SITE_CONFIG.name,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Calculator Categories – Browse Online Calculators by Topic',
+    description:
+      'Explore calculators organized across 16 major domains: math, finance, health, date & time, everyday life, and business.',
   },
 };
 
@@ -23,12 +41,31 @@ export default function CategoriesPage() {
     { name: 'Categories', url: '/categories' },
   ];
 
+  const categoryItems = categoriesWithCounts.map(({ category, count }) => ({
+    name: category.name,
+    url: `/categories/${category.slug}`,
+    description: `${category.description} (${count} calculators available)`,
+  }));
+
+  const collectionSchema = generateCollectionPageSchema(
+    'Calculator Categories Directory',
+    'Browse calculators organized across 16 major topic domains',
+    '/categories',
+    categoryItems
+  );
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(generateBreadcrumbSchema(breadcrumbs)),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(collectionSchema),
         }}
       />
 

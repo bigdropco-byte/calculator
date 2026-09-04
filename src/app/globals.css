@@ -15,6 +15,12 @@
 html {
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
 }
 
 body {
@@ -22,6 +28,8 @@ body {
   color: var(--text-main);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   min-height: 100vh;
+  max-width: 100vw;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
 }
@@ -40,7 +48,7 @@ body {
   transform: translateY(-1px);
 }
 
-/* Focus indicator */
+/* Accessible focus indicator */
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
@@ -48,6 +56,26 @@ button:focus-visible,
 a:focus-visible {
   outline: 2px solid #0284c7;
   outline-offset: 2px;
+}
+
+/* Touch manipulation and ergonomic tap targets */
+button,
+a,
+input,
+select {
+  touch-action: manipulation;
+}
+
+/* Prevent iOS Safari from auto-zooming inputs on focus */
+@media screen and (max-width: 768px) {
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  input[type="email"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
 }
 
 /* Custom scrollbar for search modal & code */
@@ -68,7 +96,7 @@ a:focus-visible {
 
 /* Print optimizations */
 @media print {
-  header, footer, .no-print {
+  header, footer, aside, .no-print {
     display: none !important;
   }
   body {

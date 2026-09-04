@@ -4,7 +4,7 @@ import { Header } from '@/components/navigation/Header';
 import { StudentBanner } from '@/components/navigation/StudentBanner';
 import { Footer } from '@/components/navigation/Footer';
 import { CookieConsent } from '@/components/ui/CookieConsent';
-import { SITE_CONFIG } from '@/lib/seo';
+import { SITE_CONFIG, generateOrganizationSchema } from '@/lib/seo';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
@@ -32,15 +32,31 @@ export const metadata: Metadata = {
     siteName: SITE_CONFIG.name,
     title: `${SITE_CONFIG.name} – ${SITE_CONFIG.tagline}`,
     description: SITE_CONFIG.description,
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: `${SITE_CONFIG.name} – ${SITE_CONFIG.tagline}`,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: `${SITE_CONFIG.name} – ${SITE_CONFIG.tagline}`,
     description: SITE_CONFIG.description,
+    images: ['/opengraph-image'],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 
@@ -48,6 +64,7 @@ export const viewport: Viewport = {
   themeColor: '#0284c7',
   width: 'device-width',
   initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
@@ -55,8 +72,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const orgSchema = generateOrganizationSchema();
+
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+        />
+      </head>
       <body className="bg-slate-50 text-slate-900 min-h-screen flex flex-col antialiased">
         <StudentBanner />
         <Header />

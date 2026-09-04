@@ -1,16 +1,57 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { ShieldCheck } from 'lucide-react';
+import { SITE_CONFIG, generateBreadcrumbSchema, generateWebPageSchema } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy – Calculat.dev',
   description:
     'Our privacy pledge: all mathematical calculations occur client-side in your browser. Zero tracking of your financial or health inputs.',
+  alternates: {
+    canonical: `${SITE_CONFIG.url}/privacy`,
+  },
+  openGraph: {
+    title: 'Privacy Policy – Calculat.dev',
+    description:
+      'All calculations occur client-side in your browser. Zero tracking of your financial or health numbers.',
+    url: `${SITE_CONFIG.url}/privacy`,
+    type: 'website',
+    siteName: SITE_CONFIG.name,
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Privacy Policy – Calculat.dev',
+    description: 'Privacy-first calculation tools running locally in your browser.',
+  },
 };
 
 export default function PrivacyPage() {
+  const breadcrumbs = [
+    { name: 'Home', url: '/' },
+    { name: 'Privacy Policy', url: '/privacy' },
+  ];
+
+  const pageSchema = generateWebPageSchema(
+    'Privacy Policy',
+    'Client-side execution and local storage privacy policy',
+    '/privacy'
+  );
+
   return (
-    <div className="max-w-3xl mx-auto space-y-6 text-sm text-slate-700 leading-relaxed">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateBreadcrumbSchema(breadcrumbs)),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(pageSchema),
+        }}
+      />
+      <div className="max-w-3xl mx-auto space-y-6 text-sm text-slate-700 leading-relaxed">
       <div className="border-b border-slate-200 pb-5">
         <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Privacy Policy</h1>
         <p className="text-xs text-slate-500 mt-1">Last updated: January 2025</p>
@@ -56,5 +97,6 @@ export default function PrivacyPage() {
         We may update this Privacy Policy from time to time to reflect changes in our platform. Any modifications will be posted on this page with an updated revision date.
       </p>
     </div>
+    </>
   );
 }

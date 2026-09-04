@@ -3,7 +3,11 @@ import { Metadata } from 'next';
 import { getAllPublishedCalculators } from '@/lib/calculatorRegistry';
 import { DirectoryFilter } from '@/components/directory/DirectoryFilter';
 import { RecentTray } from '@/components/directory/RecentTray';
-import { SITE_CONFIG, generateBreadcrumbSchema } from '@/lib/seo';
+import {
+  SITE_CONFIG,
+  generateBreadcrumbSchema,
+  generateCollectionPageSchema,
+} from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'All Calculators – Comprehensive Free Online Calculator Directory',
@@ -11,6 +15,20 @@ export const metadata: Metadata = {
     'Browse our complete directory of free online calculators for math, finance, health, dates, business, and everyday use. Filter by category or jump alphabetically A–Z.',
   alternates: {
     canonical: `${SITE_CONFIG.url}/calculators`,
+  },
+  openGraph: {
+    title: 'All Calculators – Comprehensive Free Online Calculator Directory',
+    description:
+      'Browse our complete directory of free online calculators for math, finance, health, dates, business, and everyday use.',
+    url: `${SITE_CONFIG.url}/calculators`,
+    type: 'website',
+    siteName: SITE_CONFIG.name,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'All Calculators – Free Online Calculator Directory',
+    description:
+      'Browse our complete directory of free online calculators for math, finance, health, dates, and everyday use.',
   },
 };
 
@@ -22,12 +40,31 @@ export default function CalculatorsPage() {
     { name: 'Calculators', url: '/calculators' },
   ];
 
+  const collectionItems = allCalculators.map(calc => ({
+    name: calc.name,
+    url: `/calculators/${calc.slug}`,
+    description: calc.shortDescription,
+  }));
+
+  const collectionSchema = generateCollectionPageSchema(
+    'All Calculators Directory',
+    'Comprehensive directory of online calculators',
+    '/calculators',
+    collectionItems
+  );
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(generateBreadcrumbSchema(breadcrumbs)),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(collectionSchema),
         }}
       />
 
