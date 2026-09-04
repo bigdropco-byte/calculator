@@ -2,6 +2,8 @@ import { ImageResponse } from 'next/og';
 import { getCalculatorBySlug, getAllPublishedCalculators } from '@/lib/calculatorRegistry';
 import { CATEGORIES } from '@/lib/categoryRegistry';
 
+export const dynamic = 'force-static';
+
 export const size = {
   width: 1200,
   height: 630,

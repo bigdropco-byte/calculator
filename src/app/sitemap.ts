@@ -3,6 +3,8 @@ import { getAllPublishedCalculators, getCalculatorsByCategory } from '@/lib/calc
 import { getAllCategories } from '@/lib/categoryRegistry';
 import { SITE_CONFIG } from '@/lib/seo';
 
+export const dynamic = 'force-static';
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const publishedCalculators = getAllPublishedCalculators();
   const categories = getAllCategories();
