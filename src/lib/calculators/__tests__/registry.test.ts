@@ -11,9 +11,9 @@ describe('Calculator Registry Integrity', () => {
     expect(slugs.length).toBe(uniqueSlugs.size);
   });
 
-  it('verifies exact total count is 198 calculators', () => {
-    expect(allCalcs.length).toBe(198);
-    expect(published.length).toBe(198);
+  it('verifies exact total count is 210 calculators', () => {
+    expect(allCalcs.length).toBe(210);
+    expect(published.length).toBe(210);
   });
 
   it('contains all 29 construction, wood, masonry, and pocket calculators', () => {
@@ -61,7 +61,7 @@ describe('Calculator Registry Integrity', () => {
     }
   });
 
-  it('contains all 27 newly added STEM, fitness, packaging, and character calculators', () => {
+  it('contains all 27 STEM, fitness, packaging, and character calculators', () => {
     const stemSlugs = [
       'sphere-packing-calculator',
       'asq-calculator',
@@ -97,6 +97,35 @@ describe('Calculator Registry Integrity', () => {
     for (const slug of stemSlugs) {
       const calc = getCalculatorBySlug(slug);
       expect(calc, `Expected calculator with slug "${slug}" to exist in registry`).toBeDefined();
+      expect(calc?.editorial.faqs.length).toBe(4);
+      expect(calc?.seo.title.length).toBeGreaterThan(10);
+      expect(calc?.seo.metaDescription.length).toBeGreaterThan(30);
+      expect(calc?.editorial.formula.expression.length).toBeGreaterThan(5);
+    }
+  });
+
+  it('contains all 12 newly added probability suite calculators', () => {
+    const probSlugs = [
+      'probability-calculator',
+      'permutations-and-combinations-calculator',
+      'binomial-probability-calculator',
+      'dice-probability-calculator',
+      'coin-flip-probability-calculator',
+      'bayes-theorem-calculator',
+      'normal-distribution-calculator',
+      'poisson-probability-calculator',
+      'odds-probability-calculator',
+      'hypergeometric-calculator',
+      'poker-odds-calculator',
+      'lottery-odds-calculator',
+    ];
+
+    expect(probSlugs.length).toBe(12);
+
+    for (const slug of probSlugs) {
+      const calc = getCalculatorBySlug(slug);
+      expect(calc, `Expected calculator with slug "${slug}" to exist in registry`).toBeDefined();
+      expect(calc?.category).toBe('probability');
       expect(calc?.editorial.faqs.length).toBe(4);
       expect(calc?.seo.title.length).toBeGreaterThan(10);
       expect(calc?.seo.metaDescription.length).toBeGreaterThan(30);

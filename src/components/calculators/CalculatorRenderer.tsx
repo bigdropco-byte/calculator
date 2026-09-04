@@ -242,6 +242,22 @@ import {
   VideoSpeedWidget,
 } from './TextAndPackagingWidgets';
 
+// 12 Probability Suite Widgets
+import {
+  ProbabilityWidget,
+  PermutationsCombinationsWidget,
+  BinomialWidget,
+  DiceProbabilityWidget,
+  CoinFlipWidget,
+  BayesTheoremWidget,
+  NormalDistributionWidget,
+  PoissonWidget,
+  OddsProbabilityWidget,
+  HypergeometricWidget,
+  PokerOddsWidget,
+  LotteryOddsWidget,
+} from './ProbabilityWidgets';
+
 interface CalculatorRendererProps {
   slug: string;
 }
@@ -683,6 +699,32 @@ export const CalculatorRenderer: React.FC<CalculatorRendererProps> = ({ slug }) 
       return <BinPackingWidget />;
     case 'ip-subnet-calculator':
       return <IpSubnetWidget />;
+
+    // 12 Probability Suite Tools
+    case 'probability-calculator':
+      return <ProbabilityWidget />;
+    case 'permutations-and-combinations-calculator':
+      return <PermutationsCombinationsWidget />;
+    case 'binomial-probability-calculator':
+      return <BinomialWidget />;
+    case 'dice-probability-calculator':
+      return <DiceProbabilityWidget />;
+    case 'coin-flip-probability-calculator':
+      return <CoinFlipWidget />;
+    case 'bayes-theorem-calculator':
+      return <BayesTheoremWidget />;
+    case 'normal-distribution-calculator':
+      return <NormalDistributionWidget />;
+    case 'poisson-probability-calculator':
+      return <PoissonWidget />;
+    case 'odds-probability-calculator':
+      return <OddsProbabilityWidget />;
+    case 'hypergeometric-calculator':
+      return <HypergeometricWidget />;
+    case 'poker-odds-calculator':
+      return <PokerOddsWidget />;
+    case 'lottery-odds-calculator':
+      return <LotteryOddsWidget />;
 
     default:
       return (
