@@ -1,6 +1,15 @@
 import { CalculatorDefinition } from './types';
 import { CATEGORIES } from './categoryRegistry';
 
+export const SOCIAL_LINKS = {
+  facebook: 'https://www.facebook.com/calculat.dev',
+  reddit: 'https://www.reddit.com/user/Calculat_dev',
+  x: 'https://x.com/calculat_dev',
+  twitter: 'https://x.com/calculat_dev',
+  pinterest: 'https://www.pinterest.com/calculat_dev',
+  youtube: 'https://www.youtube.com/@calculat_dev',
+};
+
 export const SITE_CONFIG = {
   name: 'Calculat',
   domain: 'calculat.dev',
@@ -9,6 +18,7 @@ export const SITE_CONFIG = {
   description:
     'Find free, fast, and accurate online calculators for math, finance, health, dates, everyday calculations, and more. Clean directory-first search engine for calculation tools.',
   creator: 'Calculat Independent Student Project',
+  social: SOCIAL_LINKS,
 };
 
 export function generateOrganizationSchema() {
@@ -25,7 +35,14 @@ export function generateOrganizationSchema() {
       '@type': 'Person',
       name: 'Independent Student Developer',
     },
-    sameAs: ['https://github.com/bigdropco-byte/calculator'],
+    sameAs: [
+      'https://www.facebook.com/calculat.dev',
+      'https://www.reddit.com/user/Calculat_dev',
+      'https://x.com/calculat_dev',
+      'https://www.pinterest.com/calculat_dev',
+      'https://www.youtube.com/@calculat_dev',
+      'https://github.com/bigdropco-byte/calculator',
+    ],
   };
 }
 

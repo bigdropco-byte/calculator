@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { ShieldCheck } from 'lucide-react';
 import { CalculatBrandLogo } from '@/components/ui/CalculatLogo';
+import { SocialLinks } from '@/components/navigation/SocialLinks';
 
 export const Footer: React.FC = () => {
   return (
@@ -34,6 +35,12 @@ export const Footer: React.FC = () => {
               <span>
                 Calculations are performed locally in your browser. Zero tracking of your numbers.
               </span>
+            </div>
+
+            {/* Official Social Media Handles */}
+            <div className="pt-1">
+              <p className="text-xs font-semibold text-slate-700 mb-2">Connect &amp; Follow:</p>
+              <SocialLinks size="md" />
             </div>
           </div>
 

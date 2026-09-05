@@ -1,6 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { ContactForm } from '@/components/content/ContactForm';
+import { SocialLinks } from '@/components/navigation/SocialLinks';
 import { SITE_CONFIG, generateBreadcrumbSchema } from '@/lib/seo';
 
 export const metadata: Metadata = {
@@ -63,6 +64,17 @@ export default function ContactPage() {
         </div>
 
         <ContactForm />
+
+        {/* Official Social Media Channels */}
+        <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-2xs space-y-3">
+          <h2 className="text-base font-bold text-slate-900">Official Social Media &amp; Community</h2>
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Follow Calculat across our official social channels for new tool announcements, calculation tips, updates, and feedback discussions.
+          </p>
+          <div className="pt-2">
+            <SocialLinks size="md" showLabels />
+          </div>
+        </div>
       </div>
     </>
   );

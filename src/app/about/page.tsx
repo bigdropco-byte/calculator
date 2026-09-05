@@ -2,6 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { Calculator, ShieldCheck, Zap, Layers } from 'lucide-react';
+import { SocialLinks } from '@/components/navigation/SocialLinks';
 import { SITE_CONFIG, generateBreadcrumbSchema, generateWebPageSchema } from '@/lib/seo';
 
 export const metadata: Metadata = {
@@ -125,6 +126,14 @@ export default function AboutPage() {
         <p>
           Calculat will always prioritize clean usability, privacy, and mathematical accuracy over marketing clutter. We continuously write new calculator modules and expand our directory based on direct suggestions from our visitors.
         </p>
+
+        <h2 className="text-xl font-bold text-slate-900 mt-8 mb-4">Official Channels &amp; Community</h2>
+        <p>
+          Connect with Calculat on our official social media channels to follow newly released tools, suggest formulas, and participate in community feature roadmaps:
+        </p>
+        <div className="not-prose my-4">
+          <SocialLinks size="md" showLabels />
+        </div>
 
         <div className="pt-6 border-t border-slate-200 flex items-center gap-4">
           <Link
