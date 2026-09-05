@@ -19,14 +19,66 @@ export const SITE_CONFIG = {
     'Find free, fast, and accurate online calculators for math, finance, health, dates, everyday calculations, and more. Clean directory-first search engine for calculation tools.',
   creator: 'Calculat Independent Student Project',
   social: SOCIAL_LINKS,
+  twitterHandle: '@calculat_dev',
 };
+
+/**
+ * Normalizes any route path, relative link, or full URL to an absolute canonical URL
+ * conforming to Next.js trailingSlash: true static export configuration.
+ *
+ * Guaranteed properties:
+ * - Always starts with SITE_CONFIG.url (https://calculat.dev)
+ * - Strips query strings (?sort=popular, ?utm_source=...) and hash anchors (#section)
+ * - Preserves file extensions without trailing slash (/sitemap.xml, /favicon.ico)
+ * - Always appends a single trailing slash to web pages (/calculators/, /about/, /calculators/percentage-calculator/)
+ * - Handles root path as https://calculat.dev/
+ */
+export function getCanonicalUrl(path: string = ''): string {
+  if (!path || path === '/' || path === SITE_CONFIG.url || path === `${SITE_CONFIG.url}/`) {
+    return `${SITE_CONFIG.url}/`;
+  }
+
+  // Strip origin / protocol / host if present
+  let clean = path.replace(/^https?:\/\/[^\/]+/i, '');
+  // Strip query parameters and fragments (canonical URLs must never contain query strings)
+  clean = clean.replace(/[?#].*$/, '');
+  // Trim surrounding slashes and whitespace
+  clean = clean.trim().replace(/^\/+|\/+$/g, '');
+
+  if (!clean) {
+    return `${SITE_CONFIG.url}/`;
+  }
+
+  // If path ends with a file extension, do not append a trailing slash
+  if (/\.[a-zA-Z0-9]+$/.test(clean)) {
+    return `${SITE_CONFIG.url}/${clean}`;
+  }
+
+  return `${SITE_CONFIG.url}/${clean}/`;
+}
+
+/**
+ * Generates standard Next.js alternates metadata with self-referencing canonical
+ * and hreflang annotations (en-US, x-default) for comprehensive search engine clarity.
+ */
+export function getCanonicalAlternates(path: string = '') {
+  const canonicalUrl = getCanonicalUrl(path);
+  return {
+    canonical: canonicalUrl,
+    languages: {
+      'en-US': canonicalUrl,
+      'x-default': canonicalUrl,
+    },
+  };
+}
 
 export function generateOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': `${SITE_CONFIG.url}/#organization`,
     name: SITE_CONFIG.name,
-    url: SITE_CONFIG.url,
+    url: `${SITE_CONFIG.url}/`,
     logo: `${SITE_CONFIG.url}/calculat-logo.png`,
     image: `${SITE_CONFIG.url}/calculat-logo.png`,
     slogan: SITE_CONFIG.tagline,
@@ -46,14 +98,49 @@ export function generateOrganizationSchema() {
   };
 }
 
+export function generateWebSiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE_CONFIG.url}/#website`,
+    name: SITE_CONFIG.name,
+    url: `${SITE_CONFIG.url}/`,
+    description: SITE_CONFIG.description,
+    publisher: {
+      '@id': `${SITE_CONFIG.url}/#organization`,
+    },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE_CONFIG.url}/search/?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  };
+}
+
 export function generateCalculatorSchema(calculator: CalculatorDefinition) {
   const categoryName = CATEGORIES[calculator.category]?.name || calculator.category;
+  const canonicalUrl = getCanonicalUrl(`/calculators/${calculator.slug}`);
 
   return {
     '@context': 'https://schema.org',
     '@type': ['WebApplication', 'SoftwareApplication'],
+    '@id': `${canonicalUrl}#software`,
     name: calculator.name,
-    url: `${SITE_CONFIG.url}/calculators/${calculator.slug}`,
+    url: canonicalUrl,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${canonicalUrl}#webpage`,
+      url: canonicalUrl,
+    },
+    isPartOf: {
+      '@type': 'WebSite',
+      '@id': `${SITE_CONFIG.url}/#website`,
+      name: SITE_CONFIG.name,
+      url: `${SITE_CONFIG.url}/`,
+    },
     description: calculator.shortDescription,
     applicationCategory: categoryName,
     operatingSystem: 'All',
@@ -68,8 +155,15 @@ export function generateCalculatorSchema(calculator: CalculatorDefinition) {
     datePublished: calculator.addedDate,
     author: {
       '@type': 'Organization',
+      '@id': `${SITE_CONFIG.url}/#organization`,
       name: SITE_CONFIG.name,
-      url: SITE_CONFIG.url,
+      url: `${SITE_CONFIG.url}/`,
+    },
+    publisher: {
+      '@type': 'Organization',
+      '@id': `${SITE_CONFIG.url}/#organization`,
+      name: SITE_CONFIG.name,
+      url: `${SITE_CONFIG.url}/`,
     },
   };
 }
@@ -80,12 +174,20 @@ export function generateCollectionPageSchema(
   url: string,
   items: { name: string; url: string; description?: string }[]
 ) {
+  const canonicalUrl = getCanonicalUrl(url);
   return {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
+    '@id': `${canonicalUrl}#webpage`,
     name: title,
     description,
-    url: url.startsWith('http') ? url : `${SITE_CONFIG.url}${url}`,
+    url: canonicalUrl,
+    isPartOf: {
+      '@type': 'WebSite',
+      '@id': `${SITE_CONFIG.url}/#website`,
+      name: SITE_CONFIG.name,
+      url: `${SITE_CONFIG.url}/`,
+    },
     mainEntity: {
       '@type': 'ItemList',
       numberOfItems: items.length,
@@ -94,23 +196,26 @@ export function generateCollectionPageSchema(
         position: index + 1,
         name: item.name,
         description: item.description,
-        url: item.url.startsWith('http') ? item.url : `${SITE_CONFIG.url}${item.url}`,
+        url: getCanonicalUrl(item.url),
       })),
     },
   };
 }
 
 export function generateWebPageSchema(title: string, description: string, url: string) {
+  const canonicalUrl = getCanonicalUrl(url);
   return {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
+    '@id': `${canonicalUrl}#webpage`,
     name: title,
     description,
-    url: url.startsWith('http') ? url : `${SITE_CONFIG.url}${url}`,
+    url: canonicalUrl,
     isPartOf: {
       '@type': 'WebSite',
+      '@id': `${SITE_CONFIG.url}/#website`,
       name: SITE_CONFIG.name,
-      url: SITE_CONFIG.url,
+      url: `${SITE_CONFIG.url}/`,
     },
   };
 }
@@ -123,7 +228,7 @@ export function generateBreadcrumbSchema(items: { name: string; url: string }[])
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: item.url.startsWith('http') ? item.url : `${SITE_CONFIG.url}${item.url}`,
+      item: getCanonicalUrl(item.url),
     })),
   };
 }
@@ -144,3 +249,4 @@ export function generateFaqSchema(faqs: { question: string; answer: string }[]) 
     })),
   };
 }
+

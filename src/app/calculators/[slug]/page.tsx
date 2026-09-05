@@ -16,6 +16,8 @@ import {
   generateCalculatorSchema,
   generateBreadcrumbSchema,
   generateFaqSchema,
+  getCanonicalUrl,
+  getCanonicalAlternates,
 } from '@/lib/seo';
 
 interface Props {
@@ -40,15 +42,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const categoryName = CATEGORIES[calculator.category]?.name || calculator.category;
-  const canonicalUrl = `${SITE_CONFIG.url}/calculators/${calculator.slug}`;
+  const canonicalUrl = getCanonicalUrl(`/calculators/${calculator.slug}`);
 
   return {
     title: calculator.seo.title,
     description: calculator.seo.metaDescription,
     keywords: calculator.keywords,
-    alternates: {
-      canonical: canonicalUrl,
-    },
+    alternates: getCanonicalAlternates(`/calculators/${calculator.slug}`),
     openGraph: {
       title: calculator.seo.title,
       description: calculator.seo.metaDescription,
@@ -66,6 +66,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
+      site: SITE_CONFIG.twitterHandle,
+      creator: SITE_CONFIG.twitterHandle,
       title: calculator.seo.title,
       description: calculator.seo.metaDescription,
       images: [`/calculators/${calculator.slug}/opengraph-image`],
@@ -88,9 +90,9 @@ export default async function CalculatorPage({ params }: Props) {
 
   const breadcrumbItems = [
     { name: 'Home', url: '/' },
-    { name: 'Calculators', url: '/calculators' },
-    ...(category ? [{ name: category.shortName, url: `/categories/${category.slug}` }] : []),
-    { name: calculator.name, url: `/calculators/${calculator.slug}` },
+    { name: 'Calculators', url: '/calculators/' },
+    ...(category ? [{ name: category.shortName, url: `/categories/${category.slug}/` }] : []),
+    { name: calculator.name, url: `/calculators/${calculator.slug}/` },
   ];
 
   const appSchema = generateCalculatorSchema(calculator);

@@ -50,7 +50,7 @@ function SearchContent() {
             {results.map(item => (
               <Link
                 key={item.slug}
-                href={`/calculators/${item.slug}`}
+                href={`/calculators/${item.slug}/`}
                 className="flex items-center justify-between p-4 hover:bg-sky-50/50 transition-colors group"
               >
                 <div className="flex items-start gap-3.5 min-w-0">
@@ -85,7 +85,7 @@ function SearchContent() {
               Try searching with a broader keyword or browse our categories.
             </p>
             <Link
-              href="/calculators"
+              href="/calculators/"
               className="mt-4 inline-block px-4 py-2 bg-sky-600 text-white rounded-lg text-xs font-semibold hover:bg-sky-700 transition-colors"
             >
               Browse All Calculators

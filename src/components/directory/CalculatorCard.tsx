@@ -19,7 +19,7 @@ export const CalculatorCard: React.FC<CalculatorCardProps> = ({
   if (viewMode === 'list') {
     return (
       <Link
-        href={`/calculators/${calculator.slug}`}
+        href={`/calculators/${calculator.slug}/`}
         className="group flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white border border-slate-200 rounded-lg hover:border-sky-400 hover:shadow-xs transition-all gap-3"
       >
         <div className="flex items-start sm:items-center gap-3.5 min-w-0">
@@ -57,7 +57,7 @@ export const CalculatorCard: React.FC<CalculatorCardProps> = ({
 
   return (
     <Link
-      href={`/calculators/${calculator.slug}`}
+      href={`/calculators/${calculator.slug}/`}
       className="dir-card group flex flex-col p-5 bg-white border border-slate-200 rounded-xl hover:border-sky-400 hover:shadow-md transition-all relative overflow-hidden"
     >
       <div className="flex items-center justify-between gap-2 mb-3">

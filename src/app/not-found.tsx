@@ -42,7 +42,7 @@ export default function NotFound() {
         <div className="flex items-center justify-between mb-4 border-b border-slate-200 pb-3">
           <h2 className="text-lg font-bold text-slate-900">Popular Calculators You Might Need</h2>
           <Link
-            href="/calculators"
+            href="/calculators/"
             className="text-xs font-semibold text-sky-600 hover:underline flex items-center gap-1"
           >
             View all <ArrowRight className="w-3.5 h-3.5" />

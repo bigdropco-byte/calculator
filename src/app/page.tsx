@@ -1,4 +1,5 @@
 import React from 'react';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Zap, Shield, Sparkles, FolderTree } from 'lucide-react';
 import {
@@ -13,7 +14,41 @@ import { HeroSearch } from '@/components/search/HeroSearch';
 import { CreatorStoryCard } from '@/components/content/CreatorStoryCard';
 import { HowItWorksSection } from '@/components/content/HowItWorksSection';
 import { StudentRoadmapWidget } from '@/components/directory/StudentRoadmapWidget';
-import { SITE_CONFIG } from '@/lib/seo';
+import {
+  SITE_CONFIG,
+  generateWebSiteSchema,
+  getCanonicalUrl,
+  getCanonicalAlternates,
+} from '@/lib/seo';
+
+export const metadata: Metadata = {
+  title: `${SITE_CONFIG.name} – ${SITE_CONFIG.tagline}`,
+  description: SITE_CONFIG.description,
+  alternates: getCanonicalAlternates('/'),
+  openGraph: {
+    title: `${SITE_CONFIG.name} – ${SITE_CONFIG.tagline}`,
+    description: SITE_CONFIG.description,
+    url: getCanonicalUrl('/'),
+    type: 'website',
+    siteName: SITE_CONFIG.name,
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: `${SITE_CONFIG.name} – ${SITE_CONFIG.tagline}`,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: SITE_CONFIG.twitterHandle,
+    creator: SITE_CONFIG.twitterHandle,
+    title: `${SITE_CONFIG.name} – ${SITE_CONFIG.tagline}`,
+    description: SITE_CONFIG.description,
+    images: ['/opengraph-image'],
+  },
+};
 
 export default function HomePage() {
   const popularCalculators = getPopularCalculators().slice(0, 6);
@@ -22,18 +57,7 @@ export default function HomePage() {
 
   // Structured Data for WebSite with SearchAction and HowTo visual guide
   const jsonLd = [
-    {
-      '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      name: SITE_CONFIG.name,
-      url: SITE_CONFIG.url,
-      description: SITE_CONFIG.description,
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: `${SITE_CONFIG.url}/search?q={search_term_string}`,
-        'query-input': 'required name=search_term_string',
-      },
-    },
+    generateWebSiteSchema(),
     {
       '@context': 'https://schema.org',
       '@type': 'HowTo',
@@ -126,7 +150,7 @@ export default function HomePage() {
               </p>
             </div>
             <Link
-              href="/calculators?sort=popular"
+              href="/calculators/?sort=popular"
               className="text-xs font-semibold text-sky-600 hover:text-sky-700 flex items-center gap-1 transition-colors"
             >
               View all popular <ArrowRight className="w-3.5 h-3.5" />
@@ -150,7 +174,7 @@ export default function HomePage() {
               </p>
             </div>
             <Link
-              href="/categories"
+              href="/categories/"
               className="text-xs font-semibold text-sky-600 hover:text-sky-700 flex items-center gap-1 transition-colors"
             >
               All 16 categories <ArrowRight className="w-3.5 h-3.5" />
@@ -182,7 +206,7 @@ export default function HomePage() {
               </p>
             </div>
             <Link
-              href="/calculators?sort=newest"
+              href="/calculators/?sort=newest"
               className="text-xs font-semibold text-sky-600 hover:text-sky-700 flex items-center gap-1 transition-colors"
             >
               View new tools <ArrowRight className="w-3.5 h-3.5" />

@@ -54,7 +54,7 @@ export const CreatorStoryCard: React.FC = () => {
             </div>
 
             <Link
-              href="/about"
+              href="/about/"
               className="inline-flex items-center gap-1 text-xs font-semibold text-sky-600 hover:text-sky-700 hover:underline"
             >
               Read the full story <ArrowRight className="w-3.5 h-3.5" />

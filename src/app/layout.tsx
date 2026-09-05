@@ -6,7 +6,12 @@ import { Footer } from '@/components/navigation/Footer';
 import { CookieConsent } from '@/components/ui/CookieConsent';
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
 import { GA_MEASUREMENT_ID } from '@/lib/analytics';
-import { SITE_CONFIG, generateOrganizationSchema } from '@/lib/seo';
+import {
+  SITE_CONFIG,
+  generateOrganizationSchema,
+  getCanonicalUrl,
+  getCanonicalAlternates,
+} from '@/lib/seo';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
@@ -25,12 +30,13 @@ export const metadata: Metadata = {
     'mortgage calculator',
     'bmi calculator',
   ],
-  authors: [{ name: SITE_CONFIG.name, url: SITE_CONFIG.url }],
+  authors: [{ name: SITE_CONFIG.name, url: getCanonicalUrl('/') }],
   creator: SITE_CONFIG.name,
+  alternates: getCanonicalAlternates('/'),
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: SITE_CONFIG.url,
+    url: getCanonicalUrl('/'),
     siteName: SITE_CONFIG.name,
     title: `${SITE_CONFIG.name} – ${SITE_CONFIG.tagline}`,
     description: SITE_CONFIG.description,
@@ -45,6 +51,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
+    site: SITE_CONFIG.twitterHandle,
+    creator: SITE_CONFIG.twitterHandle,
     title: `${SITE_CONFIG.name} – ${SITE_CONFIG.tagline}`,
     description: SITE_CONFIG.description,
     images: ['/opengraph-image'],

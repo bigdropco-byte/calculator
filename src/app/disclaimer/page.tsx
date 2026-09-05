@@ -1,25 +1,31 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { AlertTriangle } from 'lucide-react';
-import { SITE_CONFIG, generateBreadcrumbSchema, generateWebPageSchema } from '@/lib/seo';
+import {
+  SITE_CONFIG,
+  generateBreadcrumbSchema,
+  generateWebPageSchema,
+  getCanonicalUrl,
+  getCanonicalAlternates,
+} from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Financial & Medical Disclaimer – Calculat.dev',
   description:
     'Important informational disclaimers regarding financial estimates, medical guidelines, and general calculations provided on Calculat.dev.',
-  alternates: {
-    canonical: `${SITE_CONFIG.url}/disclaimer`,
-  },
+  alternates: getCanonicalAlternates('/disclaimer'),
   openGraph: {
     title: 'Financial & Medical Disclaimer – Calculat.dev',
     description:
       'Important informational disclaimers regarding financial estimates, medical guidelines, and general calculations.',
-    url: `${SITE_CONFIG.url}/disclaimer`,
+    url: getCanonicalUrl('/disclaimer'),
     type: 'website',
     siteName: SITE_CONFIG.name,
   },
   twitter: {
     card: 'summary',
+    site: SITE_CONFIG.twitterHandle,
+    creator: SITE_CONFIG.twitterHandle,
     title: 'Financial & Medical Disclaimer – Calculat.dev',
     description: 'Important informational disclaimers regarding financial and medical calculation tools.',
   },
@@ -28,13 +34,13 @@ export const metadata: Metadata = {
 export default function DisclaimerPage() {
   const breadcrumbs = [
     { name: 'Home', url: '/' },
-    { name: 'Disclaimer', url: '/disclaimer' },
+    { name: 'Disclaimer', url: '/disclaimer/' },
   ];
 
   const pageSchema = generateWebPageSchema(
     'Financial & Medical Disclaimer',
     'Important informational notice regarding financial, medical, and general calculations',
-    '/disclaimer'
+    '/disclaimer/'
   );
 
   return (

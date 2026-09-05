@@ -64,13 +64,13 @@ export const CalculatorShell: React.FC<CalculatorShellProps> = ({ calculator, ch
           Home
         </Link>
         <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-        <Link href="/calculators" className="hover:text-sky-600 transition-colors">
+        <Link href="/calculators/" className="hover:text-sky-600 transition-colors">
           Calculators
         </Link>
         <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
         {category && (
           <>
-            <Link href={`/categories/${category.slug}`} className="hover:text-sky-600 transition-colors">
+            <Link href={`/categories/${category.slug}/`} className="hover:text-sky-600 transition-colors">
               {category.shortName}
             </Link>
             <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />

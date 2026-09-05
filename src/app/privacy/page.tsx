@@ -1,25 +1,31 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { ShieldCheck } from 'lucide-react';
-import { SITE_CONFIG, generateBreadcrumbSchema, generateWebPageSchema } from '@/lib/seo';
+import {
+  SITE_CONFIG,
+  generateBreadcrumbSchema,
+  generateWebPageSchema,
+  getCanonicalUrl,
+  getCanonicalAlternates,
+} from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy – Calculat.dev',
   description:
     'Our privacy pledge: all mathematical calculations occur client-side in your browser. Zero tracking of your financial or health inputs.',
-  alternates: {
-    canonical: `${SITE_CONFIG.url}/privacy`,
-  },
+  alternates: getCanonicalAlternates('/privacy'),
   openGraph: {
     title: 'Privacy Policy – Calculat.dev',
     description:
       'All calculations occur client-side in your browser. Zero tracking of your financial or health numbers.',
-    url: `${SITE_CONFIG.url}/privacy`,
+    url: getCanonicalUrl('/privacy'),
     type: 'website',
     siteName: SITE_CONFIG.name,
   },
   twitter: {
     card: 'summary',
+    site: SITE_CONFIG.twitterHandle,
+    creator: SITE_CONFIG.twitterHandle,
     title: 'Privacy Policy – Calculat.dev',
     description: 'Privacy-first calculation tools running locally in your browser.',
   },
@@ -28,13 +34,13 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   const breadcrumbs = [
     { name: 'Home', url: '/' },
-    { name: 'Privacy Policy', url: '/privacy' },
+    { name: 'Privacy Policy', url: '/privacy/' },
   ];
 
   const pageSchema = generateWebPageSchema(
     'Privacy Policy',
     'Client-side execution and local storage privacy policy',
-    '/privacy'
+    '/privacy/'
   );
 
   return (

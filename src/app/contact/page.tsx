@@ -2,25 +2,30 @@ import React from 'react';
 import { Metadata } from 'next';
 import { ContactForm } from '@/components/content/ContactForm';
 import { SocialLinks } from '@/components/navigation/SocialLinks';
-import { SITE_CONFIG, generateBreadcrumbSchema } from '@/lib/seo';
+import {
+  SITE_CONFIG,
+  generateBreadcrumbSchema,
+  getCanonicalUrl,
+  getCanonicalAlternates,
+} from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Contact & Calculator Requests – Calculat.dev',
   description:
     'Suggest a calculator, report a formula calculation issue, or request custom features for Calculat.dev free calculator directory.',
-  alternates: {
-    canonical: `${SITE_CONFIG.url}/contact`,
-  },
+  alternates: getCanonicalAlternates('/contact'),
   openGraph: {
     title: 'Contact & Calculator Requests – Calculat.dev',
     description:
       'Suggest a calculator or report a formula calculation issue for Calculat.dev.',
-    url: `${SITE_CONFIG.url}/contact`,
+    url: getCanonicalUrl('/contact'),
     type: 'website',
     siteName: SITE_CONFIG.name,
   },
   twitter: {
     card: 'summary_large_image',
+    site: SITE_CONFIG.twitterHandle,
+    creator: SITE_CONFIG.twitterHandle,
     title: 'Contact & Calculator Requests – Calculat.dev',
     description: 'Suggest a calculator or contact the independent student developer.',
   },
@@ -29,14 +34,21 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   const breadcrumbs = [
     { name: 'Home', url: '/' },
-    { name: 'Contact', url: '/contact' },
+    { name: 'Contact', url: '/contact/' },
   ];
 
   const contactSchema = {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
+    '@id': `${getCanonicalUrl('/contact')}#webpage`,
     name: 'Contact & Calculator Requests',
-    url: `${SITE_CONFIG.url}/contact`,
+    url: getCanonicalUrl('/contact'),
+    isPartOf: {
+      '@type': 'WebSite',
+      '@id': `${SITE_CONFIG.url}/#website`,
+      name: SITE_CONFIG.name,
+      url: `${SITE_CONFIG.url}/`,
+    },
     description: 'Submit calculator requests or feedback directly to the developer.',
   };
 

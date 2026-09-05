@@ -1,22 +1,28 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { SITE_CONFIG, generateBreadcrumbSchema, generateWebPageSchema } from '@/lib/seo';
+import {
+  SITE_CONFIG,
+  generateBreadcrumbSchema,
+  generateWebPageSchema,
+  getCanonicalUrl,
+  getCanonicalAlternates,
+} from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Terms of Service – Calculat.dev',
   description: 'Terms of service for using Calculat.dev free online calculators and directory.',
-  alternates: {
-    canonical: `${SITE_CONFIG.url}/terms`,
-  },
+  alternates: getCanonicalAlternates('/terms'),
   openGraph: {
     title: 'Terms of Service – Calculat.dev',
     description: 'Terms of service for using Calculat.dev free online calculators and directory.',
-    url: `${SITE_CONFIG.url}/terms`,
+    url: getCanonicalUrl('/terms'),
     type: 'website',
     siteName: SITE_CONFIG.name,
   },
   twitter: {
     card: 'summary',
+    site: SITE_CONFIG.twitterHandle,
+    creator: SITE_CONFIG.twitterHandle,
     title: 'Terms of Service – Calculat.dev',
     description: 'Terms of service for using Calculat.dev.',
   },
@@ -25,13 +31,13 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   const breadcrumbs = [
     { name: 'Home', url: '/' },
-    { name: 'Terms of Service', url: '/terms' },
+    { name: 'Terms of Service', url: '/terms/' },
   ];
 
   const pageSchema = generateWebPageSchema(
     'Terms of Service',
     'Terms of service and usage conditions for Calculat.dev',
-    '/terms'
+    '/terms/'
   );
 
   return (

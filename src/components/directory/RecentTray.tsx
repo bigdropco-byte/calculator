@@ -49,7 +49,7 @@ export const RecentTray: React.FC = () => {
               {favorites.map(c => (
                 <Link
                   key={c.slug}
-                  href={`/calculators/${c.slug}`}
+                  href={`/calculators/${c.slug}/`}
                   className="px-2 py-0.5 rounded bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-medium transition-colors"
                 >
                   {c.name}
@@ -65,7 +65,7 @@ export const RecentTray: React.FC = () => {
               {recents.slice(0, 5).map(c => (
                 <Link
                   key={c.slug}
-                  href={`/calculators/${c.slug}`}
+                  href={`/calculators/${c.slug}/`}
                   className="px-2 py-0.5 rounded bg-slate-100 hover:bg-sky-50 hover:text-sky-700 text-slate-700 border border-slate-200 text-xs font-medium transition-colors"
                 >
                   {c.name}

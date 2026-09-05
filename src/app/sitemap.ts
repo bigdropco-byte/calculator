@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { getAllPublishedCalculators, getCalculatorsByCategory } from '@/lib/calculatorRegistry';
 import { getAllCategories } from '@/lib/categoryRegistry';
-import { SITE_CONFIG } from '@/lib/seo';
+import { getCanonicalUrl } from '@/lib/seo';
 
 export const dynamic = 'force-static';
 
@@ -9,61 +9,61 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const publishedCalculators = getAllPublishedCalculators();
   const categories = getAllCategories();
 
-  // 1. Static Pages
+  // 1. Static Pages (Canonical URLs with trailing slash)
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: SITE_CONFIG.url,
+      url: getCanonicalUrl('/'),
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1.0,
     },
     {
-      url: `${SITE_CONFIG.url}/calculators`,
+      url: getCanonicalUrl('/calculators'),
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.9,
     },
     {
-      url: `${SITE_CONFIG.url}/categories`,
+      url: getCanonicalUrl('/categories'),
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
-      url: `${SITE_CONFIG.url}/about`,
+      url: getCanonicalUrl('/about'),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.4,
     },
     {
-      url: `${SITE_CONFIG.url}/contact`,
+      url: getCanonicalUrl('/contact'),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.4,
     },
     {
-      url: `${SITE_CONFIG.url}/privacy`,
+      url: getCanonicalUrl('/privacy'),
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.3,
     },
     {
-      url: `${SITE_CONFIG.url}/terms`,
+      url: getCanonicalUrl('/terms'),
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.3,
     },
     {
-      url: `${SITE_CONFIG.url}/disclaimer`,
+      url: getCanonicalUrl('/disclaimer'),
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.3,
     },
   ];
 
-  // 2. Published Calculators (Canonical URLs)
+  // 2. Published Calculators (Canonical URLs with trailing slash)
   const calculatorRoutes: MetadataRoute.Sitemap = publishedCalculators.map(calc => ({
-    url: `${SITE_CONFIG.url}/calculators/${calc.slug}`,
+    url: getCanonicalUrl(`/calculators/${calc.slug}`),
     lastModified: new Date(calc.addedDate),
     changeFrequency: 'monthly',
     priority: calc.popular ? 0.9 : 0.8,
@@ -75,7 +75,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const categoryRoutes: MetadataRoute.Sitemap = populatedCategories.map(cat => ({
-    url: `${SITE_CONFIG.url}/categories/${cat.slug}`,
+    url: getCanonicalUrl(`/categories/${cat.slug}`),
     lastModified: new Date(),
     changeFrequency: 'weekly',
     priority: 0.7,

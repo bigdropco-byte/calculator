@@ -14,7 +14,7 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({ category, count }) =
 
   return (
     <Link
-      href={`/categories/${category.slug}`}
+      href={`/categories/${category.slug}/`}
       className="dir-card group flex flex-col p-5 bg-white border border-slate-200 rounded-xl hover:border-sky-400 hover:shadow-md transition-all relative"
     >
       <div className="flex items-center justify-between mb-3.5">

@@ -8,25 +8,27 @@ import {
   SITE_CONFIG,
   generateBreadcrumbSchema,
   generateCollectionPageSchema,
+  getCanonicalUrl,
+  getCanonicalAlternates,
 } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Calculator Categories – Browse Online Calculators by Topic',
   description:
     'Explore calculators organized across 16 major domains: math, finance, health, date & time, everyday life, business, science, education, and unit conversion.',
-  alternates: {
-    canonical: `${SITE_CONFIG.url}/categories`,
-  },
+  alternates: getCanonicalAlternates('/categories'),
   openGraph: {
     title: 'Calculator Categories – Browse Online Calculators by Topic',
     description:
       'Explore calculators organized across 16 major domains: math, finance, health, date & time, everyday life, business, science, education, and unit conversion.',
-    url: `${SITE_CONFIG.url}/categories`,
+    url: getCanonicalUrl('/categories'),
     type: 'website',
     siteName: SITE_CONFIG.name,
   },
   twitter: {
     card: 'summary_large_image',
+    site: SITE_CONFIG.twitterHandle,
+    creator: SITE_CONFIG.twitterHandle,
     title: 'Calculator Categories – Browse Online Calculators by Topic',
     description:
       'Explore calculators organized across 16 major domains: math, finance, health, date & time, everyday life, and business.',
@@ -38,19 +40,19 @@ export default function CategoriesPage() {
 
   const breadcrumbs = [
     { name: 'Home', url: '/' },
-    { name: 'Categories', url: '/categories' },
+    { name: 'Categories', url: '/categories/' },
   ];
 
   const categoryItems = categoriesWithCounts.map(({ category, count }) => ({
     name: category.name,
-    url: `/categories/${category.slug}`,
+    url: `/categories/${category.slug}/`,
     description: `${category.description} (${count} calculators available)`,
   }));
 
   const collectionSchema = generateCollectionPageSchema(
     'Calculator Categories Directory',
     'Browse calculators organized across 16 major topic domains',
-    '/categories',
+    '/categories/',
     categoryItems
   );
 

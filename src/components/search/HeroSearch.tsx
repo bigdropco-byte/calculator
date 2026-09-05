@@ -53,7 +53,7 @@ export const HeroSearch: React.FC = () => {
           <React.Fragment key={item.slug}>
             <button
               type="button"
-              onClick={() => router.push(`/calculators/${item.slug}`)}
+              onClick={() => router.push(`/calculators/${item.slug}/`)}
               className="hover:text-sky-600 hover:underline transition-colors font-medium text-slate-700"
             >
               {item.label}

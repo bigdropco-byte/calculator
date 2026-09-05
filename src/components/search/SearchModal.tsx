@@ -78,7 +78,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
   const navigate = (slug: string) => {
     onClose();
-    router.push(`/calculators/${slug}`);
+    router.push(`/calculators/${slug}/`);
   };
 
   const quickPills = [

@@ -3,25 +3,31 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { Calculator, ShieldCheck, Zap, Layers } from 'lucide-react';
 import { SocialLinks } from '@/components/navigation/SocialLinks';
-import { SITE_CONFIG, generateBreadcrumbSchema, generateWebPageSchema } from '@/lib/seo';
+import {
+  SITE_CONFIG,
+  generateBreadcrumbSchema,
+  generateWebPageSchema,
+  getCanonicalUrl,
+  getCanonicalAlternates,
+} from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'About Calculat – The Free Online Calculator Directory',
   description:
     'Learn about Calculat.dev, our mission to build the internet’s cleanest, fastest, and most comprehensive directory of calculation tools.',
-  alternates: {
-    canonical: `${SITE_CONFIG.url}/about`,
-  },
+  alternates: getCanonicalAlternates('/about'),
   openGraph: {
     title: 'About Calculat – The Free Online Calculator Directory',
     description:
       'Learn about Calculat.dev, our mission to build the internet’s cleanest, fastest, and most comprehensive directory of calculation tools.',
-    url: `${SITE_CONFIG.url}/about`,
+    url: getCanonicalUrl('/about'),
     type: 'website',
     siteName: SITE_CONFIG.name,
   },
   twitter: {
     card: 'summary_large_image',
+    site: SITE_CONFIG.twitterHandle,
+    creator: SITE_CONFIG.twitterHandle,
     title: 'About Calculat – Free Online Calculator Directory',
     description:
       'Learn about Calculat.dev and our independent student mission to build an ad-free calculator platform.',
@@ -31,13 +37,13 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   const breadcrumbs = [
     { name: 'Home', url: '/' },
-    { name: 'About', url: '/about' },
+    { name: 'About', url: '/about/' },
   ];
 
   const pageSchema = generateWebPageSchema(
     'About Calculat',
     'Mission, architecture, and story behind Calculat.dev',
-    '/about'
+    '/about/'
   );
 
   return (
@@ -137,13 +143,13 @@ export default function AboutPage() {
 
         <div className="pt-6 border-t border-slate-200 flex items-center gap-4">
           <Link
-            href="/calculators"
+            href="/calculators/"
             className="px-4 py-2 bg-sky-600 text-white rounded-lg text-xs font-semibold hover:bg-sky-700 transition-colors"
           >
             Explore Directory
           </Link>
           <Link
-            href="/contact"
+            href="/contact/"
             className="px-4 py-2 bg-white border border-slate-200 text-slate-700 rounded-lg text-xs font-semibold hover:bg-slate-50 transition-colors"
           >
             Suggest a Calculator

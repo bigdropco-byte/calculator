@@ -19,10 +19,10 @@ export const Header: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { href: '/calculators', label: 'Calculators' },
-    { href: '/categories', label: 'Categories' },
-    { href: '/calculators?sort=popular', label: 'Popular' },
-    { href: '/calculators?sort=newest', label: 'New' },
+    { href: '/calculators/', label: 'Calculators' },
+    { href: '/categories/', label: 'Categories' },
+    { href: '/calculators/?sort=popular', label: 'Popular' },
+    { href: '/calculators/?sort=newest', label: 'New' },
   ];
 
   return (
@@ -44,7 +44,8 @@ export const Header: React.FC = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
             {navLinks.map(link => {
-              const isActive = pathname === link.href;
+              const linkPath = link.href.split('?')[0];
+              const isActive = pathname === link.href || pathname === linkPath || pathname === linkPath.replace(/\/$/, '');
               return (
                 <Link
                   key={link.href}

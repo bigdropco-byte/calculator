@@ -13,6 +13,8 @@ import {
   SITE_CONFIG,
   generateBreadcrumbSchema,
   generateCollectionPageSchema,
+  getCanonicalUrl,
+  getCanonicalAlternates,
 } from '@/lib/seo';
 
 interface Props {
@@ -36,22 +38,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const calculators = getCalculatorsByCategory(category.slug);
   const hasTools = calculators.length > 0;
+  const canonicalUrl = getCanonicalUrl(`/categories/${category.slug}`);
 
   return {
     title: `${category.name} – Free Online ${category.shortName} Calculators`,
     description: category.description,
-    alternates: {
-      canonical: `${SITE_CONFIG.url}/categories/${category.slug}`,
-    },
+    alternates: getCanonicalAlternates(`/categories/${category.slug}`),
     openGraph: {
       title: `${category.name} – Free Online ${category.shortName} Calculators`,
       description: category.description,
-      url: `${SITE_CONFIG.url}/categories/${category.slug}`,
+      url: canonicalUrl,
       type: 'website',
       siteName: SITE_CONFIG.name,
     },
     twitter: {
       card: 'summary_large_image',
+      site: SITE_CONFIG.twitterHandle,
+      creator: SITE_CONFIG.twitterHandle,
       title: `${category.name} – Free Online Calculators`,
       description: category.description,
     },
@@ -77,20 +80,20 @@ export default async function CategoryPage({ params }: Props) {
 
   const breadcrumbs = [
     { name: 'Home', url: '/' },
-    { name: 'Categories', url: '/categories' },
-    { name: category.name, url: `/categories/${category.slug}` },
+    { name: 'Categories', url: '/categories/' },
+    { name: category.name, url: `/categories/${category.slug}/` },
   ];
 
   const collectionItems = calculators.map(c => ({
     name: c.name,
-    url: `/calculators/${c.slug}`,
+    url: `/calculators/${c.slug}/`,
     description: c.shortDescription,
   }));
 
   const collectionSchema = generateCollectionPageSchema(
     category.name,
     category.description,
-    `/categories/${category.slug}`,
+    `/categories/${category.slug}/`,
     collectionItems
   );
 
@@ -118,7 +121,7 @@ export default async function CategoryPage({ params }: Props) {
             Home
           </Link>
           <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-          <Link href="/categories" className="hover:text-sky-600 transition-colors">
+          <Link href="/categories/" className="hover:text-sky-600 transition-colors">
             Categories
           </Link>
           <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
@@ -194,7 +197,7 @@ export default async function CategoryPage({ params }: Props) {
               </p>
             </div>
             <Link
-              href="/calculators"
+              href="/calculators/"
               className="inline-flex items-center gap-1.5 px-4 py-2 bg-sky-600 text-white rounded-lg text-xs font-semibold hover:bg-sky-700 transition-colors"
             >
               Browse All Calculators <ArrowRight className="w-3.5 h-3.5" />

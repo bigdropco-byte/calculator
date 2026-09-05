@@ -51,32 +51,32 @@ export const Footer: React.FC = () => {
             </h3>
             <ul className="space-y-2 text-xs sm:text-sm">
               <li>
-                <Link href="/calculators" className="hover:text-sky-600 transition-colors">
+                <Link href="/calculators/" className="hover:text-sky-600 transition-colors">
                   All Calculators
                 </Link>
               </li>
               <li>
-                <Link href="/calculators?sort=popular" className="hover:text-sky-600 transition-colors">
+                <Link href="/calculators/?sort=popular" className="hover:text-sky-600 transition-colors">
                   Popular Calculators
                 </Link>
               </li>
               <li>
-                <Link href="/calculators?sort=newest" className="hover:text-sky-600 transition-colors">
+                <Link href="/calculators/?sort=newest" className="hover:text-sky-600 transition-colors">
                   Recently Added
                 </Link>
               </li>
               <li>
-                <Link href="/calculators/percentage-calculator" className="hover:text-sky-600 transition-colors">
+                <Link href="/calculators/percentage-calculator/" className="hover:text-sky-600 transition-colors">
                   Percentage Calculator
                 </Link>
               </li>
               <li>
-                <Link href="/calculators/mortgage-calculator" className="hover:text-sky-600 transition-colors">
+                <Link href="/calculators/mortgage-calculator/" className="hover:text-sky-600 transition-colors">
                   Mortgage Calculator
                 </Link>
               </li>
               <li>
-                <Link href="/calculators/bmi-calculator" className="hover:text-sky-600 transition-colors">
+                <Link href="/calculators/bmi-calculator/" className="hover:text-sky-600 transition-colors">
                   BMI Calculator
                 </Link>
               </li>
@@ -90,32 +90,32 @@ export const Footer: React.FC = () => {
             </h3>
             <ul className="space-y-2 text-xs sm:text-sm">
               <li>
-                <Link href="/categories/math" className="hover:text-sky-600 transition-colors">
+                <Link href="/categories/math/" className="hover:text-sky-600 transition-colors">
                   Math Calculators
                 </Link>
               </li>
               <li>
-                <Link href="/categories/finance" className="hover:text-sky-600 transition-colors">
+                <Link href="/categories/finance/" className="hover:text-sky-600 transition-colors">
                   Finance Calculators
                 </Link>
               </li>
               <li>
-                <Link href="/categories/health" className="hover:text-sky-600 transition-colors">
+                <Link href="/categories/health/" className="hover:text-sky-600 transition-colors">
                   Health Calculators
                 </Link>
               </li>
               <li>
-                <Link href="/categories/date-time" className="hover:text-sky-600 transition-colors">
+                <Link href="/categories/date-time/" className="hover:text-sky-600 transition-colors">
                   Date &amp; Time
                 </Link>
               </li>
               <li>
-                <Link href="/categories/everyday" className="hover:text-sky-600 transition-colors">
+                <Link href="/categories/everyday/" className="hover:text-sky-600 transition-colors">
                   Everyday Tools
                 </Link>
               </li>
               <li>
-                <Link href="/categories" className="text-sky-600 font-medium hover:underline">
+                <Link href="/categories/" className="text-sky-600 font-medium hover:underline">
                   View All 16 Categories →
                 </Link>
               </li>
@@ -129,27 +129,27 @@ export const Footer: React.FC = () => {
             </h3>
             <ul className="space-y-2 text-xs sm:text-sm">
               <li>
-                <Link href="/about" className="hover:text-sky-600 transition-colors">
+                <Link href="/about/" className="hover:text-sky-600 transition-colors">
                   About Calculat
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-sky-600 transition-colors">
+                <Link href="/contact/" className="hover:text-sky-600 transition-colors">
                   Contact &amp; Suggestion
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="hover:text-sky-600 transition-colors">
+                <Link href="/privacy/" className="hover:text-sky-600 transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="hover:text-sky-600 transition-colors">
+                <Link href="/terms/" className="hover:text-sky-600 transition-colors">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/disclaimer" className="hover:text-sky-600 transition-colors">
+                <Link href="/disclaimer/" className="hover:text-sky-600 transition-colors">
                   Financial &amp; Medical Disclaimer
                 </Link>
               </li>

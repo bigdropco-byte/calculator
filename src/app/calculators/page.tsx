@@ -7,25 +7,27 @@ import {
   SITE_CONFIG,
   generateBreadcrumbSchema,
   generateCollectionPageSchema,
+  getCanonicalUrl,
+  getCanonicalAlternates,
 } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'All Calculators – Comprehensive Free Online Calculator Directory',
   description:
     'Browse our complete directory of free online calculators for math, finance, health, dates, business, and everyday use. Filter by category or jump alphabetically A–Z.',
-  alternates: {
-    canonical: `${SITE_CONFIG.url}/calculators`,
-  },
+  alternates: getCanonicalAlternates('/calculators'),
   openGraph: {
     title: 'All Calculators – Comprehensive Free Online Calculator Directory',
     description:
       'Browse our complete directory of free online calculators for math, finance, health, dates, business, and everyday use.',
-    url: `${SITE_CONFIG.url}/calculators`,
+    url: getCanonicalUrl('/calculators'),
     type: 'website',
     siteName: SITE_CONFIG.name,
   },
   twitter: {
     card: 'summary_large_image',
+    site: SITE_CONFIG.twitterHandle,
+    creator: SITE_CONFIG.twitterHandle,
     title: 'All Calculators – Free Online Calculator Directory',
     description:
       'Browse our complete directory of free online calculators for math, finance, health, dates, and everyday use.',
@@ -37,19 +39,19 @@ export default function CalculatorsPage() {
 
   const breadcrumbs = [
     { name: 'Home', url: '/' },
-    { name: 'Calculators', url: '/calculators' },
+    { name: 'Calculators', url: '/calculators/' },
   ];
 
   const collectionItems = allCalculators.map(calc => ({
     name: calc.name,
-    url: `/calculators/${calc.slug}`,
+    url: `/calculators/${calc.slug}/`,
     description: calc.shortDescription,
   }));
 
   const collectionSchema = generateCollectionPageSchema(
     'All Calculators Directory',
     'Comprehensive directory of online calculators',
-    '/calculators',
+    '/calculators/',
     collectionItems
   );
 
