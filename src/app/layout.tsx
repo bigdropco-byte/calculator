@@ -5,6 +5,7 @@ import { StudentBanner } from '@/components/navigation/StudentBanner';
 import { Footer } from '@/components/navigation/Footer';
 import { CookieConsent } from '@/components/ui/CookieConsent';
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
+import { GA_MEASUREMENT_ID } from '@/lib/analytics';
 import { SITE_CONFIG, generateOrganizationSchema } from '@/lib/seo';
 
 export const metadata: Metadata = {
@@ -100,6 +101,25 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Google tag (gtag.js) - Google Analytics 4 */}
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        />
+        <script
+          id="google-analytics-init"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', '${GA_MEASUREMENT_ID}', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
         <link rel="icon" href={`${basePath}/icon.svg`} type="image/svg+xml" />
         <link rel="icon" href={`${basePath}/favicon.ico`} sizes="any" />
         <link rel="icon" href={`${basePath}/favicon-48x48.png`} sizes="48x48" type="image/png" />

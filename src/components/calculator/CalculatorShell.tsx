@@ -6,6 +6,7 @@ import { ChevronRight, Star, Share2, ShieldCheck, Check } from 'lucide-react';
 import { CalculatorDefinition } from '@/lib/types';
 import { CATEGORIES } from '@/lib/categoryRegistry';
 import { addRecentCalculator, isFavoriteCalculator, toggleFavoriteCalculator } from '@/lib/storage';
+import { trackFavorite, trackShare } from '@/lib/analytics';
 
 interface CalculatorShellProps {
   calculator: CalculatorDefinition;
@@ -26,6 +27,7 @@ export const CalculatorShell: React.FC<CalculatorShellProps> = ({ calculator, ch
   const handleToggleFav = () => {
     const next = toggleFavoriteCalculator(calculator.slug);
     setIsFav(next);
+    trackFavorite(calculator.slug, next ? 'add' : 'remove');
   };
 
   const handleShare = async () => {
@@ -37,6 +39,7 @@ export const CalculatorShell: React.FC<CalculatorShellProps> = ({ calculator, ch
           text: calculator.shortDescription,
           url,
         });
+        trackShare(calculator.slug, 'web_share');
         return;
       } catch {
         // Fallback to clipboard
@@ -46,6 +49,7 @@ export const CalculatorShell: React.FC<CalculatorShellProps> = ({ calculator, ch
     try {
       await navigator.clipboard.writeText(url);
       setCopiedShare(true);
+      trackShare(calculator.slug, 'clipboard');
       setTimeout(() => setCopiedShare(false), 2000);
     } catch (e) {
       console.error('Copy failed', e);
