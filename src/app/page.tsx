@@ -11,6 +11,7 @@ import { CategoryCard } from '@/components/directory/CategoryCard';
 import { RecentTray } from '@/components/directory/RecentTray';
 import { HeroSearch } from '@/components/search/HeroSearch';
 import { CreatorStoryCard } from '@/components/content/CreatorStoryCard';
+import { HowItWorksSection } from '@/components/content/HowItWorksSection';
 import { StudentRoadmapWidget } from '@/components/directory/StudentRoadmapWidget';
 import { SITE_CONFIG } from '@/lib/seo';
 
@@ -19,19 +20,70 @@ export default function HomePage() {
   const recentCalculators = getRecentCalculatorsList(4);
   const activeCategories = getActiveCategoriesWithCount();
 
-  // Structured Data for WebSite with SearchAction
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: SITE_CONFIG.name,
-    url: SITE_CONFIG.url,
-    description: SITE_CONFIG.description,
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${SITE_CONFIG.url}/search?q={search_term_string}`,
-      'query-input': 'required name=search_term_string',
+  // Structured Data for WebSite with SearchAction and HowTo visual guide
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: SITE_CONFIG.name,
+      url: SITE_CONFIG.url,
+      description: SITE_CONFIG.description,
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: `${SITE_CONFIG.url}/search?q={search_term_string}`,
+        'query-input': 'required name=search_term_string',
+      },
     },
-  };
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: 'How to Use Calculat.dev Online Calculators',
+      description:
+        'A 6-step visual guide showing how to search or browse calculators, enter values, calculate instantly, view accurate results, and save or share calculations.',
+      image: `${SITE_CONFIG.url}/how-calculat-works.jpg`,
+      totalTime: 'PT30S',
+      step: [
+        {
+          '@type': 'HowToStep',
+          position: 1,
+          name: 'Search or Browse',
+          text: 'Find the calculator you need using search or explore categories & popular tools.',
+          url: `${SITE_CONFIG.url}/#search`,
+        },
+        {
+          '@type': 'HowToStep',
+          position: 2,
+          name: 'Choose a Calculator',
+          text: 'Select any calculator that matches your need. Each tool is designed to be simple and easy to use.',
+          url: `${SITE_CONFIG.url}/calculators/`,
+        },
+        {
+          '@type': 'HowToStep',
+          position: 3,
+          name: 'Enter Your Values',
+          text: 'Input the required numbers or details. Our calculators support real-time validation for accuracy.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 4,
+          name: 'Calculate Instantly',
+          text: 'Click the calculate button and get instant, accurate results in a fraction of a second.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 5,
+          name: 'View Results',
+          text: 'See your results clearly displayed with explanations (when available) to help you understand better.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 6,
+          name: 'Use, Save & Share',
+          text: 'Use the results, reset for new calculations, or share with others if needed.',
+        },
+      ],
+    },
+  ];
 
   return (
     <>
@@ -111,6 +163,9 @@ export default function HomePage() {
             ))}
           </div>
         </section>
+
+        {/* HOW IT WORKS SECTION */}
+        <HowItWorksSection />
 
         {/* COMMUNITY VOTING ON NEXT TOOLS */}
         <section>
