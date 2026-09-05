@@ -1,44 +1,24 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Search } from 'lucide-react';
 import { SearchModal } from './SearchModal';
-import { stripLocaleFromPath, getLocalizedPath } from '@/lib/i18n/config';
-import { getUiTranslations, getLocalizedCalculator } from '@/lib/i18n/translate';
-import { getCalculatorBySlug } from '@/lib/calculatorRegistry';
 
 export const HeroSearch: React.FC = () => {
   const router = useRouter();
-  const pathname = usePathname() || '/';
-  const { locale } = stripLocaleFromPath(pathname);
-  const ui = getUiTranslations(locale);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [initialSearch, setInitialSearch] = useState('');
 
-  const exampleSlugs = [
-    'percentage-calculator',
-    'age-calculator',
-    'bmi-calculator',
-    'mortgage-calculator',
-    'loan-calculator',
-    'tip-calculator',
-    'compound-interest-calculator',
+  const examples = [
+    { label: 'Percentage', slug: 'percentage-calculator', query: 'percentage' },
+    { label: 'Age', slug: 'age-calculator', query: 'age' },
+    { label: 'BMI', slug: 'bmi-calculator', query: 'bmi' },
+    { label: 'Mortgage', slug: 'mortgage-calculator', query: 'mortgage' },
+    { label: 'Loan', slug: 'loan-calculator', query: 'loan' },
+    { label: 'Tip', slug: 'tip-calculator', query: 'tip' },
+    { label: 'Compound Interest', slug: 'compound-interest-calculator', query: 'compound interest' },
   ];
-
-  const examples = exampleSlugs.map(slug => {
-    const calc = getCalculatorBySlug(slug);
-    if (!calc) return { label: slug, slug, query: slug };
-    const localized = getLocalizedCalculator(calc, locale);
-    // Shorten name if needed for compact pills
-    const shortLabel = localized.name.replace(/\s*(Calculator|कैलकुलेटर|Calculadora de|Calculateur de|Rechner|حاسبة)$/i, '').trim();
-    return {
-      label: shortLabel || localized.name,
-      slug,
-      query: localized.name,
-    };
-  });
 
   const handleOpenSearch = (q: string = '') => {
     setInitialSearch(q);
@@ -58,22 +38,22 @@ export const HeroSearch: React.FC = () => {
         <input
           type="text"
           readOnly
-          placeholder={ui.searchPlaceholder}
+          placeholder="What do you want to calculate?"
           className="w-full text-base sm:text-lg text-slate-900 placeholder-slate-400 bg-transparent border-0 focus:outline-none cursor-pointer"
         />
         <span className="hidden sm:inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 text-xs font-semibold text-slate-600 border border-slate-200 shrink-0">
-          {ui.pressK}
+          Press ⌘K
         </span>
       </div>
 
       {/* Examples underneath */}
       <div className="mt-3.5 flex items-center justify-center gap-1.5 flex-wrap text-xs text-slate-500">
-        <span className="font-semibold text-slate-600">{ui.sortPopular}:</span>
+        <span className="font-semibold text-slate-600">Popular:</span>
         {examples.map((item, index) => (
           <React.Fragment key={item.slug}>
             <button
               type="button"
-              onClick={() => router.push(getLocalizedPath(`/calculators/${item.slug}/`, locale))}
+              onClick={() => router.push(`/calculators/${item.slug}/`)}
               className="hover:text-sky-600 hover:underline transition-colors font-medium text-slate-700"
             >
               {item.label}

@@ -2,13 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Bookmark, ArrowRight } from 'lucide-react';
-import { stripLocaleFromPath, getLocalizedPath } from '@/lib/i18n/config';
+import { Heart, Bookmark, ArrowRight, Sparkles } from 'lucide-react';
 
 export const CreatorStoryCard: React.FC = () => {
-  const pathname = usePathname() || '/';
-  const { locale } = stripLocaleFromPath(pathname);
   const [isMac, setIsMac] = useState(true);
 
   useEffect(() => {
@@ -58,7 +54,7 @@ export const CreatorStoryCard: React.FC = () => {
             </div>
 
             <Link
-              href={getLocalizedPath('/about/', locale)}
+              href="/about/"
               className="inline-flex items-center gap-1 text-xs font-semibold text-sky-600 hover:text-sky-700 hover:underline"
             >
               Read the full story <ArrowRight className="w-3.5 h-3.5" />

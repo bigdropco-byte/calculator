@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "tsx scripts/generate-sitemaps.ts && next build",
-    "generate:sitemaps": "tsx scripts/generate-sitemaps.ts",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run"
@@ -25,7 +24,6 @@
     "eslint-config-next": "16.3.4",
     "postcss": "^8",
     "tailwindcss": "^4",
-    "tsx": "^4.23.13",
     "typescript": "^5",
     "vitest": "^4.1.11"
   }

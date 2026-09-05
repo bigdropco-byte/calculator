@@ -1,6 +1,5 @@
 import { CalculatorDefinition } from './types';
 import { CATEGORIES } from './categoryRegistry';
-import { DEFAULT_LOCALE, getLocalizedPath, Locale, stripLocaleFromPath, SUPPORTED_LOCALES } from './i18n/config';
 
 export const SOCIAL_LINKS = {
   facebook: 'https://www.facebook.com/calculat.dev',
@@ -27,54 +26,49 @@ export const SITE_CONFIG = {
  * Normalizes any route path, relative link, or full URL to an absolute canonical URL
  * conforming to Next.js trailingSlash: true static export configuration.
  *
- * If a locale is provided, formats the URL according to that locale's subpath
- * (English at root https://calculat.dev/, others at https://calculat.dev/[locale]/).
+ * Guaranteed properties:
+ * - Always starts with SITE_CONFIG.url (https://calculat.dev)
+ * - Strips query strings (?sort=popular, ?utm_source=...) and hash anchors (#section)
+ * - Preserves file extensions without trailing slash (/sitemap.xml, /favicon.ico)
+ * - Always appends a single trailing slash to web pages (/calculators/, /about/, /calculators/percentage-calculator/)
+ * - Handles root path as https://calculat.dev/
  */
-export function getCanonicalUrl(path: string = '', locale?: Locale): string {
-  // Strip origin if present
-  let clean = path.replace(/^https?:\/\/[^\/]+/i, '');
-  // Strip query parameters and fragments
-  clean = clean.replace(/[?#].*$/, '').trim();
-
-  // If path ends with a file extension, do not append a trailing slash or localize
-  if (/\.[a-zA-Z0-9]+$/.test(clean)) {
-    clean = clean.replace(/^\/+/, '');
-    return `${SITE_CONFIG.url}/${clean}`;
-  }
-
-  // Determine effective locale and base path
-  const parsed = stripLocaleFromPath(clean);
-  const targetLocale = locale !== undefined ? locale : parsed.locale;
-  const localizedPath = getLocalizedPath(parsed.pathWithoutLocale, targetLocale);
-
-  if (localizedPath === '/') {
+export function getCanonicalUrl(path: string = ''): string {
+  if (!path || path === '/' || path === SITE_CONFIG.url || path === `${SITE_CONFIG.url}/`) {
     return `${SITE_CONFIG.url}/`;
   }
 
-  const trimmed = localizedPath.replace(/^\/+|\/+$/g, '');
-  return `${SITE_CONFIG.url}/${trimmed}/`;
+  // Strip origin / protocol / host if present
+  let clean = path.replace(/^https?:\/\/[^\/]+/i, '');
+  // Strip query parameters and fragments (canonical URLs must never contain query strings)
+  clean = clean.replace(/[?#].*$/, '');
+  // Trim surrounding slashes and whitespace
+  clean = clean.trim().replace(/^\/+|\/+$/g, '');
+
+  if (!clean) {
+    return `${SITE_CONFIG.url}/`;
+  }
+
+  // If path ends with a file extension, do not append a trailing slash
+  if (/\.[a-zA-Z0-9]+$/.test(clean)) {
+    return `${SITE_CONFIG.url}/${clean}`;
+  }
+
+  return `${SITE_CONFIG.url}/${clean}/`;
 }
 
 /**
  * Generates standard Next.js alternates metadata with self-referencing canonical
- * and full multilingual hreflang annotations (en, es, fr, de, pt, hi, x-default)
- * adhering strictly to Google Search Central internationalization requirements.
+ * and hreflang annotations (en-US, x-default) for comprehensive search engine clarity.
  */
-export function getCanonicalAlternates(path: string = '', currentLocale: Locale = DEFAULT_LOCALE) {
-  const { pathWithoutLocale } = stripLocaleFromPath(path);
-  const canonicalUrl = getCanonicalUrl(pathWithoutLocale, currentLocale);
-
-  const languages: Record<string, string> = {};
-  for (const loc of SUPPORTED_LOCALES) {
-    languages[loc] = getCanonicalUrl(pathWithoutLocale, loc);
-  }
-  // Also provide en-US and x-default for international targeting
-  languages['en-US'] = getCanonicalUrl(pathWithoutLocale, DEFAULT_LOCALE);
-  languages['x-default'] = getCanonicalUrl(pathWithoutLocale, DEFAULT_LOCALE);
-
+export function getCanonicalAlternates(path: string = '') {
+  const canonicalUrl = getCanonicalUrl(path);
   return {
     canonical: canonicalUrl,
-    languages,
+    languages: {
+      'en-US': canonicalUrl,
+      'x-default': canonicalUrl,
+    },
   };
 }
 
@@ -104,15 +98,13 @@ export function generateOrganizationSchema() {
   };
 }
 
-export function generateWebSiteSchema(locale: Locale = DEFAULT_LOCALE) {
-  const rootUrl = getCanonicalUrl('/', locale);
+export function generateWebSiteSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    '@id': `${rootUrl}#website`,
+    '@id': `${SITE_CONFIG.url}/#website`,
     name: SITE_CONFIG.name,
-    url: rootUrl,
-    inLanguage: locale,
+    url: `${SITE_CONFIG.url}/`,
     description: SITE_CONFIG.description,
     publisher: {
       '@id': `${SITE_CONFIG.url}/#organization`,
@@ -128,9 +120,9 @@ export function generateWebSiteSchema(locale: Locale = DEFAULT_LOCALE) {
   };
 }
 
-export function generateCalculatorSchema(calculator: CalculatorDefinition, locale: Locale = DEFAULT_LOCALE) {
+export function generateCalculatorSchema(calculator: CalculatorDefinition) {
   const categoryName = CATEGORIES[calculator.category]?.name || calculator.category;
-  const canonicalUrl = getCanonicalUrl(`/calculators/${calculator.slug}/`, locale);
+  const canonicalUrl = getCanonicalUrl(`/calculators/${calculator.slug}`);
 
   return {
     '@context': 'https://schema.org',
@@ -138,7 +130,6 @@ export function generateCalculatorSchema(calculator: CalculatorDefinition, local
     '@id': `${canonicalUrl}#software`,
     name: calculator.name,
     url: canonicalUrl,
-    inLanguage: locale,
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': `${canonicalUrl}#webpage`,
@@ -181,10 +172,9 @@ export function generateCollectionPageSchema(
   title: string,
   description: string,
   url: string,
-  items: { name: string; url: string; description?: string }[],
-  locale: Locale = DEFAULT_LOCALE
+  items: { name: string; url: string; description?: string }[]
 ) {
-  const canonicalUrl = getCanonicalUrl(url, locale);
+  const canonicalUrl = getCanonicalUrl(url);
   return {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -192,7 +182,6 @@ export function generateCollectionPageSchema(
     name: title,
     description,
     url: canonicalUrl,
-    inLanguage: locale,
     isPartOf: {
       '@type': 'WebSite',
       '@id': `${SITE_CONFIG.url}/#website`,
@@ -207,14 +196,14 @@ export function generateCollectionPageSchema(
         position: index + 1,
         name: item.name,
         description: item.description,
-        url: getCanonicalUrl(item.url, locale),
+        url: getCanonicalUrl(item.url),
       })),
     },
   };
 }
 
-export function generateWebPageSchema(title: string, description: string, url: string, locale: Locale = DEFAULT_LOCALE) {
-  const canonicalUrl = getCanonicalUrl(url, locale);
+export function generateWebPageSchema(title: string, description: string, url: string) {
+  const canonicalUrl = getCanonicalUrl(url);
   return {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
@@ -222,7 +211,6 @@ export function generateWebPageSchema(title: string, description: string, url: s
     name: title,
     description,
     url: canonicalUrl,
-    inLanguage: locale,
     isPartOf: {
       '@type': 'WebSite',
       '@id': `${SITE_CONFIG.url}/#website`,
@@ -232,7 +220,7 @@ export function generateWebPageSchema(title: string, description: string, url: s
   };
 }
 
-export function generateBreadcrumbSchema(items: { name: string; url: string }[], locale: Locale = DEFAULT_LOCALE) {
+export function generateBreadcrumbSchema(items: { name: string; url: string }[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -240,7 +228,7 @@ export function generateBreadcrumbSchema(items: { name: string; url: string }[],
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: getCanonicalUrl(item.url, locale),
+      item: getCanonicalUrl(item.url),
     })),
   };
 }
@@ -261,3 +249,4 @@ export function generateFaqSchema(faqs: { question: string; answer: string }[]) 
     })),
   };
 }
+

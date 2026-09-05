@@ -1,14 +1,11 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Search, X, ArrowRight, CornerDownLeft, Sparkles } from 'lucide-react';
 import { searchCalculators } from '@/lib/calculatorSearch';
 import { SearchResultItem } from '@/lib/types';
 import { CategoryIcon } from '@/components/ui/CategoryIcon';
-import { stripLocaleFromPath, getLocalizedPath } from '@/lib/i18n/config';
-import { getUiTranslations, getLocalizedCalculator, getCategoryTranslation } from '@/lib/i18n/translate';
-import { getCalculatorBySlug } from '@/lib/calculatorRegistry';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -22,10 +19,6 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   initialQuery = '',
 }) => {
   const router = useRouter();
-  const pathname = usePathname() || '/';
-  const { locale } = stripLocaleFromPath(pathname);
-  const ui = getUiTranslations(locale);
-
   const [query, setQuery] = useState(initialQuery);
   const [results, setResults] = useState<SearchResultItem[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -48,6 +41,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         if (isOpen) {
           onClose();
         } else {
+          // Parent handles opening or we can dispatch an event
           window.dispatchEvent(new CustomEvent('open-calculat-search'));
         }
       }
@@ -84,29 +78,18 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
   const navigate = (slug: string) => {
     onClose();
-    router.push(getLocalizedPath(`/calculators/${slug}/`, locale));
+    router.push(`/calculators/${slug}/`);
   };
 
-  const exampleSlugs = [
-    'percentage-calculator',
-    'mortgage-calculator',
-    'bmi-calculator',
-    'age-calculator',
-    'loan-calculator',
-    'tip-calculator',
-    'compound-interest-calculator',
+  const quickPills = [
+    { label: 'Percentage', query: 'percentage' },
+    { label: 'Mortgage', query: 'mortgage' },
+    { label: 'BMI', query: 'bmi' },
+    { label: 'Age', query: 'age' },
+    { label: 'Loan', query: 'loan' },
+    { label: 'Tip', query: 'tip' },
+    { label: 'Compound Interest', query: 'compound interest' },
   ];
-
-  const quickPills = exampleSlugs.map(slug => {
-    const calc = getCalculatorBySlug(slug);
-    if (!calc) return { label: slug, query: slug };
-    const localized = getLocalizedCalculator(calc, locale);
-    const shortLabel = localized.name.replace(/\s*(Calculator|कैलकुलेटर|Calculadora de|Calculateur de|Rechner|حاسبة)$/i, '').trim();
-    return {
-      label: shortLabel || localized.name,
-      query: localized.name,
-    };
-  });
 
   if (!isOpen) return null;
 
@@ -130,7 +113,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
             type="text"
             value={query}
             onChange={e => handleQueryChange(e.target.value)}
-            placeholder={ui.searchPlaceholder}
+            placeholder="What do you want to calculate? (e.g. mortgage, percentage, bmi)"
             className="w-full text-base sm:text-lg text-slate-900 placeholder-slate-400 bg-transparent border-0 focus:outline-none focus:ring-0"
           />
           {query && (
@@ -155,7 +138,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         {/* Quick Suggestion Pills */}
         <div className="px-4 py-2.5 bg-slate-50 border-b border-slate-200/80 flex items-center gap-1.5 overflow-x-auto text-xs text-slate-500 no-scrollbar">
           <span className="shrink-0 flex items-center gap-1 font-medium text-slate-600">
-            <Sparkles className="w-3.5 h-3.5 text-sky-600" /> {ui.sortPopular}:
+            <Sparkles className="w-3.5 h-3.5 text-sky-600" /> Popular:
           </span>
           {quickPills.map(pill => (
             <button
@@ -174,13 +157,6 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           {results.length > 0 ? (
             results.map((item, index) => {
               const isSelected = index === selectedIndex;
-              const calc = getCalculatorBySlug(item.slug);
-              const localized = calc ? getLocalizedCalculator(calc, locale) : null;
-              const catTrans = getCategoryTranslation(locale, item.category as any);
-              const displayName = localized?.name || item.name;
-              const displayDesc = localized?.shortDescription || item.shortDescription;
-              const displayCat = catTrans?.shortName || catTrans?.name || item.categoryName;
-
               return (
                 <div
                   key={item.slug}
@@ -201,21 +177,21 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                     <div className="min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="font-semibold text-sm sm:text-base truncate">
-                          {displayName}
+                          {item.name}
                         </span>
                         <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
-                          {displayCat}
+                          {item.categoryName}
                         </span>
                       </div>
                       <p className="text-xs text-slate-500 mt-1 line-clamp-1">
-                        {displayDesc}
+                        {item.shortDescription}
                       </p>
                     </div>
                   </div>
                   <div className="shrink-0 ml-3 flex items-center self-center text-slate-400">
                     {isSelected ? (
                       <span className="flex items-center text-xs text-sky-600 font-medium gap-1">
-                        {ui.selectToOpen || 'Select'} <CornerDownLeft className="w-3.5 h-3.5" />
+                        Select <CornerDownLeft className="w-3.5 h-3.5" />
                       </span>
                     ) : (
                       <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100" />
@@ -226,9 +202,9 @@ export const SearchModal: React.FC<SearchModalProps> = ({
             })
           ) : (
             <div className="py-12 px-4 text-center">
-              <p className="text-sm font-medium text-slate-700">{ui.noResults} &ldquo;{query}&rdquo;</p>
+              <p className="text-sm font-medium text-slate-700">No calculators found for &ldquo;{query}&rdquo;</p>
               <p className="text-xs text-slate-500 mt-1">
-                {ui.searchSuggestions}
+                Try searching for percentage, mortgage, age, or browse by category.
               </p>
             </div>
           )}
@@ -238,13 +214,13 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         <div className="px-4 py-2.5 bg-slate-50 border-t border-slate-200 text-[11px] text-slate-500 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <span>
-              <kbd className="px-1.5 py-0.5 bg-white border border-slate-200 rounded text-[10px]">↑</kbd> <kbd className="px-1.5 py-0.5 bg-white border border-slate-200 rounded text-[10px]">↓</kbd>
+              <kbd className="px-1.5 py-0.5 bg-white border border-slate-200 rounded text-[10px]">↑</kbd> <kbd className="px-1.5 py-0.5 bg-white border border-slate-200 rounded text-[10px]">↓</kbd> to navigate
             </span>
             <span>
-              <kbd className="px-1.5 py-0.5 bg-white border border-slate-200 rounded text-[10px]">↵</kbd> {ui.selectToOpen || 'open'}
+              <kbd className="px-1.5 py-0.5 bg-white border border-slate-200 rounded text-[10px]">↵</kbd> to open
             </span>
           </div>
-          <span>{ui.studentBadge} • {ui.privacyBadge}</span>
+          <span>Local calculation • Privacy friendly</span>
         </div>
       </div>
     </div>
