@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonicalUrl = getCanonicalUrl('/', locale as Locale);
 
   return {
-    title: pageTitle,
+    title: { absolute: pageTitle },
     description: ui.description,
     alternates: getCanonicalAlternates('/', locale as Locale),
     openGraph: {

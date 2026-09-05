@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "tsx scripts/generate-sitemaps.ts && next build",
+    "generate:sitemaps": "tsx scripts/generate-sitemaps.ts",
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run"

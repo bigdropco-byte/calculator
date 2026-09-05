@@ -17,7 +17,7 @@ import {
   getCanonicalAlternates,
 } from '@/lib/seo';
 import { isValidLocale, NON_DEFAULT_LOCALES, Locale, getLocalizedPath } from '@/lib/i18n/config';
-import { getLocalizedCategory, getUiTranslations } from '@/lib/i18n/translate';
+import { getLocalizedCalculator, getLocalizedCategory, getUiTranslations } from '@/lib/i18n/translate';
 
 interface Props {
   params: Promise<{ locale: string; category: string }>;
@@ -51,17 +51,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const category = getLocalizedCategory(rawCategory, currentLocale);
+  const ui = getUiTranslations(currentLocale);
   const calculators = getCalculatorsByCategory(category.slug);
   const hasTools = calculators.length > 0;
   const canonicalUrl = getCanonicalUrl(`/categories/${category.slug}/`, currentLocale);
 
+  const pageTitle =
+    currentLocale === 'en'
+      ? `${category.name} – Free Online ${category.shortName} Calculators`
+      : `${category.name} – ${ui.calculate}`;
+  const pageDescription = `${category.description} ${ui.description}`;
+
   return {
-    title: `${category.name} – Free Online ${category.shortName} Calculators`,
-    description: category.description,
+    title: pageTitle,
+    description: pageDescription,
     alternates: getCanonicalAlternates(`/categories/${category.slug}/`, currentLocale),
     openGraph: {
-      title: `${category.name} – Free Online ${category.shortName} Calculators`,
-      description: category.description,
+      title: `${pageTitle} | ${SITE_CONFIG.name}`,
+      description: pageDescription,
       url: canonicalUrl,
       type: 'website',
       siteName: SITE_CONFIG.name,
@@ -71,8 +78,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: 'summary_large_image',
       site: SITE_CONFIG.twitterHandle,
       creator: SITE_CONFIG.twitterHandle,
-      title: `${category.name} – Free Online Calculators`,
-      description: category.description,
+      title: `${pageTitle} | ${SITE_CONFIG.name}`,
+      description: pageDescription,
     },
     robots: {
       index: hasTools,
@@ -106,11 +113,14 @@ export default async function LocalizedCategoryPage({ params }: Props) {
     { name: category.name, url: getLocalizedPath(`/categories/${category.slug}/`, currentLocale) },
   ];
 
-  const collectionItems = calculators.map(c => ({
-    name: c.name,
-    url: getLocalizedPath(`/calculators/${c.slug}/`, currentLocale),
-    description: c.shortDescription,
-  }));
+  const collectionItems = calculators.map(c => {
+    const locCalc = getLocalizedCalculator(c, currentLocale);
+    return {
+      name: locCalc.name,
+      url: getLocalizedPath(`/calculators/${c.slug}/`, currentLocale),
+      description: locCalc.shortDescription,
+    };
+  });
 
   const collectionSchema = generateCollectionPageSchema(
     category.name,
@@ -160,7 +170,7 @@ export default async function LocalizedCategoryPage({ params }: Props) {
                 <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-sky-50 text-sky-700 border border-sky-200">
                   {ui.toolsCount(calculators.length)}
                 </span>
-                <span className="text-xs text-slate-400">100% Free &amp; Ad-Free</span>
+                <span className="text-xs text-slate-400">{ui.alwaysFreeTitle}</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                 {category.name}
@@ -180,7 +190,7 @@ export default async function LocalizedCategoryPage({ params }: Props) {
                 {category.shortName} {ui.navCalculators}
               </h2>
               <p className="text-xs text-slate-500">
-                Filter and sort tools in this category
+                {ui.directorySubheader}
               </p>
             </div>
             <DirectoryFilter
@@ -196,7 +206,7 @@ export default async function LocalizedCategoryPage({ params }: Props) {
               <CategoryIcon name={category.icon} className="w-6 h-6" />
             </div>
             <h3 className="text-base font-semibold text-slate-800">
-              {category.name} Coming Soon
+              {category.name} – {ui.comingSoon}
             </h3>
             <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
               We are actively developing calculators for this category. Check back soon or suggest a tool!

@@ -13,7 +13,7 @@ import {
   getCanonicalAlternates,
 } from '@/lib/seo';
 import { isValidLocale, NON_DEFAULT_LOCALES, Locale, getLocalizedPath } from '@/lib/i18n/config';
-import { getUiTranslations } from '@/lib/i18n/translate';
+import { getLocalizedCategory, getUiTranslations } from '@/lib/i18n/translate';
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -27,17 +27,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
 
-  const ui = getUiTranslations(locale as Locale);
-  const title = `${ui.navCategories} – ${SITE_CONFIG.name}`;
+  const currentLocale = locale as Locale;
+  const ui = getUiTranslations(currentLocale);
+  const title = `${ui.navCategories} – ${ui.browseByCategory}`;
   const description = ui.exploreCategories;
-  const canonicalUrl = getCanonicalUrl('/categories/', locale as Locale);
+  const canonicalUrl = getCanonicalUrl('/categories/', currentLocale);
 
   return {
     title,
     description,
-    alternates: getCanonicalAlternates('/categories/', locale as Locale),
+    alternates: getCanonicalAlternates('/categories/', currentLocale),
     openGraph: {
-      title,
+      title: `${title} | ${SITE_CONFIG.name}`,
       description,
       url: canonicalUrl,
       type: 'website',
@@ -48,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: 'summary_large_image',
       site: SITE_CONFIG.twitterHandle,
       creator: SITE_CONFIG.twitterHandle,
-      title,
+      title: `${title} | ${SITE_CONFIG.name}`,
       description,
     },
   };
@@ -69,11 +70,14 @@ export default async function LocalizedCategoriesPage({ params }: Props) {
     { name: ui.navCategories, url: getLocalizedPath('/categories/', currentLocale) },
   ];
 
-  const categoryItems = categoriesWithCounts.map(({ category, count }) => ({
-    name: category.name,
-    url: getLocalizedPath(`/categories/${category.slug}/`, currentLocale),
-    description: `${category.description} (${count} calculators available)`,
-  }));
+  const categoryItems = categoriesWithCounts.map(({ category, count }) => {
+    const locCat = getLocalizedCategory(category, currentLocale);
+    return {
+      name: locCat.name,
+      url: getLocalizedPath(`/categories/${category.slug}/`, currentLocale),
+      description: `${locCat.description} (${count})`,
+    };
+  });
 
   const collectionSchema = generateCollectionPageSchema(
     ui.navCategories,

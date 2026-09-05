@@ -155,6 +155,21 @@ describe('UI and Category Translations', () => {
         expect(trans.description).toBeTruthy();
       }
     }
+
+    // Specific verification for Thai (th)
+    const thMath = getCategoryTranslation('th', 'math');
+    expect(thMath.name).toBe('เครื่องคำนวณคณิตศาสตร์');
+    expect(thMath.shortName).toBe('คณิตศาสตร์');
+
+    const thFinance = getCategoryTranslation('th', 'finance');
+    expect(thFinance.name).toBe('เครื่องคำนวณการเงิน');
+    expect(thFinance.shortName).toBe('การเงิน');
+
+    const mathCat = CATEGORIES.math;
+    const localizedMath = getLocalizedCategory(mathCat, 'th');
+    expect(localizedMath.name).toBe('เครื่องคำนวณคณิตศาสตร์');
+    expect(localizedMath.shortName).toBe('คณิตศาสตร์');
+    expect(localizedMath.description).toContain('แก้โจทย์เลขคณิต');
   });
 
   it('localizes calculators with explicit translations and graceful fallback', () => {

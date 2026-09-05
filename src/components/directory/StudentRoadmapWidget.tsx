@@ -2,7 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ThumbsUp, Check, Sparkles, MessageSquarePlus, Clock } from 'lucide-react';
+import { stripLocaleFromPath, getLocalizedPath } from '@/lib/i18n/config';
 
 interface RoadmapItem {
   id: string;
@@ -51,6 +53,8 @@ const INITIAL_ROADMAP: RoadmapItem[] = [
 ];
 
 export const StudentRoadmapWidget: React.FC = () => {
+  const pathname = usePathname() || '/';
+  const { locale } = stripLocaleFromPath(pathname);
   const [items, setItems] = useState<RoadmapItem[]>(INITIAL_ROADMAP);
   const [votedIds, setVotedIds] = useState<string[]>([]);
   const [justVoted, setJustVoted] = useState<string | null>(null);
@@ -99,7 +103,7 @@ export const StudentRoadmapWidget: React.FC = () => {
         </div>
 
         <Link
-          href="/contact/?topic=suggestion"
+          href={`${getLocalizedPath('/contact/', locale)}?topic=suggestion`}
           className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-sky-50 hover:text-sky-700 text-slate-700 text-xs font-semibold transition-colors border border-slate-200 shrink-0 self-start md:self-auto"
         >
           <MessageSquarePlus className="w-4 h-4 text-slate-400" />
