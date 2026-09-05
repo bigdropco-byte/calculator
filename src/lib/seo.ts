@@ -5,7 +5,7 @@ export const SITE_CONFIG = {
   name: 'Calculat',
   domain: 'calculat.dev',
   url: 'https://calculat.dev',
-  tagline: 'Online Calculators for Everything',
+  tagline: 'All Calculators, One Place.',
   description:
     'Find free, fast, and accurate online calculators for math, finance, health, dates, everyday calculations, and more. Clean directory-first search engine for calculation tools.',
   creator: 'Calculat Independent Student Project',
@@ -17,8 +17,9 @@ export function generateOrganizationSchema() {
     '@type': 'Organization',
     name: SITE_CONFIG.name,
     url: SITE_CONFIG.url,
-    logo: `${SITE_CONFIG.url}/icon-512.png`,
-    image: `${SITE_CONFIG.url}/icon-512.png`,
+    logo: `${SITE_CONFIG.url}/calculat-logo.png`,
+    image: `${SITE_CONFIG.url}/calculat-logo.png`,
+    slogan: SITE_CONFIG.tagline,
     description: SITE_CONFIG.description,
     founder: {
       '@type': 'Person',

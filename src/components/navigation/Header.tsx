@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Search, Menu, X } from 'lucide-react';
 import { SearchModal } from '@/components/search/SearchModal';
-import { CalculatLogoIcon } from '@/components/ui/CalculatLogo';
+import { CalculatBrandLogo } from '@/components/ui/CalculatLogo';
 
 export const Header: React.FC = () => {
   const pathname = usePathname();
@@ -32,12 +32,13 @@ export const Header: React.FC = () => {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 text-slate-900 font-bold text-xl tracking-tight group"
+            className="flex items-center group py-1"
+            aria-label="Calculat.dev - All Calculators, One Place."
           >
-            <CalculatLogoIcon size={36} />
-            <span className="flex items-center">
-              Calculat<span className="text-sky-600 font-semibold text-sm ml-0.5">.dev</span>
-            </span>
+            <CalculatBrandLogo
+              height={40}
+              className="transition-transform group-hover:scale-[1.02] duration-200"
+            />
           </Link>
 
           {/* Desktop Navigation */}

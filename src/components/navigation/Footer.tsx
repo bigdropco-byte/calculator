@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { ShieldCheck } from 'lucide-react';
-import { CalculatLogoIcon } from '@/components/ui/CalculatLogo';
+import { CalculatBrandLogo } from '@/components/ui/CalculatLogo';
 
 export const Footer: React.FC = () => {
   return (
@@ -10,11 +10,15 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 lg:gap-12">
           {/* Brand Col */}
           <div className="md:col-span-2 space-y-4">
-            <Link href="/" className="flex items-center gap-2 text-slate-900 font-bold text-lg group">
-              <CalculatLogoIcon size={32} />
-              <span>
-                Calculat<span className="text-sky-600">.dev</span>
-              </span>
+            <Link
+              href="/"
+              className="inline-flex items-center group py-1"
+              aria-label="Calculat.dev - All Calculators, One Place."
+            >
+              <CalculatBrandLogo
+                height={48}
+                className="transition-transform group-hover:scale-[1.02] duration-200"
+              />
             </Link>
             <p className="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-sm">
               Free, fast, and accurate online calculator directory. Built with care by an independent student developer to replace ad-cluttered websites with clean tools.
