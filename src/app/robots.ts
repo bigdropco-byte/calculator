@@ -9,7 +9,13 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/search/', '/search', '/search?*'],
+        disallow: [
+          '/search/',
+          '/search',
+          '/search?*',
+          '/*/search/',
+          '/*/search?*',
+        ],
       },
     ],
     sitemap: `${SITE_CONFIG.url}/sitemap.xml`,

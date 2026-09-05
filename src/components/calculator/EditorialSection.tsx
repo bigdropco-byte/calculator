@@ -3,14 +3,22 @@ import { CalculatorDefinition } from '@/lib/types';
 import { getRelatedCalculators } from '@/lib/calculatorRegistry';
 import { CalculatorCard } from '@/components/directory/CalculatorCard';
 import { BookOpen, HelpCircle, Lightbulb, Calculator as CalcIcon } from 'lucide-react';
+import { DEFAULT_LOCALE, Locale } from '@/lib/i18n/config';
+import { getLocalizedCalculator, getUiTranslations } from '@/lib/i18n/translate';
 
 interface EditorialSectionProps {
   calculator: CalculatorDefinition;
+  locale?: Locale;
 }
 
-export const EditorialSection: React.FC<EditorialSectionProps> = ({ calculator }) => {
+export const EditorialSection: React.FC<EditorialSectionProps> = ({
+  calculator,
+  locale = DEFAULT_LOCALE,
+}) => {
   const { editorial } = calculator;
   const related = getRelatedCalculators(calculator, 3);
+  const ui = getUiTranslations(locale);
+  const localizedCalc = getLocalizedCalculator(calculator, locale);
 
   return (
     <div className="mt-12 space-y-12 border-t border-slate-200 pt-12">
@@ -18,7 +26,7 @@ export const EditorialSection: React.FC<EditorialSectionProps> = ({ calculator }
       <section className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 shadow-2xs">
         <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2.5">
           <BookOpen className="w-5 h-5 text-sky-600" />
-          What Is a {calculator.name}?
+          {ui.formulaAndMethod}: {localizedCalc.name}
         </h2>
         <p className="text-slate-600 leading-relaxed text-sm sm:text-base">
           {editorial.whatIs}
@@ -27,7 +35,7 @@ export const EditorialSection: React.FC<EditorialSectionProps> = ({ calculator }
         {/* How to use */}
         <div className="mt-6 pt-6 border-t border-slate-100">
           <h3 className="text-base font-semibold text-slate-900 mb-3">
-            How to Use This Calculator
+            {ui.howItWorksTitle}
           </h3>
           <ol className="space-y-2 text-sm text-slate-600 list-decimal list-inside">
             {editorial.howToUse.map((step, idx) => (
@@ -63,7 +71,7 @@ export const EditorialSection: React.FC<EditorialSectionProps> = ({ calculator }
         <section className="bg-white border border-slate-200 rounded-xl p-6 shadow-2xs">
           <h2 className="text-lg font-bold text-slate-900 mb-2 flex items-center gap-2">
             <Lightbulb className="w-4 h-4 text-amber-500" />
-            Worked Example
+            {ui.workedExample}
           </h2>
           <p className="text-xs font-semibold text-slate-700 mb-2">
             Scenario: {editorial.example.scenario}
@@ -101,7 +109,7 @@ export const EditorialSection: React.FC<EditorialSectionProps> = ({ calculator }
         <section className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 shadow-2xs">
           <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2.5">
             <HelpCircle className="w-5 h-5 text-sky-600" />
-            Frequently Asked Questions
+            {ui.faqsTitle}
           </h2>
           <div className="divide-y divide-slate-100">
             {editorial.faqs.map((faq, index) => (
@@ -122,12 +130,12 @@ export const EditorialSection: React.FC<EditorialSectionProps> = ({ calculator }
       {related.length > 0 && (
         <section>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-bold text-slate-900">Related Calculators</h2>
+            <h2 className="text-lg font-bold text-slate-900">{ui.relatedCalculators}</h2>
             <span className="text-xs text-slate-500">Explore similar tools</span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {related.map(relCalc => (
-              <CalculatorCard key={relCalc.slug} calculator={relCalc} />
+              <CalculatorCard key={relCalc.slug} calculator={relCalc} locale={locale} />
             ))}
           </div>
         </section>

@@ -6,11 +6,17 @@ import { usePathname } from 'next/navigation';
 import { Search, Menu, X } from 'lucide-react';
 import { SearchModal } from '@/components/search/SearchModal';
 import { CalculatBrandLogo } from '@/components/ui/CalculatLogo';
+import { LanguageSwitcher } from '@/components/navigation/LanguageSwitcher';
+import { stripLocaleFromPath, getLocalizedPath } from '@/lib/i18n/config';
+import { getUiTranslations } from '@/lib/i18n/translate';
 
 export const Header: React.FC = () => {
   const pathname = usePathname();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const { locale } = stripLocaleFromPath(pathname);
+  const ui = getUiTranslations(locale);
 
   useEffect(() => {
     const handleOpenSearch = () => setIsSearchOpen(true);
@@ -19,10 +25,10 @@ export const Header: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { href: '/calculators/', label: 'Calculators' },
-    { href: '/categories/', label: 'Categories' },
-    { href: '/calculators/?sort=popular', label: 'Popular' },
-    { href: '/calculators/?sort=newest', label: 'New' },
+    { href: getLocalizedPath('/calculators/', locale), label: ui.navCalculators },
+    { href: getLocalizedPath('/categories/', locale), label: ui.navCategories },
+    { href: `${getLocalizedPath('/calculators/', locale)}?sort=popular`, label: ui.navPopular },
+    { href: `${getLocalizedPath('/calculators/', locale)}?sort=newest`, label: ui.navNew },
   ];
 
   return (
@@ -31,7 +37,7 @@ export const Header: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
           {/* Logo */}
           <Link
-            href="/"
+            href={getLocalizedPath('/', locale)}
             className="flex items-center group py-1"
             aria-label="Calculat.dev - All Calculators, One Place."
           >
@@ -62,22 +68,25 @@ export const Header: React.FC = () => {
             })}
           </nav>
 
-          {/* Right Action: Search Bar / Button */}
+          {/* Right Action: Search Bar & Language Switcher */}
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => setIsSearchOpen(true)}
-              className="flex items-center gap-2.5 px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200/80 border border-slate-200 text-slate-500 hover:text-slate-700 text-sm font-normal transition-colors w-40 sm:w-64 justify-between"
-              aria-label="Search calculators"
+              className="flex items-center gap-2.5 px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200/80 border border-slate-200 text-slate-500 hover:text-slate-700 text-sm font-normal transition-colors w-36 sm:w-60 justify-between"
+              aria-label={ui.searchPlaceholder}
             >
               <span className="flex items-center gap-2 truncate">
                 <Search className="w-4 h-4 text-slate-400 shrink-0" />
-                <span className="truncate">Search calculators...</span>
+                <span className="truncate">{ui.searchHeader}...</span>
               </span>
               <kbd className="hidden sm:inline-flex items-center text-[10px] uppercase font-semibold text-slate-400 bg-white border border-slate-200 px-1.5 py-0.5 rounded shadow-2xs">
                 ⌘K
               </kbd>
             </button>
+
+            {/* Language Switcher Dropdown */}
+            <LanguageSwitcher variant="header" />
 
             {/* Mobile Hamburger Toggle */}
             <button
