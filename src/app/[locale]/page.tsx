@@ -113,26 +113,6 @@ export default async function LocalizedHomePage({ params }: Props) {
             <HeroSearch />
           </div>
 
-          {/* Quick Filter Pill Tags */}
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-xs text-slate-500">
-            <span className="font-medium text-slate-400">{ui.sortPopular}:</span>
-            {[
-              { slug: 'percentage-calculator', name: 'Percentage' },
-              { slug: 'mortgage-calculator', name: 'Mortgage' },
-              { slug: 'bmi-calculator', name: 'BMI' },
-              { slug: 'age-calculator', name: 'Age' },
-              { slug: 'compound-interest-calculator', name: 'Compound Interest' },
-              { slug: 'tip-calculator', name: 'Tip' },
-            ].map(item => (
-              <Link
-                key={item.slug}
-                href={getLocalizedPath(`/calculators/${item.slug}/`, currentLocale)}
-                className="px-2.5 py-1 rounded-full bg-white border border-slate-200 text-slate-600 hover:text-sky-600 hover:border-sky-300 transition-colors shadow-2xs"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
         </section>
 
         {/* Local History & Favorites Tray */}
