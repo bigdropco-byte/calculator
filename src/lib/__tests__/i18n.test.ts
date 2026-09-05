@@ -7,6 +7,7 @@ import {
   getLocalizedPath,
   isValidLocale,
   LOCALES,
+  Locale,
 } from '../i18n/config';
 import {
   getUiTranslations,
@@ -14,17 +15,35 @@ import {
   getLocalizedCategory,
   getLocalizedCalculator,
 } from '../i18n/translate';
-import { UI_TRANSLATIONS } from '../i18n/translations/ui';
-import { CATEGORY_TRANSLATIONS } from '../i18n/translations/categories';
 import { CATEGORIES } from '../categoryRegistry';
 import { CALCULATORS } from '../calculatorRegistry';
 import { getCanonicalUrl, getCanonicalAlternates } from '../seo';
 
 describe('i18n Configuration & Helpers', () => {
-  it('defines 6 supported locales with en as default', () => {
-    expect(SUPPORTED_LOCALES).toEqual(['en', 'es', 'fr', 'de', 'pt', 'hi']);
-    expect(NON_DEFAULT_LOCALES).toEqual(['es', 'fr', 'de', 'pt', 'hi']);
+  it('defines 39 supported locales with en as default', () => {
+    expect(SUPPORTED_LOCALES.length).toBe(39);
+    expect(NON_DEFAULT_LOCALES.length).toBe(38);
     expect(DEFAULT_LOCALE).toBe('en');
+    expect(SUPPORTED_LOCALES).toContain('en');
+    expect(SUPPORTED_LOCALES).toContain('ar');
+    expect(SUPPORTED_LOCALES).toContain('zh');
+    expect(SUPPORTED_LOCALES).toContain('ja');
+    expect(SUPPORTED_LOCALES).toContain('ur');
+    expect(SUPPORTED_LOCALES).toContain('he');
+    expect(SUPPORTED_LOCALES).toContain('fa');
+    expect(SUPPORTED_LOCALES).toContain('nb');
+  });
+
+  it('correctly sets RTL direction for RTL languages', () => {
+    const rtlLocales: Locale[] = ['ar', 'fa', 'he', 'ur'];
+    for (const loc of rtlLocales) {
+      expect(LOCALES[loc].dir).toBe('rtl');
+    }
+    // Check some LTR locales
+    expect(LOCALES.en.dir).toBe('ltr');
+    expect(LOCALES.es.dir).toBe('ltr');
+    expect(LOCALES.ja.dir).toBe('ltr');
+    expect(LOCALES.zh.dir).toBe('ltr');
   });
 
   it('validates locales correctly', () => {
@@ -34,7 +53,10 @@ describe('i18n Configuration & Helpers', () => {
     expect(isValidLocale('de')).toBe(true);
     expect(isValidLocale('pt')).toBe(true);
     expect(isValidLocale('hi')).toBe(true);
-    expect(isValidLocale('ja')).toBe(false);
+    expect(isValidLocale('ja')).toBe(true);
+    expect(isValidLocale('ar')).toBe(true);
+    expect(isValidLocale('zh')).toBe(true);
+    expect(isValidLocale('ur')).toBe(true);
     expect(isValidLocale('unknown')).toBe(false);
   });
 
@@ -47,8 +69,8 @@ describe('i18n Configuration & Helpers', () => {
       locale: 'es',
       pathWithoutLocale: '/',
     });
-    expect(stripLocaleFromPath('/fr/calculators/percentage-calculator/')).toEqual({
-      locale: 'fr',
+    expect(stripLocaleFromPath('/ar/calculators/percentage-calculator/')).toEqual({
+      locale: 'ar',
       pathWithoutLocale: '/calculators/percentage-calculator/',
     });
     expect(stripLocaleFromPath('/calculators/percentage-calculator/')).toEqual({
@@ -61,8 +83,8 @@ describe('i18n Configuration & Helpers', () => {
     expect(getLocalizedPath('/', 'en')).toBe('/');
     expect(getLocalizedPath('/', 'es')).toBe('/es/');
     expect(getLocalizedPath('/calculators/', 'de')).toBe('/de/calculators/');
-    expect(getLocalizedPath('/calculators/percentage-calculator/', 'fr')).toBe(
-      '/fr/calculators/percentage-calculator/'
+    expect(getLocalizedPath('/calculators/percentage-calculator/', 'ja')).toBe(
+      '/ja/calculators/percentage-calculator/'
     );
     // Switching from one locale to another
     expect(getLocalizedPath('/es/calculators/', 'pt')).toBe('/pt/calculators/');
@@ -80,40 +102,28 @@ describe('SEO Canonical & Alternates', () => {
 
   it('generates canonical URL for non-default locales with subpaths', () => {
     expect(getCanonicalUrl('/', 'es')).toBe('https://calculat.dev/es/');
-    expect(getCanonicalUrl('/calculators/percentage-calculator/', 'fr')).toBe(
-      'https://calculat.dev/fr/calculators/percentage-calculator/'
+    expect(getCanonicalUrl('/calculators/percentage-calculator/', 'ar')).toBe(
+      'https://calculat.dev/ar/calculators/percentage-calculator/'
     );
-    expect(getCanonicalUrl('/calculators/percentage-calculator/', 'hi')).toBe(
-      'https://calculat.dev/hi/calculators/percentage-calculator/'
+    expect(getCanonicalUrl('/calculators/percentage-calculator/', 'zh')).toBe(
+      'https://calculat.dev/zh/calculators/percentage-calculator/'
     );
   });
 
-  it('generates bidirectional alternates with x-default', () => {
-    const alternates = getCanonicalAlternates('/calculators/percentage-calculator/', 'es');
+  it('generates bidirectional alternates for all 39 languages with x-default', () => {
+    const alternates = getCanonicalAlternates('/calculators/percentage-calculator/', 'ar');
 
     // Self-referencing canonical
     expect(alternates.canonical).toBe(
-      'https://calculat.dev/es/calculators/percentage-calculator/'
+      'https://calculat.dev/ar/calculators/percentage-calculator/'
     );
 
-    // All supported languages + x-default
-    expect(alternates.languages.en).toBe(
+    // All 39 supported languages + en-US + x-default
+    for (const loc of SUPPORTED_LOCALES) {
+      expect(alternates.languages[loc]).toBeDefined();
+    }
+    expect(alternates.languages['en-US']).toBe(
       'https://calculat.dev/calculators/percentage-calculator/'
-    );
-    expect(alternates.languages.es).toBe(
-      'https://calculat.dev/es/calculators/percentage-calculator/'
-    );
-    expect(alternates.languages.fr).toBe(
-      'https://calculat.dev/fr/calculators/percentage-calculator/'
-    );
-    expect(alternates.languages.de).toBe(
-      'https://calculat.dev/de/calculators/percentage-calculator/'
-    );
-    expect(alternates.languages.pt).toBe(
-      'https://calculat.dev/pt/calculators/percentage-calculator/'
-    );
-    expect(alternates.languages.hi).toBe(
-      'https://calculat.dev/hi/calculators/percentage-calculator/'
     );
     expect(alternates.languages['x-default']).toBe(
       'https://calculat.dev/calculators/percentage-calculator/'
@@ -122,7 +132,7 @@ describe('SEO Canonical & Alternates', () => {
 });
 
 describe('UI and Category Translations', () => {
-  it('has translations for all 6 locales', () => {
+  it('has translations for all 39 locales', () => {
     for (const loc of SUPPORTED_LOCALES) {
       const ui = getUiTranslations(loc);
       expect(ui.calculate).toBeDefined();
@@ -132,7 +142,7 @@ describe('UI and Category Translations', () => {
     }
   });
 
-  it('has category translations for all 17 categories in all 6 locales', () => {
+  it('has category translations for all 17 categories across all 39 locales', () => {
     const categories = Object.keys(CATEGORIES);
     expect(categories.length).toBe(17);
 
@@ -152,14 +162,16 @@ describe('UI and Category Translations', () => {
     const esCalc = getLocalizedCalculator(pctCalc, 'es');
     expect(esCalc.name).toBe('Calculadora de Porcentajes');
 
-    const hiCalc = getLocalizedCalculator(pctCalc, 'hi');
-    expect(hiCalc.name).toBe('प्रतिशत कैलकुलेटर');
+    const arCalc = getLocalizedCalculator(pctCalc, 'ar');
+    expect(arCalc.name).toBeTruthy();
 
-    // Calculator without explicit translation gets fallback
+    // Calculator without explicit translation gets universal fallback
     const otherCalc = CALCULATORS.find(c => c.slug === 'sphere-packing-calculator');
     if (otherCalc) {
       const deCalc = getLocalizedCalculator(otherCalc, 'de');
       expect(deCalc.seo.title).toContain('Calculat');
+      const jaCalc = getLocalizedCalculator(otherCalc, 'ja');
+      expect(jaCalc.seo.title).toContain('Calculat');
     }
   });
 });

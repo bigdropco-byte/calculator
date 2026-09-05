@@ -16,7 +16,7 @@ export function getUiTranslations(locale: Locale): UiTranslations {
  */
 export function getCategoryTranslation(locale: Locale, slug: CategorySlug): LocalizedCategory {
   const localeDict = CATEGORY_TRANSLATIONS[locale] || CATEGORY_TRANSLATIONS[DEFAULT_LOCALE];
-  return localeDict[slug] || CATEGORY_TRANSLATIONS[DEFAULT_LOCALE][slug];
+  return localeDict?.[slug] || CATEGORY_TRANSLATIONS[DEFAULT_LOCALE]![slug];
 }
 
 /**
@@ -93,16 +93,52 @@ function getFallbackCalculatorMeta(
         seoDescription: `${calc.shortDescription} Calculat.dev पर तेज, सटीक और मुफ्त ऑनलाइन गणना उपकरण।`,
         keywords: [calc.name.toLowerCase(), 'मुफ्त कैलकुलेटर', 'ऑनलाइन कैलकुलेटर', 'calculat'],
       };
+    case 'zh':
+      return {
+        name: calc.name,
+        shortDescription: calc.shortDescription,
+        seoTitle: `${calc.name} – 在线免费计算器 | Calculat`,
+        seoDescription: `${calc.shortDescription} 在 Calculat.dev 上体验快速、纯净、无广告的在线计算工具。`,
+        keywords: [calc.name.toLowerCase(), '在线计算器', '免费计算工具', 'calculat'],
+      };
+    case 'ja':
+      return {
+        name: calc.name,
+        shortDescription: calc.shortDescription,
+        seoTitle: `${calc.name} – 無料オンライン計算機 | Calculat`,
+        seoDescription: `${calc.shortDescription} Calculat.dev の高速・高精度・広告なしオンライン計算ツール。`,
+        keywords: [calc.name.toLowerCase(), '無料計算機', 'オンライン計算ツール', 'calculat'],
+      };
+    case 'ru':
+      return {
+        name: calc.name,
+        shortDescription: calc.shortDescription,
+        seoTitle: `${calc.name} – Бесплатный онлайн калькулятор | Calculat`,
+        seoDescription: `${calc.shortDescription} Быстрый и точный расчет онлайн без рекламы на Calculat.dev.`,
+        keywords: [calc.name.toLowerCase(), 'онлайн калькулятор', 'расчет онлайн', 'calculat'],
+      };
+    case 'ar':
+      return {
+        name: calc.name,
+        shortDescription: calc.shortDescription,
+        seoTitle: `${calc.name} – حاسبة مجانية عبر الإنترنت | Calculat`,
+        seoDescription: `${calc.shortDescription} أداة حساب سريعة ودقيقة ومجانية بدون إعلانات على Calculat.dev.`,
+        keywords: [calc.name.toLowerCase(), 'حاسبة مجانية', 'حساب اون لاين', 'calculat'],
+      };
     default:
       return {
         name: calc.name,
         shortDescription: calc.shortDescription,
-        seoTitle: calc.seo.title,
-        seoDescription: calc.seo.metaDescription,
-        keywords: calc.keywords,
+        seoTitle: `${calc.name} – ${ui.calculate} | ${SITE_CONFIG.name}`,
+        seoDescription: `${calc.shortDescription} ${ui.description}`,
+        keywords: [calc.name.toLowerCase(), ui.calculate.toLowerCase(), ui.navCalculators.toLowerCase(), 'calculat'],
       };
   }
 }
+
+const SITE_CONFIG = {
+  name: 'Calculat',
+};
 
 /**
  * Returns a CalculatorDefinition with localized name, description, SEO metadata, and keywords.
