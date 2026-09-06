@@ -258,6 +258,54 @@ import {
   LotteryOddsWidget,
 } from './ProbabilityWidgets';
 
+// 2D Geometry Widgets (12)
+import {
+  CircleCalculatorWidget,
+  TriangleCalculatorWidget,
+  RightTriangleWidget,
+  SquareCalculatorWidget,
+  RectangleCalculatorWidget,
+  RhombusCalculatorWidget,
+  ParallelogramCalculatorWidget,
+  TrapeziumCalculatorWidget,
+  PentagonCalculatorWidget,
+  HexagonCalculatorWidget,
+  PolygonCalculatorWidget,
+  PythagoreanTheoremWidget,
+} from './Geometry2DWidgets';
+
+// 3D Geometry Widgets (7)
+import {
+  CubeCalculatorWidget,
+  CuboidCalculatorWidget,
+  CylinderCalculatorWidget,
+  ConeCalculatorWidget,
+  SphereCalculatorWidget,
+  PrismCalculatorWidget,
+  PyramidCalculatorWidget,
+} from './Geometry3DWidgets';
+
+// Algebra, Powers, Trig & Logarithm Widgets (17)
+import {
+  LinearEquationWidget,
+  QuadraticEquationWidget,
+  SystemOfEquationsWidget,
+  ArithmeticMeanWidget,
+  WeightedAverageWidget,
+  SquarePowerWidget,
+  CubePowerWidget,
+  NthPowerWidget,
+  SquareRootWidget,
+  NthRootWidget,
+  SineCalculatorWidget,
+  CosineCalculatorWidget,
+  TangentCalculatorWidget,
+  CotangentCalculatorWidget,
+  LogarithmCalculatorWidget,
+  NaturalLogarithmWidget,
+  CommonLogarithmWidget,
+} from './AlgebraPowersTrigWidgets';
+
 interface CalculatorRendererProps {
   slug: string;
 }
@@ -725,6 +773,93 @@ export const CalculatorRenderer: React.FC<CalculatorRendererProps> = ({ slug }) 
       return <PokerOddsWidget />;
     case 'lottery-odds-calculator':
       return <LotteryOddsWidget />;
+
+    // 36 Math Suite Calculators
+    // Equations
+    case 'linear-equation-calculator':
+      return <LinearEquationWidget />;
+    case 'quadratic-equation-calculator':
+      return <QuadraticEquationWidget />;
+    case 'system-of-linear-equations-calculator':
+      return <SystemOfEquationsWidget />;
+
+    // 2D Geometry (Area & Perimeter)
+    case 'circle-calculator':
+      return <CircleCalculatorWidget />;
+    case 'triangle-calculator':
+      return <TriangleCalculatorWidget />;
+    case 'right-triangle-calculator':
+      return <RightTriangleWidget />;
+    case 'square-calculator':
+      return <SquareCalculatorWidget />;
+    case 'rectangle-calculator':
+      return <RectangleCalculatorWidget />;
+    case 'rhombus-calculator':
+      return <RhombusCalculatorWidget />;
+    case 'parallelogram-calculator':
+      return <ParallelogramCalculatorWidget />;
+    case 'trapezium-calculator':
+      return <TrapeziumCalculatorWidget />;
+    case 'pentagon-calculator':
+      return <PentagonCalculatorWidget />;
+    case 'hexagon-calculator':
+      return <HexagonCalculatorWidget />;
+    case 'polygon-calculator':
+      return <PolygonCalculatorWidget />;
+    case 'pythagorean-theorem-calculator':
+      return <PythagoreanTheoremWidget />;
+
+    // 3D Geometry (Volume & Surface Area)
+    case 'cube-calculator':
+      return <CubeCalculatorWidget />;
+    case 'cuboid-calculator':
+      return <CuboidCalculatorWidget />;
+    case 'cylinder-calculator':
+      return <CylinderCalculatorWidget />;
+    case 'cone-calculator':
+      return <ConeCalculatorWidget />;
+    case 'sphere-calculator':
+      return <SphereCalculatorWidget />;
+    case 'prism-calculator':
+      return <PrismCalculatorWidget />;
+    case 'pyramid-calculator':
+      return <PyramidCalculatorWidget />;
+
+    // Average
+    case 'arithmetic-mean-calculator':
+      return <ArithmeticMeanWidget />;
+    case 'weighted-average-calculator':
+      return <WeightedAverageWidget />;
+
+    // Powers & Roots
+    case 'square-power-calculator':
+      return <SquarePowerWidget />;
+    case 'cube-power-calculator':
+      return <CubePowerWidget />;
+    case 'nth-power-calculator':
+      return <NthPowerWidget />;
+    case 'square-root-calculator':
+      return <SquareRootWidget />;
+    case 'nth-root-calculator':
+      return <NthRootWidget />;
+
+    // Trigonometric Functions
+    case 'sine-calculator':
+      return <SineCalculatorWidget />;
+    case 'cosine-calculator':
+      return <CosineCalculatorWidget />;
+    case 'tangent-calculator':
+      return <TangentCalculatorWidget />;
+    case 'cotangent-calculator':
+      return <CotangentCalculatorWidget />;
+
+    // Logarithms
+    case 'logarithm-calculator':
+      return <LogarithmCalculatorWidget />;
+    case 'natural-logarithm-calculator':
+      return <NaturalLogarithmWidget />;
+    case 'common-logarithm-calculator':
+      return <CommonLogarithmWidget />;
 
     default:
       return (

@@ -11,9 +11,9 @@ describe('Calculator Registry Integrity', () => {
     expect(slugs.length).toBe(uniqueSlugs.size);
   });
 
-  it('verifies exact total count is 210 calculators', () => {
-    expect(allCalcs.length).toBe(210);
-    expect(published.length).toBe(210);
+  it('verifies exact total count is 246 calculators', () => {
+    expect(allCalcs.length).toBe(246);
+    expect(published.length).toBe(246);
   });
 
   it('contains all 29 construction, wood, masonry, and pocket calculators', () => {
@@ -132,4 +132,65 @@ describe('Calculator Registry Integrity', () => {
       expect(calc?.editorial.formula.expression.length).toBeGreaterThan(5);
     }
   });
+
+  it('contains all 36 newly added math suite calculators', () => {
+    const mathSlugs = [
+      // Equations (3)
+      'linear-equation-calculator',
+      'quadratic-equation-calculator',
+      'system-of-linear-equations-calculator',
+      // 2D Geometry (12)
+      'circle-calculator',
+      'triangle-calculator',
+      'right-triangle-calculator',
+      'square-calculator',
+      'rectangle-calculator',
+      'rhombus-calculator',
+      'parallelogram-calculator',
+      'trapezium-calculator',
+      'pentagon-calculator',
+      'hexagon-calculator',
+      'polygon-calculator',
+      'pythagorean-theorem-calculator',
+      // 3D Geometry (7)
+      'cube-calculator',
+      'cuboid-calculator',
+      'cylinder-calculator',
+      'cone-calculator',
+      'sphere-calculator',
+      'prism-calculator',
+      'pyramid-calculator',
+      // Average (2)
+      'arithmetic-mean-calculator',
+      'weighted-average-calculator',
+      // Powers & Roots (5)
+      'square-power-calculator',
+      'cube-power-calculator',
+      'nth-power-calculator',
+      'square-root-calculator',
+      'nth-root-calculator',
+      // Trigonometric Functions (4)
+      'sine-calculator',
+      'cosine-calculator',
+      'tangent-calculator',
+      'cotangent-calculator',
+      // Logarithms (3)
+      'logarithm-calculator',
+      'natural-logarithm-calculator',
+      'common-logarithm-calculator',
+    ];
+
+    expect(mathSlugs.length).toBe(36);
+
+    for (const slug of mathSlugs) {
+      const calc = getCalculatorBySlug(slug);
+      expect(calc, `Expected calculator with slug "${slug}" to exist in registry`).toBeDefined();
+      expect(calc?.category).toBe('math');
+      expect(calc?.editorial.faqs.length).toBe(4);
+      expect(calc?.seo.title.length).toBeGreaterThan(10);
+      expect(calc?.seo.metaDescription.length).toBeGreaterThan(30);
+      expect(calc?.editorial.formula.expression.length).toBeGreaterThan(5);
+    }
+  });
 });
+

@@ -14,6 +14,7 @@ import { PERCENTAGE_SUITE_CALCULATORS } from './registry/percentageSuiteCalculat
 import { CONSTRUCTION_AND_WOOD_CALCULATORS } from './registry/constructionAndWoodCalculators';
 import { STEM_AND_FITNESS_CALCULATORS } from './registry/stemAndFitnessCalculators';
 import { PROBABILITY_CALCULATORS } from './registry/probabilityCalculators';
+import { MATH_SUITE_CALCULATORS } from './registry/mathSuiteCalculators';
 
 export const CALCULATORS: CalculatorDefinition[] = [
   {
@@ -753,6 +754,7 @@ export const CALCULATORS: CalculatorDefinition[] = [
   ...CONSTRUCTION_AND_WOOD_CALCULATORS,
   ...STEM_AND_FITNESS_CALCULATORS,
   ...PROBABILITY_CALCULATORS,
+  ...MATH_SUITE_CALCULATORS,
 ];
 
 // Helper query functions
