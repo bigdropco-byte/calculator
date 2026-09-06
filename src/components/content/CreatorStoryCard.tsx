@@ -27,7 +27,7 @@ export const CreatorStoryCard: React.FC = () => {
             <span className="text-xs font-bold uppercase tracking-wider text-sky-700 bg-sky-50 border border-sky-200 px-2.5 py-0.5 rounded-full">
               The Story Behind Calculat
             </span>
-            <span className="text-xs text-slate-400">• Independent Project</span>
+            <span className="text-xs font-medium text-slate-600">• Independent Project</span>
           </div>
 
           <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">

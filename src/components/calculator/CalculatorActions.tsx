@@ -34,8 +34,8 @@ export const CalculatorActions: React.FC<CalculatorActionsProps> = ({
         disabled={!resultText}
         className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
           copied
-            ? 'bg-emerald-600 text-white shadow-2xs'
-            : 'bg-sky-600 hover:bg-sky-700 text-white shadow-2xs disabled:opacity-50 disabled:cursor-not-allowed'
+            ? 'bg-emerald-700 text-white shadow-2xs'
+            : 'bg-sky-700 hover:bg-sky-800 text-white shadow-2xs disabled:opacity-50 disabled:cursor-not-allowed'
         }`}
         aria-label="Copy result to clipboard"
       >
@@ -52,15 +52,17 @@ export const CalculatorActions: React.FC<CalculatorActionsProps> = ({
         )}
       </button>
 
-      <button
-        type="button"
-        onClick={onReset}
-        className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-colors"
-        aria-label="Reset calculator inputs"
-      >
-        <RotateCcw className="w-3.5 h-3.5 text-slate-400" />
-        <span>Reset</span>
-      </button>
+      {onReset && (
+        <button
+          type="button"
+          onClick={onReset}
+          className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 text-xs font-medium transition-colors"
+          aria-label="Reset calculator inputs"
+        >
+          <RotateCcw className="w-3.5 h-3.5 text-slate-500" />
+          <span>Reset</span>
+        </button>
+      )}
     </div>
   );
 };

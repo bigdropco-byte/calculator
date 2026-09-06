@@ -134,13 +134,13 @@ export const StudentRoadmapWidget: React.FC = () => {
                     {item.category}
                   </span>
                 </div>
-                <p className="text-xs text-slate-500 leading-relaxed line-clamp-2">
+                <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
                   {item.description}
                 </p>
               </div>
 
               <div className="flex items-center gap-3 shrink-0 self-end sm:self-center">
-                <span className="text-xs font-bold text-slate-500">
+                <span className="text-xs font-bold text-slate-700">
                   {item.votes} votes
                 </span>
                 <button
@@ -171,7 +171,7 @@ export const StudentRoadmapWidget: React.FC = () => {
         })}
       </div>
 
-      <div className="mt-6 pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
+      <div className="mt-6 pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-600">
         <span className="flex items-center gap-1">
           <Sparkles className="w-3.5 h-3.5 text-amber-500" /> Built with pride by an independent student developer
         </span>

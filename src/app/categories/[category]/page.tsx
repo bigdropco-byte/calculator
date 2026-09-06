@@ -192,13 +192,13 @@ export default async function CategoryPage({ params }: Props) {
             </div>
             <div>
               <h2 className="text-lg font-bold text-slate-900">More Calculators Coming Soon</h2>
-              <p className="text-xs text-slate-500 mt-1 max-w-md mx-auto">
+              <p className="text-xs text-slate-600 mt-1 max-w-md mx-auto">
                 We are actively developing new {category.name.toLowerCase()}. In the meantime, you can explore other active categories or browse all available calculators.
               </p>
             </div>
             <Link
               href="/calculators/"
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-sky-600 text-white rounded-lg text-xs font-semibold hover:bg-sky-700 transition-colors"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-sky-700 text-white rounded-lg text-xs font-semibold hover:bg-sky-800 transition-colors"
             >
               Browse All Calculators <ArrowRight className="w-3.5 h-3.5" />
             </Link>

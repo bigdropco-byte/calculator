@@ -52,31 +52,31 @@ export const CookieConsent: React.FC = () => {
         <button
           type="button"
           onClick={handleAccept}
-          className="text-slate-400 hover:text-slate-600 p-1 rounded-md transition-colors"
+          className="text-slate-500 hover:text-slate-700 p-1 rounded-md transition-colors"
           aria-label="Dismiss cookie notice"
         >
           <X className="w-4 h-4" />
         </button>
       </div>
 
-      <p className="text-xs text-slate-600 leading-relaxed mb-3">
+      <p className="text-xs text-slate-700 leading-relaxed mb-3">
         Calculat uses local storage solely to remember your favorites and recently used calculators. We do <strong>not</strong> track you across other websites or sell personal calculation data.
       </p>
 
       {showDetails && (
-        <div className="p-2.5 mb-3 bg-slate-50 border border-slate-200 rounded-lg text-[11px] text-slate-600 space-y-1.5 animate-in fade-in duration-150">
+        <div className="p-2.5 mb-3 bg-slate-50 border border-slate-200 rounded-lg text-[11px] text-slate-700 space-y-1.5 animate-in fade-in duration-150">
           <div className="flex items-center justify-between">
-            <span className="font-medium text-slate-800">Essential Local Storage:</span>
-            <span className="text-emerald-700 font-bold flex items-center gap-0.5">
+            <span className="font-medium text-slate-900">Essential Local Storage:</span>
+            <span className="text-emerald-800 font-bold flex items-center gap-0.5">
               <Check className="w-3 h-3" /> Active
             </span>
           </div>
-          <p className="text-slate-500 text-[10px]">
+          <p className="text-slate-600 text-[10px]">
             Stores your starred favorites, recently viewed tool slugs, and roadmap poll votes directly on this device.
           </p>
           <div className="flex items-center justify-between pt-1 border-t border-slate-200/60">
-            <span className="font-medium text-slate-800">Third-Party Tracking Cookies:</span>
-            <span className="text-slate-400 font-semibold">Disabled (0 cookies)</span>
+            <span className="font-medium text-slate-900">Third-Party Tracking Cookies:</span>
+            <span className="text-slate-700 font-semibold">Disabled (0 cookies)</span>
           </div>
         </div>
       )}
@@ -85,7 +85,7 @@ export const CookieConsent: React.FC = () => {
         <button
           type="button"
           onClick={() => setShowDetails(!showDetails)}
-          className="text-slate-500 hover:text-sky-700 underline text-[11px] font-medium transition-colors"
+          className="text-slate-600 hover:text-sky-800 underline text-[11px] font-medium transition-colors"
         >
           {showDetails ? 'Hide details' : 'Preferences'}
         </button>
@@ -101,19 +101,19 @@ export const CookieConsent: React.FC = () => {
           <button
             type="button"
             onClick={handleAccept}
-            className="px-3.5 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-semibold transition-colors text-xs shadow-2xs"
+            className="px-3.5 py-1.5 rounded-lg bg-sky-700 hover:bg-sky-800 text-white font-semibold transition-colors text-xs shadow-2xs"
           >
             Accept All
           </button>
         </div>
       </div>
 
-      <div className="mt-2.5 pt-2 border-t border-slate-100 text-[10px] text-slate-400 flex items-center justify-between">
+      <div className="mt-2.5 pt-2 border-t border-slate-100 text-[11px] text-slate-600 font-medium flex items-center justify-between">
         <span className="flex items-center gap-1">
-          <ShieldCheck className="w-3 h-3 text-emerald-600" />
+          <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
           100% Client-Side Privacy
         </span>
-        <Link href="/privacy" className="hover:underline text-slate-500">
+        <Link href="/privacy" className="hover:underline text-slate-700 font-medium">
           Privacy Policy
         </Link>
       </div>

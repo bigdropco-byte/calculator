@@ -276,13 +276,13 @@ export const DirectoryFilter: React.FC<DirectoryFilterProps> = ({
       ) : (
         <div className="bg-white border border-slate-200 rounded-xl p-12 text-center">
           <p className="text-base font-semibold text-slate-800">No calculators found</p>
-          <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
+          <p className="text-xs text-slate-600 mt-1 max-w-sm mx-auto">
             We couldn&apos;t find any tools matching your active filters. Try searching for another term or reset your filters.
           </p>
           <button
             type="button"
             onClick={resetFilters}
-            className="mt-4 px-4 py-2 bg-sky-600 text-white rounded-lg text-xs font-semibold hover:bg-sky-700 transition-colors"
+            className="mt-4 px-4 py-2 bg-sky-700 text-white rounded-lg text-xs font-semibold hover:bg-sky-800 transition-colors"
           >
             Show All Calculators
           </button>

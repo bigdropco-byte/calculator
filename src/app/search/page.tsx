@@ -81,12 +81,12 @@ function SearchContent() {
         ) : (
           <div className="bg-white border border-slate-200 rounded-xl p-12 text-center">
             <p className="text-base font-semibold text-slate-800">No calculators found</p>
-            <p className="text-xs text-slate-500 mt-1">
+            <p className="text-xs text-slate-600 mt-1">
               Try searching with a broader keyword or browse our categories.
             </p>
             <Link
               href="/calculators/"
-              className="mt-4 inline-block px-4 py-2 bg-sky-600 text-white rounded-lg text-xs font-semibold hover:bg-sky-700 transition-colors"
+              className="mt-4 inline-block px-4 py-2 bg-sky-700 text-white rounded-lg text-xs font-semibold hover:bg-sky-800 transition-colors"
             >
               Browse All Calculators
             </Link>
