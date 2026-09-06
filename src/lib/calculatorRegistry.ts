@@ -757,6 +757,8 @@ export const CALCULATORS: CalculatorDefinition[] = [
   ...MATH_SUITE_CALCULATORS,
 ];
 
+const CALCULATOR_MAP = new Map<string, CalculatorDefinition>(CALCULATORS.map(c => [c.slug, c]));
+
 // Helper query functions
 export function getAllCalculators(): CalculatorDefinition[] {
   return CALCULATORS;
@@ -767,7 +769,8 @@ export function getAllPublishedCalculators(): CalculatorDefinition[] {
 }
 
 export function getCalculatorBySlug(slug: string): CalculatorDefinition | undefined {
-  return CALCULATORS.find(c => c.slug === slug && c.status === 'published');
+  const calc = CALCULATOR_MAP.get(slug);
+  return calc?.status === 'published' ? calc : undefined;
 }
 
 export function getCalculatorsByCategory(categorySlug: CategorySlug): CalculatorDefinition[] {

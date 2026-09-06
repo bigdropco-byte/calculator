@@ -1,310 +1,280 @@
 'use client';
 
 import React from 'react';
-import { PercentageCalculatorWidget } from './PercentageCalculatorWidget';
-import { PercentageIncreaseCalculatorWidget } from './PercentageIncreaseCalculatorWidget';
-import { AverageCalculatorWidget } from './AverageCalculatorWidget';
-import { AgeCalculatorWidget } from './AgeCalculatorWidget';
-import { DateDifferenceCalculatorWidget } from './DateDifferenceCalculatorWidget';
-import { BmiCalculatorWidget } from './BmiCalculatorWidget';
-import { CompoundInterestCalculatorWidget } from './CompoundInterestCalculatorWidget';
-import { LoanCalculatorWidget } from './LoanCalculatorWidget';
-import { MortgageCalculatorWidget } from './MortgageCalculatorWidget';
-import { TipCalculatorWidget } from './TipCalculatorWidget';
+import dynamic from 'next/dynamic';
+
+// ---------------------------------------------------------------------------
+// Lazy-loaded calculator widgets via next/dynamic for per-page code splitting.
+// Each widget is only downloaded when its calculator page is visited.
+// ---------------------------------------------------------------------------
+
+// Initial 10
+const PercentageCalculatorWidget = dynamic(() => import('./PercentageCalculatorWidget').then(m => ({ default: m.PercentageCalculatorWidget })));
+const PercentageIncreaseCalculatorWidget = dynamic(() => import('./PercentageIncreaseCalculatorWidget').then(m => ({ default: m.PercentageIncreaseCalculatorWidget })));
+const AverageCalculatorWidget = dynamic(() => import('./AverageCalculatorWidget').then(m => ({ default: m.AverageCalculatorWidget })));
+const AgeCalculatorWidget = dynamic(() => import('./AgeCalculatorWidget').then(m => ({ default: m.AgeCalculatorWidget })));
+const DateDifferenceCalculatorWidget = dynamic(() => import('./DateDifferenceCalculatorWidget').then(m => ({ default: m.DateDifferenceCalculatorWidget })));
+const BmiCalculatorWidget = dynamic(() => import('./BmiCalculatorWidget').then(m => ({ default: m.BmiCalculatorWidget })));
+const CompoundInterestCalculatorWidget = dynamic(() => import('./CompoundInterestCalculatorWidget').then(m => ({ default: m.CompoundInterestCalculatorWidget })));
+const LoanCalculatorWidget = dynamic(() => import('./LoanCalculatorWidget').then(m => ({ default: m.LoanCalculatorWidget })));
+const MortgageCalculatorWidget = dynamic(() => import('./MortgageCalculatorWidget').then(m => ({ default: m.MortgageCalculatorWidget })));
+const TipCalculatorWidget = dynamic(() => import('./TipCalculatorWidget').then(m => ({ default: m.TipCalculatorWidget })));
 
 // 15 Numerology & Twin Flame Widgets
-import { LifePathCalculatorWidget } from './LifePathCalculatorWidget';
-import { SunNumberCalculatorWidget } from './SunNumberCalculatorWidget';
-import { AttitudeNumberCalculatorWidget } from './AttitudeNumberCalculatorWidget';
-import { ExpressionNumberCalculatorWidget } from './ExpressionNumberCalculatorWidget';
-import { SoulUrgeCalculatorWidget } from './SoulUrgeCalculatorWidget';
-import { PersonalityNumberCalculatorWidget } from './PersonalityNumberCalculatorWidget';
-import { BalanceNumberCalculatorWidget } from './BalanceNumberCalculatorWidget';
-import { MaturityNumberCalculatorWidget } from './MaturityNumberCalculatorWidget';
-import { LuckyColourCalculatorWidget } from './LuckyColourCalculatorWidget';
-import { CareerCalculatorWidget } from './CareerCalculatorWidget';
-import { TwinFlameCalculatorWidget } from './TwinFlameCalculatorWidget';
-import { TwinFlameLifePathWidget } from './TwinFlameLifePathWidget';
-import { TwinFlameNumerologyWidget } from './TwinFlameNumerologyWidget';
-import { TwinFlameLoveWidget } from './TwinFlameLoveWidget';
-import { TwinFlameBirthChartWidget } from './TwinFlameBirthChartWidget';
+const LifePathCalculatorWidget = dynamic(() => import('./LifePathCalculatorWidget').then(m => ({ default: m.LifePathCalculatorWidget })));
+const SunNumberCalculatorWidget = dynamic(() => import('./SunNumberCalculatorWidget').then(m => ({ default: m.SunNumberCalculatorWidget })));
+const AttitudeNumberCalculatorWidget = dynamic(() => import('./AttitudeNumberCalculatorWidget').then(m => ({ default: m.AttitudeNumberCalculatorWidget })));
+const ExpressionNumberCalculatorWidget = dynamic(() => import('./ExpressionNumberCalculatorWidget').then(m => ({ default: m.ExpressionNumberCalculatorWidget })));
+const SoulUrgeCalculatorWidget = dynamic(() => import('./SoulUrgeCalculatorWidget').then(m => ({ default: m.SoulUrgeCalculatorWidget })));
+const PersonalityNumberCalculatorWidget = dynamic(() => import('./PersonalityNumberCalculatorWidget').then(m => ({ default: m.PersonalityNumberCalculatorWidget })));
+const BalanceNumberCalculatorWidget = dynamic(() => import('./BalanceNumberCalculatorWidget').then(m => ({ default: m.BalanceNumberCalculatorWidget })));
+const MaturityNumberCalculatorWidget = dynamic(() => import('./MaturityNumberCalculatorWidget').then(m => ({ default: m.MaturityNumberCalculatorWidget })));
+const LuckyColourCalculatorWidget = dynamic(() => import('./LuckyColourCalculatorWidget').then(m => ({ default: m.LuckyColourCalculatorWidget })));
+const CareerCalculatorWidget = dynamic(() => import('./CareerCalculatorWidget').then(m => ({ default: m.CareerCalculatorWidget })));
+const TwinFlameCalculatorWidget = dynamic(() => import('./TwinFlameCalculatorWidget').then(m => ({ default: m.TwinFlameCalculatorWidget })));
+const TwinFlameLifePathWidget = dynamic(() => import('./TwinFlameLifePathWidget').then(m => ({ default: m.TwinFlameLifePathWidget })));
+const TwinFlameNumerologyWidget = dynamic(() => import('./TwinFlameNumerologyWidget').then(m => ({ default: m.TwinFlameNumerologyWidget })));
+const TwinFlameLoveWidget = dynamic(() => import('./TwinFlameLoveWidget').then(m => ({ default: m.TwinFlameLoveWidget })));
+const TwinFlameBirthChartWidget = dynamic(() => import('./TwinFlameBirthChartWidget').then(m => ({ default: m.TwinFlameBirthChartWidget })));
 
 // 33 New Payroll, Tax, Investment & Travel Widgets
-import {
-  CaliforniaPaycheckWidget,
-  TexasPaycheckWidget,
-  FloridaPaycheckWidget,
-  NewYorkCityPaycheckWidget,
-  NewJerseyPaycheckWidget,
-  IllinoisPaycheckWidget,
-  ChicagoPaycheckWidget,
-  PennsylvaniaPaycheckWidget,
-  OhioPaycheckWidget,
-  GeorgiaPaycheckWidget,
-  ColoradoPaycheckWidget,
-  IndianaPaycheckWidget,
-  NorthCarolinaPaycheckWidget,
-  MichiganHourlyPaycheckWidget,
-} from './StatePaycheckWidgets';
-import { PaycheckCalculatorWidget } from './PaycheckCalculatorWidget';
-import { PaycheckTaxCalculatorWidget } from './PaycheckTaxCalculatorWidget';
-import { UsSalaryTaxCalculatorWidget } from './UsSalaryTaxCalculatorWidget';
-import { HourlyPaycheckWidget } from './HourlyPaycheckWidget';
-import { DailyPaycheckWidget } from './DailyPaycheckWidget';
-import { WeeklyPaycheckWidget } from './WeeklyPaycheckWidget';
-import { MonthlyPaycheckWidget } from './MonthlyPaycheckWidget';
-import { YearlyPaycheckWidget } from './YearlyPaycheckWidget';
-import { OvertimeCalculatorWidget } from './OvertimeCalculatorWidget';
-import { PayRaiseCalculatorWidget } from './PayRaiseCalculatorWidget';
-import { EicCalculatorWidget } from './EicCalculatorWidget';
+const CaliforniaPaycheckWidget = dynamic(() => import('./StatePaycheckWidgets').then(m => ({ default: m.CaliforniaPaycheckWidget })));
+const TexasPaycheckWidget = dynamic(() => import('./StatePaycheckWidgets').then(m => ({ default: m.TexasPaycheckWidget })));
+const FloridaPaycheckWidget = dynamic(() => import('./StatePaycheckWidgets').then(m => ({ default: m.FloridaPaycheckWidget })));
+const NewYorkCityPaycheckWidget = dynamic(() => import('./StatePaycheckWidgets').then(m => ({ default: m.NewYorkCityPaycheckWidget })));
+const NewJerseyPaycheckWidget = dynamic(() => import('./StatePaycheckWidgets').then(m => ({ default: m.NewJerseyPaycheckWidget })));
+const IllinoisPaycheckWidget = dynamic(() => import('./StatePaycheckWidgets').then(m => ({ default: m.IllinoisPaycheckWidget })));
+const ChicagoPaycheckWidget = dynamic(() => import('./StatePaycheckWidgets').then(m => ({ default: m.ChicagoPaycheckWidget })));
+const PennsylvaniaPaycheckWidget = dynamic(() => import('./StatePaycheckWidgets').then(m => ({ default: m.PennsylvaniaPaycheckWidget })));
+const OhioPaycheckWidget = dynamic(() => import('./StatePaycheckWidgets').then(m => ({ default: m.OhioPaycheckWidget })));
+const GeorgiaPaycheckWidget = dynamic(() => import('./StatePaycheckWidgets').then(m => ({ default: m.GeorgiaPaycheckWidget })));
+const ColoradoPaycheckWidget = dynamic(() => import('./StatePaycheckWidgets').then(m => ({ default: m.ColoradoPaycheckWidget })));
+const IndianaPaycheckWidget = dynamic(() => import('./StatePaycheckWidgets').then(m => ({ default: m.IndianaPaycheckWidget })));
+const NorthCarolinaPaycheckWidget = dynamic(() => import('./StatePaycheckWidgets').then(m => ({ default: m.NorthCarolinaPaycheckWidget })));
+const MichiganHourlyPaycheckWidget = dynamic(() => import('./StatePaycheckWidgets').then(m => ({ default: m.MichiganHourlyPaycheckWidget })));
+const PaycheckCalculatorWidget = dynamic(() => import('./PaycheckCalculatorWidget').then(m => ({ default: m.PaycheckCalculatorWidget })));
+const PaycheckTaxCalculatorWidget = dynamic(() => import('./PaycheckTaxCalculatorWidget').then(m => ({ default: m.PaycheckTaxCalculatorWidget })));
+const UsSalaryTaxCalculatorWidget = dynamic(() => import('./UsSalaryTaxCalculatorWidget').then(m => ({ default: m.UsSalaryTaxCalculatorWidget })));
+const HourlyPaycheckWidget = dynamic(() => import('./HourlyPaycheckWidget').then(m => ({ default: m.HourlyPaycheckWidget })));
+const DailyPaycheckWidget = dynamic(() => import('./DailyPaycheckWidget').then(m => ({ default: m.DailyPaycheckWidget })));
+const WeeklyPaycheckWidget = dynamic(() => import('./WeeklyPaycheckWidget').then(m => ({ default: m.WeeklyPaycheckWidget })));
+const MonthlyPaycheckWidget = dynamic(() => import('./MonthlyPaycheckWidget').then(m => ({ default: m.MonthlyPaycheckWidget })));
+const YearlyPaycheckWidget = dynamic(() => import('./YearlyPaycheckWidget').then(m => ({ default: m.YearlyPaycheckWidget })));
+const OvertimeCalculatorWidget = dynamic(() => import('./OvertimeCalculatorWidget').then(m => ({ default: m.OvertimeCalculatorWidget })));
+const PayRaiseCalculatorWidget = dynamic(() => import('./PayRaiseCalculatorWidget').then(m => ({ default: m.PayRaiseCalculatorWidget })));
+const EicCalculatorWidget = dynamic(() => import('./EicCalculatorWidget').then(m => ({ default: m.EicCalculatorWidget })));
 
-import { StockCalculatorWidget } from './StockCalculatorWidget';
-import { RoiCalculatorWidget } from './RoiCalculatorWidget';
-import { FixedDepositCalculatorWidget } from './FixedDepositCalculatorWidget';
-import { SipCalculatorWidget } from './SipCalculatorWidget';
-import { StpCalculatorWidget } from './StpCalculatorWidget';
-import { XrpProfitCalculatorWidget } from './XrpProfitCalculatorWidget';
-import { LtpCalculatorWidget } from './LtpCalculatorWidget';
+const StockCalculatorWidget = dynamic(() => import('./StockCalculatorWidget').then(m => ({ default: m.StockCalculatorWidget })));
+const RoiCalculatorWidget = dynamic(() => import('./RoiCalculatorWidget').then(m => ({ default: m.RoiCalculatorWidget })));
+const FixedDepositCalculatorWidget = dynamic(() => import('./FixedDepositCalculatorWidget').then(m => ({ default: m.FixedDepositCalculatorWidget })));
+const SipCalculatorWidget = dynamic(() => import('./SipCalculatorWidget').then(m => ({ default: m.SipCalculatorWidget })));
+const StpCalculatorWidget = dynamic(() => import('./StpCalculatorWidget').then(m => ({ default: m.StpCalculatorWidget })));
+const XrpProfitCalculatorWidget = dynamic(() => import('./XrpProfitCalculatorWidget').then(m => ({ default: m.XrpProfitCalculatorWidget })));
+const LtpCalculatorWidget = dynamic(() => import('./LtpCalculatorWidget').then(m => ({ default: m.LtpCalculatorWidget })));
 
-import { TripBudgetCalculatorWidget } from './TripBudgetCalculatorWidget';
+const TripBudgetCalculatorWidget = dynamic(() => import('./TripBudgetCalculatorWidget').then(m => ({ default: m.TripBudgetCalculatorWidget })));
 
 // Marine Propeller Widgets
-import { MarinePropellerWidget } from './MarinePropellerWidget';
+const MarinePropellerWidget = dynamic(() => import('./MarinePropellerWidget').then(m => ({ default: m.MarinePropellerWidget })));
 
 // Thrust Widgets
-import {
-  ThrustToWeightWidget,
-  DroneThrustWidget,
-  RocketThrustWidget,
-  GeneralThrustWidget,
-} from './ThrustWidgets';
+const ThrustToWeightWidget = dynamic(() => import('./ThrustWidgets').then(m => ({ default: m.ThrustToWeightWidget })));
+const DroneThrustWidget = dynamic(() => import('./ThrustWidgets').then(m => ({ default: m.DroneThrustWidget })));
+const RocketThrustWidget = dynamic(() => import('./ThrustWidgets').then(m => ({ default: m.RocketThrustWidget })));
+const GeneralThrustWidget = dynamic(() => import('./ThrustWidgets').then(m => ({ default: m.GeneralThrustWidget })));
 
 // Structural, Civil & Fitness Thrust Widgets
-import {
-  PipeThrustWidget,
-  RafterThrustWidget,
-  HipThrustWidget,
-} from './StructuralThrustWidgets';
+const PipeThrustWidget = dynamic(() => import('./StructuralThrustWidgets').then(m => ({ default: m.PipeThrustWidget })));
+const RafterThrustWidget = dynamic(() => import('./StructuralThrustWidgets').then(m => ({ default: m.RafterThrustWidget })));
+const HipThrustWidget = dynamic(() => import('./StructuralThrustWidgets').then(m => ({ default: m.HipThrustWidget })));
 
 // Physics, Tech & Medical Density Widgets
-import {
-  GeneralDensityWidget,
-  CubeDensityWidget,
-  WaterDensityWidget,
-  AirDensityWidget,
-  PixelDensityWidget,
-  PopulationDensityWidget,
-  PsaDensityWidget,
-} from './DensityPhysicsWidgets';
+const GeneralDensityWidget = dynamic(() => import('./DensityPhysicsWidgets').then(m => ({ default: m.GeneralDensityWidget })));
+const CubeDensityWidget = dynamic(() => import('./DensityPhysicsWidgets').then(m => ({ default: m.CubeDensityWidget })));
+const WaterDensityWidget = dynamic(() => import('./DensityPhysicsWidgets').then(m => ({ default: m.WaterDensityWidget })));
+const AirDensityWidget = dynamic(() => import('./DensityPhysicsWidgets').then(m => ({ default: m.AirDensityWidget })));
+const PixelDensityWidget = dynamic(() => import('./DensityPhysicsWidgets').then(m => ({ default: m.PixelDensityWidget })));
+const PopulationDensityWidget = dynamic(() => import('./DensityPhysicsWidgets').then(m => ({ default: m.PopulationDensityWidget })));
+const PsaDensityWidget = dynamic(() => import('./DensityPhysicsWidgets').then(m => ({ default: m.PsaDensityWidget })));
 
 // Freight & Logistics Density Widgets
-import { FreightDensityWidget } from './FreightDensityWidgets';
+const FreightDensityWidget = dynamic(() => import('./FreightDensityWidgets').then(m => ({ default: m.FreightDensityWidget })));
 
 // Date & Time Widgets (14)
-import {
-  DateCalculatorWidget,
-  TimeCalculatorWidget,
-  DateTimeCalculatorWidget,
-  TimeAdditionSubtractionCalculatorWidget,
-  HoursCalculatorWidget,
-  DaysCalculatorWidget,
-  WeeksCalculatorWidget,
-  MonthsCalculatorWidget,
-  YearsCalculatorWidget,
-  DayOfTheWeekCalculatorWidget,
-  SecondsToTimeCalculatorWidget,
-  AverageTimeCalculatorWidget,
-  LeapYearCalculatorWidget,
-  MilitaryTimeConverterWidget,
-} from './DateTimeWidgets';
+const DateCalculatorWidget = dynamic(() => import('./DateTimeWidgets').then(m => ({ default: m.DateCalculatorWidget })));
+const TimeCalculatorWidget = dynamic(() => import('./DateTimeWidgets').then(m => ({ default: m.TimeCalculatorWidget })));
+const DateTimeCalculatorWidget = dynamic(() => import('./DateTimeWidgets').then(m => ({ default: m.DateTimeCalculatorWidget })));
+const TimeAdditionSubtractionCalculatorWidget = dynamic(() => import('./DateTimeWidgets').then(m => ({ default: m.TimeAdditionSubtractionCalculatorWidget })));
+const HoursCalculatorWidget = dynamic(() => import('./DateTimeWidgets').then(m => ({ default: m.HoursCalculatorWidget })));
+const DaysCalculatorWidget = dynamic(() => import('./DateTimeWidgets').then(m => ({ default: m.DaysCalculatorWidget })));
+const WeeksCalculatorWidget = dynamic(() => import('./DateTimeWidgets').then(m => ({ default: m.WeeksCalculatorWidget })));
+const MonthsCalculatorWidget = dynamic(() => import('./DateTimeWidgets').then(m => ({ default: m.MonthsCalculatorWidget })));
+const YearsCalculatorWidget = dynamic(() => import('./DateTimeWidgets').then(m => ({ default: m.YearsCalculatorWidget })));
+const DayOfTheWeekCalculatorWidget = dynamic(() => import('./DateTimeWidgets').then(m => ({ default: m.DayOfTheWeekCalculatorWidget })));
+const SecondsToTimeCalculatorWidget = dynamic(() => import('./DateTimeWidgets').then(m => ({ default: m.SecondsToTimeCalculatorWidget })));
+const AverageTimeCalculatorWidget = dynamic(() => import('./DateTimeWidgets').then(m => ({ default: m.AverageTimeCalculatorWidget })));
+const LeapYearCalculatorWidget = dynamic(() => import('./DateTimeWidgets').then(m => ({ default: m.LeapYearCalculatorWidget })));
+const MilitaryTimeConverterWidget = dynamic(() => import('./DateTimeWidgets').then(m => ({ default: m.MilitaryTimeConverterWidget })));
 
 // Time Card, Payroll, Hotel & Lead Time Widgets (4)
-import {
-  TimeCardCalculatorWidget,
-  PayrollHoursCalculatorWidget,
-  HotelDaysCalculatorWidget,
-  LeadTimeCalculatorWidget,
-} from './TimeCardWidgets';
+const TimeCardCalculatorWidget = dynamic(() => import('./TimeCardWidgets').then(m => ({ default: m.TimeCardCalculatorWidget })));
+const PayrollHoursCalculatorWidget = dynamic(() => import('./TimeCardWidgets').then(m => ({ default: m.PayrollHoursCalculatorWidget })));
+const HotelDaysCalculatorWidget = dynamic(() => import('./TimeCardWidgets').then(m => ({ default: m.HotelDaysCalculatorWidget })));
+const LeadTimeCalculatorWidget = dynamic(() => import('./TimeCardWidgets').then(m => ({ default: m.LeadTimeCalculatorWidget })));
 
 // Tech & Work Time Widgets (6)
-import {
-  DownloadTimeCalculatorWidget,
-  DiscordEpochTimeCalculatorWidget,
-  EpochTimeConverterWidget,
-  UnixEpochTimeCalculatorWidget,
-  AudiobookSpeedCalculatorWidget,
-  WordsToMinutesCalculatorWidget,
-} from './TechTimeWidgets';
+const DownloadTimeCalculatorWidget = dynamic(() => import('./TechTimeWidgets').then(m => ({ default: m.DownloadTimeCalculatorWidget })));
+const DiscordEpochTimeCalculatorWidget = dynamic(() => import('./TechTimeWidgets').then(m => ({ default: m.DiscordEpochTimeCalculatorWidget })));
+const EpochTimeConverterWidget = dynamic(() => import('./TechTimeWidgets').then(m => ({ default: m.EpochTimeConverterWidget })));
+const UnixEpochTimeCalculatorWidget = dynamic(() => import('./TechTimeWidgets').then(m => ({ default: m.UnixEpochTimeCalculatorWidget })));
+const AudiobookSpeedCalculatorWidget = dynamic(() => import('./TechTimeWidgets').then(m => ({ default: m.AudiobookSpeedCalculatorWidget })));
+const WordsToMinutesCalculatorWidget = dynamic(() => import('./TechTimeWidgets').then(m => ({ default: m.WordsToMinutesCalculatorWidget })));
 
 // Birthday & Milestone Widgets (9)
-import {
-  BirthdayCalculatorWidget,
-  WeeksAgoCalculatorWidget,
-  BirthYearCalculatorWidget,
-  HalfBirthdayCalculatorWidget,
-  GoldenBirthdayCalculatorWidget,
-  SilverBirthdayCalculatorWidget,
-  DiamondBirthdayCalculatorWidget,
-  SleepCalculatorWidget,
-  AnniversaryCalculatorWidget,
-} from './BirthdayMilestoneWidgets';
+const BirthdayCalculatorWidget = dynamic(() => import('./BirthdayMilestoneWidgets').then(m => ({ default: m.BirthdayCalculatorWidget })));
+const WeeksAgoCalculatorWidget = dynamic(() => import('./BirthdayMilestoneWidgets').then(m => ({ default: m.WeeksAgoCalculatorWidget })));
+const BirthYearCalculatorWidget = dynamic(() => import('./BirthdayMilestoneWidgets').then(m => ({ default: m.BirthYearCalculatorWidget })));
+const HalfBirthdayCalculatorWidget = dynamic(() => import('./BirthdayMilestoneWidgets').then(m => ({ default: m.HalfBirthdayCalculatorWidget })));
+const GoldenBirthdayCalculatorWidget = dynamic(() => import('./BirthdayMilestoneWidgets').then(m => ({ default: m.GoldenBirthdayCalculatorWidget })));
+const SilverBirthdayCalculatorWidget = dynamic(() => import('./BirthdayMilestoneWidgets').then(m => ({ default: m.SilverBirthdayCalculatorWidget })));
+const DiamondBirthdayCalculatorWidget = dynamic(() => import('./BirthdayMilestoneWidgets').then(m => ({ default: m.DiamondBirthdayCalculatorWidget })));
+const SleepCalculatorWidget = dynamic(() => import('./BirthdayMilestoneWidgets').then(m => ({ default: m.SleepCalculatorWidget })));
+const AnniversaryCalculatorWidget = dynamic(() => import('./BirthdayMilestoneWidgets').then(m => ({ default: m.AnniversaryCalculatorWidget })));
 
 // Esoteric Birthday Widgets (5)
-import {
-  RomanNumeralDateWidget,
-  MoonPhaseBirthdayWidget,
-  HebrewBirthdayWidget,
-  SoulmateBirthdayWidget,
-  TwinFlameBirthdayWidget,
-} from './EsotericBirthdayWidgets';
+const RomanNumeralDateWidget = dynamic(() => import('./EsotericBirthdayWidgets').then(m => ({ default: m.RomanNumeralDateWidget })));
+const MoonPhaseBirthdayWidget = dynamic(() => import('./EsotericBirthdayWidgets').then(m => ({ default: m.MoonPhaseBirthdayWidget })));
+const HebrewBirthdayWidget = dynamic(() => import('./EsotericBirthdayWidgets').then(m => ({ default: m.HebrewBirthdayWidget })));
+const SoulmateBirthdayWidget = dynamic(() => import('./EsotericBirthdayWidgets').then(m => ({ default: m.SoulmateBirthdayWidget })));
+const TwinFlameBirthdayWidget = dynamic(() => import('./EsotericBirthdayWidgets').then(m => ({ default: m.TwinFlameBirthdayWidget })));
 
 // Swim Time Widget (1)
-import { SwimTimeConverterWidget } from './SwimTimeWidget';
+const SwimTimeConverterWidget = dynamic(() => import('./SwimTimeWidget').then(m => ({ default: m.SwimTimeConverterWidget })));
 
 // 13 Percentage, Tax, VAT, Sports & Fitness Widgets
-import {
-  DiscountPercentageWidget,
-  WinPercentageWidget,
-  YearlyPercentageIncreaseWidget,
-  PercentageDecreaseWidget,
-  PartTimePercentageWidget,
-  TimePercentageWidget,
-  PercentageOfTimeWidget,
-  ReversePercentageWidget,
-  GrowthPercentageWidget,
-  TaxPercentageWidget,
-  VatPercentageWidget,
-  SluggingPercentageWidget,
-  FatPercentageWidget,
-} from './PercentageSuiteWidgets';
+const DiscountPercentageWidget = dynamic(() => import('./PercentageSuiteWidgets').then(m => ({ default: m.DiscountPercentageWidget })));
+const WinPercentageWidget = dynamic(() => import('./PercentageSuiteWidgets').then(m => ({ default: m.WinPercentageWidget })));
+const YearlyPercentageIncreaseWidget = dynamic(() => import('./PercentageSuiteWidgets').then(m => ({ default: m.YearlyPercentageIncreaseWidget })));
+const PercentageDecreaseWidget = dynamic(() => import('./PercentageSuiteWidgets').then(m => ({ default: m.PercentageDecreaseWidget })));
+const PartTimePercentageWidget = dynamic(() => import('./PercentageSuiteWidgets').then(m => ({ default: m.PartTimePercentageWidget })));
+const TimePercentageWidget = dynamic(() => import('./PercentageSuiteWidgets').then(m => ({ default: m.TimePercentageWidget })));
+const PercentageOfTimeWidget = dynamic(() => import('./PercentageSuiteWidgets').then(m => ({ default: m.PercentageOfTimeWidget })));
+const ReversePercentageWidget = dynamic(() => import('./PercentageSuiteWidgets').then(m => ({ default: m.ReversePercentageWidget })));
+const GrowthPercentageWidget = dynamic(() => import('./PercentageSuiteWidgets').then(m => ({ default: m.GrowthPercentageWidget })));
+const TaxPercentageWidget = dynamic(() => import('./PercentageSuiteWidgets').then(m => ({ default: m.TaxPercentageWidget })));
+const VatPercentageWidget = dynamic(() => import('./PercentageSuiteWidgets').then(m => ({ default: m.VatPercentageWidget })));
+const SluggingPercentageWidget = dynamic(() => import('./PercentageSuiteWidgets').then(m => ({ default: m.SluggingPercentageWidget })));
+const FatPercentageWidget = dynamic(() => import('./PercentageSuiteWidgets').then(m => ({ default: m.FatPercentageWidget })));
 
 // 29 Masonry, Concrete, Wood, Lumber & Pocket Calculator Widgets
-import {
-  ConcreteCalculatorWidget,
-  ConcreteSlabWidget,
-  ConcreteBlockWidget,
-  SakreteCalculatorWidget,
-  QuikreteCalculatorWidget,
-  GravelStoneCalculatorWidget,
-  AsphaltCalculatorWidget,
-  MaterialCalculatorWidget,
-} from './MasonryConcreteWidgets';
-import {
-  WoodCalculatorWidget,
-  FramingWoodWidget,
-  TrestleWoodWidget,
-  WeightOfWoodWidget,
-  DeckWoodWidget,
-  CordWoodWidget,
-  CabinetWoodWidget,
-  FirewoodCordWidget,
-  LooseCordWoodWidget,
-  ShedWoodWidget,
-  FenceWoodWidget,
-  FirewoodCalculatorWidget,
-} from './WoodLumberWidgets';
-import { StandardCalculatorWidget } from './StandardCalculatorWidget';
+const ConcreteCalculatorWidget = dynamic(() => import('./MasonryConcreteWidgets').then(m => ({ default: m.ConcreteCalculatorWidget })));
+const ConcreteSlabWidget = dynamic(() => import('./MasonryConcreteWidgets').then(m => ({ default: m.ConcreteSlabWidget })));
+const ConcreteBlockWidget = dynamic(() => import('./MasonryConcreteWidgets').then(m => ({ default: m.ConcreteBlockWidget })));
+const SakreteCalculatorWidget = dynamic(() => import('./MasonryConcreteWidgets').then(m => ({ default: m.SakreteCalculatorWidget })));
+const QuikreteCalculatorWidget = dynamic(() => import('./MasonryConcreteWidgets').then(m => ({ default: m.QuikreteCalculatorWidget })));
+const GravelStoneCalculatorWidget = dynamic(() => import('./MasonryConcreteWidgets').then(m => ({ default: m.GravelStoneCalculatorWidget })));
+const AsphaltCalculatorWidget = dynamic(() => import('./MasonryConcreteWidgets').then(m => ({ default: m.AsphaltCalculatorWidget })));
+const MaterialCalculatorWidget = dynamic(() => import('./MasonryConcreteWidgets').then(m => ({ default: m.MaterialCalculatorWidget })));
+const WoodCalculatorWidget = dynamic(() => import('./WoodLumberWidgets').then(m => ({ default: m.WoodCalculatorWidget })));
+const FramingWoodWidget = dynamic(() => import('./WoodLumberWidgets').then(m => ({ default: m.FramingWoodWidget })));
+const TrestleWoodWidget = dynamic(() => import('./WoodLumberWidgets').then(m => ({ default: m.TrestleWoodWidget })));
+const WeightOfWoodWidget = dynamic(() => import('./WoodLumberWidgets').then(m => ({ default: m.WeightOfWoodWidget })));
+const DeckWoodWidget = dynamic(() => import('./WoodLumberWidgets').then(m => ({ default: m.DeckWoodWidget })));
+const CordWoodWidget = dynamic(() => import('./WoodLumberWidgets').then(m => ({ default: m.CordWoodWidget })));
+const CabinetWoodWidget = dynamic(() => import('./WoodLumberWidgets').then(m => ({ default: m.CabinetWoodWidget })));
+const FirewoodCordWidget = dynamic(() => import('./WoodLumberWidgets').then(m => ({ default: m.FirewoodCordWidget })));
+const LooseCordWoodWidget = dynamic(() => import('./WoodLumberWidgets').then(m => ({ default: m.LooseCordWoodWidget })));
+const ShedWoodWidget = dynamic(() => import('./WoodLumberWidgets').then(m => ({ default: m.ShedWoodWidget })));
+const FenceWoodWidget = dynamic(() => import('./WoodLumberWidgets').then(m => ({ default: m.FenceWoodWidget })));
+const FirewoodCalculatorWidget = dynamic(() => import('./WoodLumberWidgets').then(m => ({ default: m.FirewoodCalculatorWidget })));
+const StandardCalculatorWidget = dynamic(() => import('./StandardCalculatorWidget').then(m => ({ default: m.StandardCalculatorWidget })));
 
 // 27 STEM, Fitness, Military, Character Counter & Packaging Widgets
-import {
-  SpherePackingWidget,
-  CubeRootWidget,
-  BestScientificCalculatorWidget,
-  EquationSolverWidget,
-  PartialFractionWidget,
-  GradeCalculatorWidget,
-  StudentTWidget,
-  ChiSquareWidget,
-  HeatIndexWidget,
-  InchCmWidget,
-  IpSubnetWidget,
-  BinPackingWidget,
-} from './StemMathWidgets';
+const SpherePackingWidget = dynamic(() => import('./StemMathWidgets').then(m => ({ default: m.SpherePackingWidget })));
+const CubeRootWidget = dynamic(() => import('./StemMathWidgets').then(m => ({ default: m.CubeRootWidget })));
+const BestScientificCalculatorWidget = dynamic(() => import('./StemMathWidgets').then(m => ({ default: m.BestScientificCalculatorWidget })));
+const EquationSolverWidget = dynamic(() => import('./StemMathWidgets').then(m => ({ default: m.EquationSolverWidget })));
+const PartialFractionWidget = dynamic(() => import('./StemMathWidgets').then(m => ({ default: m.PartialFractionWidget })));
+const GradeCalculatorWidget = dynamic(() => import('./StemMathWidgets').then(m => ({ default: m.GradeCalculatorWidget })));
+const StudentTWidget = dynamic(() => import('./StemMathWidgets').then(m => ({ default: m.StudentTWidget })));
+const ChiSquareWidget = dynamic(() => import('./StemMathWidgets').then(m => ({ default: m.ChiSquareWidget })));
+const HeatIndexWidget = dynamic(() => import('./StemMathWidgets').then(m => ({ default: m.HeatIndexWidget })));
+const InchCmWidget = dynamic(() => import('./StemMathWidgets').then(m => ({ default: m.InchCmWidget })));
+const IpSubnetWidget = dynamic(() => import('./StemMathWidgets').then(m => ({ default: m.IpSubnetWidget })));
+const BinPackingWidget = dynamic(() => import('./StemMathWidgets').then(m => ({ default: m.BinPackingWidget })));
 
-import {
-  WilksWidget,
-  ApftWidget,
-  AcftWidget,
-  BenchPressWidget,
-} from './FitnessMilitaryWidgets';
+const WilksWidget = dynamic(() => import('./FitnessMilitaryWidgets').then(m => ({ default: m.WilksWidget })));
+const ApftWidget = dynamic(() => import('./FitnessMilitaryWidgets').then(m => ({ default: m.ApftWidget })));
+const AcftWidget = dynamic(() => import('./FitnessMilitaryWidgets').then(m => ({ default: m.AcftWidget })));
+const BenchPressWidget = dynamic(() => import('./FitnessMilitaryWidgets').then(m => ({ default: m.BenchPressWidget })));
 
-import {
-  WordCounterWidget,
-  KoreanCharacterWidget,
-  JapaneseCharacterWidget,
-  TwitterCharacterWidget,
-  ChineseCharacterWidget,
-  ShippingBoxSizeWidget,
-  BoxPackingWidget,
-  MovingPackingWidget,
-  AsqWidget,
-  AgeDifferenceWidget,
-  VideoSpeedWidget,
-} from './TextAndPackagingWidgets';
+const WordCounterWidget = dynamic(() => import('./TextAndPackagingWidgets').then(m => ({ default: m.WordCounterWidget })));
+const KoreanCharacterWidget = dynamic(() => import('./TextAndPackagingWidgets').then(m => ({ default: m.KoreanCharacterWidget })));
+const JapaneseCharacterWidget = dynamic(() => import('./TextAndPackagingWidgets').then(m => ({ default: m.JapaneseCharacterWidget })));
+const TwitterCharacterWidget = dynamic(() => import('./TextAndPackagingWidgets').then(m => ({ default: m.TwitterCharacterWidget })));
+const ChineseCharacterWidget = dynamic(() => import('./TextAndPackagingWidgets').then(m => ({ default: m.ChineseCharacterWidget })));
+const ShippingBoxSizeWidget = dynamic(() => import('./TextAndPackagingWidgets').then(m => ({ default: m.ShippingBoxSizeWidget })));
+const BoxPackingWidget = dynamic(() => import('./TextAndPackagingWidgets').then(m => ({ default: m.BoxPackingWidget })));
+const MovingPackingWidget = dynamic(() => import('./TextAndPackagingWidgets').then(m => ({ default: m.MovingPackingWidget })));
+const AsqWidget = dynamic(() => import('./TextAndPackagingWidgets').then(m => ({ default: m.AsqWidget })));
+const AgeDifferenceWidget = dynamic(() => import('./TextAndPackagingWidgets').then(m => ({ default: m.AgeDifferenceWidget })));
+const VideoSpeedWidget = dynamic(() => import('./TextAndPackagingWidgets').then(m => ({ default: m.VideoSpeedWidget })));
 
 // 12 Probability Suite Widgets
-import {
-  ProbabilityWidget,
-  PermutationsCombinationsWidget,
-  BinomialWidget,
-  DiceProbabilityWidget,
-  CoinFlipWidget,
-  BayesTheoremWidget,
-  NormalDistributionWidget,
-  PoissonWidget,
-  OddsProbabilityWidget,
-  HypergeometricWidget,
-  PokerOddsWidget,
-  LotteryOddsWidget,
-} from './ProbabilityWidgets';
+const ProbabilityWidget = dynamic(() => import('./ProbabilityWidgets').then(m => ({ default: m.ProbabilityWidget })));
+const PermutationsCombinationsWidget = dynamic(() => import('./ProbabilityWidgets').then(m => ({ default: m.PermutationsCombinationsWidget })));
+const BinomialWidget = dynamic(() => import('./ProbabilityWidgets').then(m => ({ default: m.BinomialWidget })));
+const DiceProbabilityWidget = dynamic(() => import('./ProbabilityWidgets').then(m => ({ default: m.DiceProbabilityWidget })));
+const CoinFlipWidget = dynamic(() => import('./ProbabilityWidgets').then(m => ({ default: m.CoinFlipWidget })));
+const BayesTheoremWidget = dynamic(() => import('./ProbabilityWidgets').then(m => ({ default: m.BayesTheoremWidget })));
+const NormalDistributionWidget = dynamic(() => import('./ProbabilityWidgets').then(m => ({ default: m.NormalDistributionWidget })));
+const PoissonWidget = dynamic(() => import('./ProbabilityWidgets').then(m => ({ default: m.PoissonWidget })));
+const OddsProbabilityWidget = dynamic(() => import('./ProbabilityWidgets').then(m => ({ default: m.OddsProbabilityWidget })));
+const HypergeometricWidget = dynamic(() => import('./ProbabilityWidgets').then(m => ({ default: m.HypergeometricWidget })));
+const PokerOddsWidget = dynamic(() => import('./ProbabilityWidgets').then(m => ({ default: m.PokerOddsWidget })));
+const LotteryOddsWidget = dynamic(() => import('./ProbabilityWidgets').then(m => ({ default: m.LotteryOddsWidget })));
 
 // 2D Geometry Widgets (12)
-import {
-  CircleCalculatorWidget,
-  TriangleCalculatorWidget,
-  RightTriangleWidget,
-  SquareCalculatorWidget,
-  RectangleCalculatorWidget,
-  RhombusCalculatorWidget,
-  ParallelogramCalculatorWidget,
-  TrapeziumCalculatorWidget,
-  PentagonCalculatorWidget,
-  HexagonCalculatorWidget,
-  PolygonCalculatorWidget,
-  PythagoreanTheoremWidget,
-} from './Geometry2DWidgets';
+const CircleCalculatorWidget = dynamic(() => import('./Geometry2DWidgets').then(m => ({ default: m.CircleCalculatorWidget })));
+const TriangleCalculatorWidget = dynamic(() => import('./Geometry2DWidgets').then(m => ({ default: m.TriangleCalculatorWidget })));
+const RightTriangleWidget = dynamic(() => import('./Geometry2DWidgets').then(m => ({ default: m.RightTriangleWidget })));
+const SquareCalculatorWidget = dynamic(() => import('./Geometry2DWidgets').then(m => ({ default: m.SquareCalculatorWidget })));
+const RectangleCalculatorWidget = dynamic(() => import('./Geometry2DWidgets').then(m => ({ default: m.RectangleCalculatorWidget })));
+const RhombusCalculatorWidget = dynamic(() => import('./Geometry2DWidgets').then(m => ({ default: m.RhombusCalculatorWidget })));
+const ParallelogramCalculatorWidget = dynamic(() => import('./Geometry2DWidgets').then(m => ({ default: m.ParallelogramCalculatorWidget })));
+const TrapeziumCalculatorWidget = dynamic(() => import('./Geometry2DWidgets').then(m => ({ default: m.TrapeziumCalculatorWidget })));
+const PentagonCalculatorWidget = dynamic(() => import('./Geometry2DWidgets').then(m => ({ default: m.PentagonCalculatorWidget })));
+const HexagonCalculatorWidget = dynamic(() => import('./Geometry2DWidgets').then(m => ({ default: m.HexagonCalculatorWidget })));
+const PolygonCalculatorWidget = dynamic(() => import('./Geometry2DWidgets').then(m => ({ default: m.PolygonCalculatorWidget })));
+const PythagoreanTheoremWidget = dynamic(() => import('./Geometry2DWidgets').then(m => ({ default: m.PythagoreanTheoremWidget })));
 
 // 3D Geometry Widgets (7)
-import {
-  CubeCalculatorWidget,
-  CuboidCalculatorWidget,
-  CylinderCalculatorWidget,
-  ConeCalculatorWidget,
-  SphereCalculatorWidget,
-  PrismCalculatorWidget,
-  PyramidCalculatorWidget,
-} from './Geometry3DWidgets';
+const CubeCalculatorWidget = dynamic(() => import('./Geometry3DWidgets').then(m => ({ default: m.CubeCalculatorWidget })));
+const CuboidCalculatorWidget = dynamic(() => import('./Geometry3DWidgets').then(m => ({ default: m.CuboidCalculatorWidget })));
+const CylinderCalculatorWidget = dynamic(() => import('./Geometry3DWidgets').then(m => ({ default: m.CylinderCalculatorWidget })));
+const ConeCalculatorWidget = dynamic(() => import('./Geometry3DWidgets').then(m => ({ default: m.ConeCalculatorWidget })));
+const SphereCalculatorWidget = dynamic(() => import('./Geometry3DWidgets').then(m => ({ default: m.SphereCalculatorWidget })));
+const PrismCalculatorWidget = dynamic(() => import('./Geometry3DWidgets').then(m => ({ default: m.PrismCalculatorWidget })));
+const PyramidCalculatorWidget = dynamic(() => import('./Geometry3DWidgets').then(m => ({ default: m.PyramidCalculatorWidget })));
 
 // Algebra, Powers, Trig & Logarithm Widgets (17)
-import {
-  LinearEquationWidget,
-  QuadraticEquationWidget,
-  SystemOfEquationsWidget,
-  ArithmeticMeanWidget,
-  WeightedAverageWidget,
-  SquarePowerWidget,
-  CubePowerWidget,
-  NthPowerWidget,
-  SquareRootWidget,
-  NthRootWidget,
-  SineCalculatorWidget,
-  CosineCalculatorWidget,
-  TangentCalculatorWidget,
-  CotangentCalculatorWidget,
-  LogarithmCalculatorWidget,
-  NaturalLogarithmWidget,
-  CommonLogarithmWidget,
-} from './AlgebraPowersTrigWidgets';
+const LinearEquationWidget = dynamic(() => import('./AlgebraPowersTrigWidgets').then(m => ({ default: m.LinearEquationWidget })));
+const QuadraticEquationWidget = dynamic(() => import('./AlgebraPowersTrigWidgets').then(m => ({ default: m.QuadraticEquationWidget })));
+const SystemOfEquationsWidget = dynamic(() => import('./AlgebraPowersTrigWidgets').then(m => ({ default: m.SystemOfEquationsWidget })));
+const ArithmeticMeanWidget = dynamic(() => import('./AlgebraPowersTrigWidgets').then(m => ({ default: m.ArithmeticMeanWidget })));
+const WeightedAverageWidget = dynamic(() => import('./AlgebraPowersTrigWidgets').then(m => ({ default: m.WeightedAverageWidget })));
+const SquarePowerWidget = dynamic(() => import('./AlgebraPowersTrigWidgets').then(m => ({ default: m.SquarePowerWidget })));
+const CubePowerWidget = dynamic(() => import('./AlgebraPowersTrigWidgets').then(m => ({ default: m.CubePowerWidget })));
+const NthPowerWidget = dynamic(() => import('./AlgebraPowersTrigWidgets').then(m => ({ default: m.NthPowerWidget })));
+const SquareRootWidget = dynamic(() => import('./AlgebraPowersTrigWidgets').then(m => ({ default: m.SquareRootWidget })));
+const NthRootWidget = dynamic(() => import('./AlgebraPowersTrigWidgets').then(m => ({ default: m.NthRootWidget })));
+const SineCalculatorWidget = dynamic(() => import('./AlgebraPowersTrigWidgets').then(m => ({ default: m.SineCalculatorWidget })));
+const CosineCalculatorWidget = dynamic(() => import('./AlgebraPowersTrigWidgets').then(m => ({ default: m.CosineCalculatorWidget })));
+const TangentCalculatorWidget = dynamic(() => import('./AlgebraPowersTrigWidgets').then(m => ({ default: m.TangentCalculatorWidget })));
+const CotangentCalculatorWidget = dynamic(() => import('./AlgebraPowersTrigWidgets').then(m => ({ default: m.CotangentCalculatorWidget })));
+const LogarithmCalculatorWidget = dynamic(() => import('./AlgebraPowersTrigWidgets').then(m => ({ default: m.LogarithmCalculatorWidget })));
+const NaturalLogarithmWidget = dynamic(() => import('./AlgebraPowersTrigWidgets').then(m => ({ default: m.NaturalLogarithmWidget })));
+const CommonLogarithmWidget = dynamic(() => import('./AlgebraPowersTrigWidgets').then(m => ({ default: m.CommonLogarithmWidget })));
 
 interface CalculatorRendererProps {
   slug: string;

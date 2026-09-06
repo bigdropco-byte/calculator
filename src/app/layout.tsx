@@ -12,6 +12,7 @@ import {
   getCanonicalUrl,
   getCanonicalAlternates,
 } from '@/lib/seo';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
@@ -104,47 +105,30 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const orgSchema = generateOrganizationSchema();
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
   return (
     <html lang="en">
       <head>
-        {/* Google tag (gtag.js) - Google Analytics 4 */}
-        <script
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        />
-        <script
-          id="google-analytics-init"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-
-              gtag('config', '${GA_MEASUREMENT_ID}', {
-                page_path: window.location.pathname,
-              });
-            `,
-          }}
-        />
-        <link rel="icon" href={`${basePath}/icon.svg`} type="image/svg+xml" />
-        <link rel="icon" href={`${basePath}/favicon.ico`} sizes="any" />
-        <link rel="icon" href={`${basePath}/favicon-48x48.png`} sizes="48x48" type="image/png" />
-        <link rel="icon" href={`${basePath}/favicon-32x32.png`} sizes="32x32" type="image/png" />
-        <link rel="icon" href={`${basePath}/favicon-16x16.png`} sizes="16x16" type="image/png" />
-        <link rel="apple-touch-icon" href={`${basePath}/apple-touch-icon.png`} sizes="180x180" />
-        <link rel="manifest" href={`${basePath}/site.webmanifest`} />
-        <meta name="theme-color" content="#2563eb" />
-        <meta name="apple-mobile-web-app-title" content="Calculat" />
-        <meta name="application-name" content="Calculat" />
-        <meta name="msapplication-TileColor" content="#2563eb" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
         />
       </head>
       <body className="bg-slate-50 text-slate-900 min-h-screen flex flex-col antialiased">
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}', {
+              page_path: window.location.pathname,
+            });
+          `}
+        </Script>
         <GoogleAnalytics />
         <StudentBanner />
         <Header />

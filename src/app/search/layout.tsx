@@ -3,7 +3,7 @@ import { SITE_CONFIG, getCanonicalUrl, getCanonicalAlternates } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Search Calculators – Calculat.dev',
-  description: 'Search across 130+ free online calculators for math, finance, health, and more.',
+  description: 'Search across 240+ free online calculators for math, finance, health, and more.',
   alternates: getCanonicalAlternates('/search'),
   robots: {
     index: false,

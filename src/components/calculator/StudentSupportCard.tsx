@@ -55,9 +55,9 @@ export const StudentSupportCard: React.FC<StudentSupportCardProps> = ({
 
         <div className="space-y-2 flex-1">
           <div className="flex items-center gap-2 flex-wrap">
-            <h3 className="text-base font-bold text-slate-900">
+            <p className="text-base font-bold text-slate-900">
               Did this calculation save you time?
-            </h3>
+            </p>
             <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-sky-100 text-sky-800 border border-sky-200">
               Student Project
             </span>

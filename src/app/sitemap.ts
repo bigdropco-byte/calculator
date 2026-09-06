@@ -74,12 +74,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     cat => getCalculatorsByCategory(cat.slug).length > 0
   );
 
-  const categoryRoutes: MetadataRoute.Sitemap = populatedCategories.map(cat => ({
-    url: getCanonicalUrl(`/categories/${cat.slug}`),
-    lastModified: new Date(),
-    changeFrequency: 'weekly',
-    priority: 0.7,
-  }));
+  const categoryRoutes: MetadataRoute.Sitemap = populatedCategories.map(cat => {
+    const tools = getCalculatorsByCategory(cat.slug);
+    const newest = tools.reduce((latest, t) => {
+      const d = new Date(t.addedDate);
+      return d > latest ? d : latest;
+    }, new Date(0));
+
+    return {
+      url: getCanonicalUrl(`/categories/${cat.slug}`),
+      lastModified: newest,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    };
+  });
 
   return [...staticRoutes, ...calculatorRoutes, ...categoryRoutes];
 }

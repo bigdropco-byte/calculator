@@ -180,7 +180,7 @@ export const HowItWorksSection: React.FC = () => {
                   <Icon className="w-3.5 h-3.5" />
                 </div>
                 <div>
-                  <h5 className="text-xs font-semibold text-slate-900">{item.title}</h5>
+                  <p className="text-xs font-semibold text-slate-900">{item.title}</p>
                   <p className="text-[11px] text-slate-500 leading-snug mt-0.5">
                     {item.description}
                   </p>

@@ -103,18 +103,12 @@ export default async function CalculatorPage({ params }: Props) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(appSchema) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            [appSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])]
+          ),
+        }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      {faqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
 
       <article className="max-w-4xl mx-auto">
         <CalculatorShell calculator={calculator}>

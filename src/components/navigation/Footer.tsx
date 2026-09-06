@@ -46,9 +46,9 @@ export const Footer: React.FC = () => {
 
           {/* Calculators Column */}
           <div>
-            <h3 className="font-semibold text-slate-900 text-xs uppercase tracking-wider mb-3">
+            <p className="font-semibold text-slate-900 text-xs uppercase tracking-wider mb-3">
               Calculators
-            </h3>
+            </p>
             <ul className="space-y-2 text-xs sm:text-sm">
               <li>
                 <Link href="/calculators/" className="hover:text-sky-600 transition-colors">
@@ -85,9 +85,9 @@ export const Footer: React.FC = () => {
 
           {/* Categories Column */}
           <div>
-            <h3 className="font-semibold text-slate-900 text-xs uppercase tracking-wider mb-3">
+            <p className="font-semibold text-slate-900 text-xs uppercase tracking-wider mb-3">
               Categories
-            </h3>
+            </p>
             <ul className="space-y-2 text-xs sm:text-sm">
               <li>
                 <Link href="/categories/math/" className="hover:text-sky-600 transition-colors">
@@ -124,9 +124,9 @@ export const Footer: React.FC = () => {
 
           {/* Company & Legal */}
           <div>
-            <h3 className="font-semibold text-slate-900 text-xs uppercase tracking-wider mb-3">
+            <p className="font-semibold text-slate-900 text-xs uppercase tracking-wider mb-3">
               About &amp; Legal
-            </h3>
+            </p>
             <ul className="space-y-2 text-xs sm:text-sm">
               <li>
                 <Link href="/about/" className="hover:text-sky-600 transition-colors">
