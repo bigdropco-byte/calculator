@@ -112,7 +112,7 @@ export const HowItWorksSection: React.FC = () => {
       </div>
 
       {/* Infographic Graphic with SEO Alt Text and Semantic Schema Reference */}
-      <figure className="relative w-full rounded-xl sm:rounded-2xl overflow-hidden border border-slate-200/80 bg-slate-50 shadow-xs">
+      <figure className="relative w-full aspect-[2/1] rounded-xl sm:rounded-2xl overflow-hidden border border-slate-200/80 bg-slate-50 shadow-xs">
         <Image
           src="/how-calculat-works.jpg"
           alt="How Calculat.dev Works: 6-step infographic guide explaining how to search or browse calculators, enter values, calculate instantly, view accurate results, and save or share calculations for math, finance, health, and everyday use"

@@ -113,6 +113,11 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.getItem('calculat_student_banner_dismissed')==='true'){document.documentElement.classList.add('banner-dismissed');}}catch(e){}`,
+          }}
+        />
       </head>
       <body className="bg-slate-50 text-slate-900 min-h-screen flex flex-col antialiased">
         <Script

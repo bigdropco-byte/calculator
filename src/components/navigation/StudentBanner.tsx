@@ -1,35 +1,39 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Bookmark, X, Sparkles } from 'lucide-react';
+import { X, Sparkles } from 'lucide-react';
 
 export const StudentBanner: React.FC = () => {
-  const [visible, setVisible] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
   const [isMac, setIsMac] = useState(true);
 
   useEffect(() => {
-    // Check if dismissed before
-    const isDismissed = localStorage.getItem('calculat_student_banner_dismissed');
-    if (!isDismissed) {
-      setVisible(true);
-    }
-    // Check OS
-    if (typeof window !== 'undefined' && navigator.userAgent) {
-      setIsMac(/Mac|iPod|iPhone|iPad/.test(navigator.userAgent));
+    if (typeof window !== 'undefined') {
+      if (localStorage.getItem('calculat_student_banner_dismissed') === 'true') {
+        setDismissed(true);
+      }
+      if (navigator.userAgent) {
+        setIsMac(/Mac|iPod|iPhone|iPad/.test(navigator.userAgent));
+      }
     }
   }, []);
 
   const handleDismiss = () => {
-    setVisible(false);
+    setDismissed(true);
     try {
       localStorage.setItem('calculat_student_banner_dismissed', 'true');
+      document.documentElement.classList.add('banner-dismissed');
     } catch {}
   };
 
-  if (!visible) return null;
+  if (dismissed) return null;
 
   return (
-    <div className="bg-gradient-to-r from-sky-900 via-slate-900 to-sky-950 text-white text-xs py-2.5 px-4 border-b border-sky-800/40 relative z-50 transition-all">
+    <aside
+      id="student-banner"
+      aria-label="Student Developer Project Notice"
+      className="bg-gradient-to-r from-sky-900 via-slate-900 to-sky-950 text-white text-xs py-2.5 px-4 border-b border-sky-800/40 relative z-30 transition-all"
+    >
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
         <div className="flex items-center gap-2 flex-wrap">
           <span className="flex items-center gap-1 font-semibold text-sky-300">
@@ -50,12 +54,12 @@ export const StudentBanner: React.FC = () => {
             onClick={handleDismiss}
             className="p-1 rounded text-slate-400 hover:text-white transition-colors"
             aria-label="Dismiss banner"
-            title="Dismiss"
+            title="Dismiss banner"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
       </div>
-    </div>
+    </aside>
   );
 };

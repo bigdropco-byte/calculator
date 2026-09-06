@@ -23,6 +23,11 @@ html {
   box-sizing: border-box;
 }
 
+/* Prevent layout shift for dismissed student banner */
+html.banner-dismissed #student-banner {
+  display: none !important;
+}
+
 body {
   background-color: var(--bg-main);
   color: var(--text-main);
