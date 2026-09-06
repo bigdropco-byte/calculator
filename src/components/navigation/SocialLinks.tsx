@@ -81,30 +81,33 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
   };
 
   return (
-    <div className={`flex items-center gap-2 flex-wrap ${className}`} role="list" aria-label="Social media links">
+    <ul
+      className={`flex items-center gap-2 flex-wrap list-none p-0 m-0 ${className}`}
+      aria-label="Social media links"
+    >
       {SOCIAL_PROFILES.map((profile) => (
-        <a
-          key={profile.name}
-          href={profile.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={profile.label}
-          title={profile.label}
-          className={`inline-flex items-center gap-1.5 text-slate-500 bg-white border border-slate-200 transition-all duration-200 shadow-2xs hover:shadow-xs hover:scale-105 active:scale-95 ${buttonSizes[size]} ${profile.hoverColor}`}
-          role="listitem"
-        >
-          <svg
-            className={`${iconSizes[size]} shrink-0 fill-current`}
-            viewBox="0 0 24 24"
-            aria-hidden="true"
+        <li key={profile.name} className="inline-flex">
+          <a
+            href={profile.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={profile.label}
+            title={profile.label}
+            className={`inline-flex items-center gap-1.5 text-slate-500 bg-white border border-slate-200 transition-all duration-200 shadow-2xs hover:shadow-xs hover:scale-105 active:scale-95 ${buttonSizes[size]} ${profile.hoverColor}`}
           >
-            <path d={profile.iconPath} />
-          </svg>
-          {showLabels && (
-            <span className="text-xs font-semibold text-slate-700">{profile.name}</span>
-          )}
-        </a>
+            <svg
+              className={`${iconSizes[size]} shrink-0 fill-current`}
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d={profile.iconPath} />
+            </svg>
+            {showLabels && (
+              <span className="text-xs font-semibold text-slate-700">{profile.name}</span>
+            )}
+          </a>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };

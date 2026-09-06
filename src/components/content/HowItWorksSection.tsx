@@ -121,7 +121,7 @@ export const HowItWorksSection: React.FC = () => {
           height={512}
           sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1024px"
           className="w-full h-auto object-contain block select-none"
-          loading="lazy"
+          loading="eager"
           decoding="async"
         />
         <figcaption className="sr-only">
