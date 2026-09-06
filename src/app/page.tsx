@@ -145,13 +145,13 @@ export default function HomePage() {
           <div className="flex items-center justify-between mb-5">
             <div>
               <h2 className="text-xl font-bold text-slate-900">Popular Calculators</h2>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-slate-600 mt-0.5">
                 The most frequently used tools in our directory
               </p>
             </div>
             <Link
               href="/calculators/?sort=popular"
-              className="text-xs font-semibold text-sky-600 hover:text-sky-700 flex items-center gap-1 transition-colors"
+              className="text-xs font-semibold text-sky-700 hover:text-sky-800 flex items-center gap-1 transition-colors"
             >
               View all popular <ArrowRight className="w-3.5 h-3.5" />
             </Link>
@@ -169,13 +169,13 @@ export default function HomePage() {
           <div className="flex items-center justify-between mb-5">
             <div>
               <h2 className="text-xl font-bold text-slate-900">Browse by Category</h2>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-slate-600 mt-0.5">
                 Explore calculators organized across 16 primary categories
               </p>
             </div>
             <Link
               href="/categories/"
-              className="text-xs font-semibold text-sky-600 hover:text-sky-700 flex items-center gap-1 transition-colors"
+              className="text-xs font-semibold text-sky-700 hover:text-sky-800 flex items-center gap-1 transition-colors"
             >
               All 16 categories <ArrowRight className="w-3.5 h-3.5" />
             </Link>
@@ -201,13 +201,13 @@ export default function HomePage() {
           <div className="flex items-center justify-between mb-5">
             <div>
               <h2 className="text-xl font-bold text-slate-900">Recently Added</h2>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-slate-600 mt-0.5">
                 Latest calculation utilities added to Calculat.dev
               </p>
             </div>
             <Link
               href="/calculators/?sort=newest"
-              className="text-xs font-semibold text-sky-600 hover:text-sky-700 flex items-center gap-1 transition-colors"
+              className="text-xs font-semibold text-sky-700 hover:text-sky-800 flex items-center gap-1 transition-colors"
             >
               View new tools <ArrowRight className="w-3.5 h-3.5" />
             </Link>

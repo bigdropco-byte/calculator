@@ -67,14 +67,14 @@ export const Header: React.FC = () => {
             <button
               type="button"
               onClick={() => setIsSearchOpen(true)}
-              className="flex items-center gap-2.5 px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200/80 border border-slate-200 text-slate-500 hover:text-slate-700 text-sm font-normal transition-colors w-40 sm:w-64 justify-between"
+              className="flex items-center gap-2.5 px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200/80 border border-slate-200 text-slate-700 hover:text-slate-900 text-sm font-medium transition-colors w-40 sm:w-64 justify-between"
               aria-label="Search calculators"
             >
               <span className="flex items-center gap-2 truncate">
-                <Search className="w-4 h-4 text-slate-400 shrink-0" />
+                <Search className="w-4 h-4 text-slate-500 shrink-0" />
                 <span className="truncate">Search calculators...</span>
               </span>
-              <kbd className="hidden sm:inline-flex items-center text-[10px] uppercase font-semibold text-slate-400 bg-white border border-slate-200 px-1.5 py-0.5 rounded shadow-2xs">
+              <kbd className="hidden sm:inline-flex items-center text-[10px] uppercase font-semibold text-slate-600 bg-white border border-slate-300 px-1.5 py-0.5 rounded shadow-2xs">
                 ⌘K
               </kbd>
             </button>

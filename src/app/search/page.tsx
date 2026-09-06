@@ -54,25 +54,25 @@ function SearchContent() {
                 className="flex items-center justify-between p-4 hover:bg-sky-50/50 transition-colors group"
               >
                 <div className="flex items-start gap-3.5 min-w-0">
-                  <div className="p-2 rounded-lg bg-sky-50 text-sky-600 group-hover:bg-sky-600 group-hover:text-white transition-colors shrink-0 mt-0.5">
+                  <div className="p-2 rounded-lg bg-sky-50 text-sky-700 group-hover:bg-sky-600 group-hover:text-white transition-colors shrink-0 mt-0.5">
                     <CategoryIcon name={item.icon} className="w-5 h-5" />
                   </div>
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="font-semibold text-slate-900 group-hover:text-sky-600 transition-colors">
+                      <span className="font-semibold text-slate-900 group-hover:text-sky-700 transition-colors">
                         {item.name}
                       </span>
-                      <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
+                      <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
                         {item.categoryName}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-500 mt-1 line-clamp-1">
+                    <p className="text-xs text-slate-600 mt-1 line-clamp-1">
                       {item.shortDescription}
                     </p>
                   </div>
                 </div>
 
-                <div className="shrink-0 ml-4 flex items-center text-xs font-semibold text-sky-600 group-hover:translate-x-1 transition-transform">
+                <div className="shrink-0 ml-4 flex items-center text-xs font-semibold text-sky-700 group-hover:translate-x-1 transition-transform">
                   Calculate <ArrowRight className="w-4 h-4 ml-1" />
                 </div>
               </Link>

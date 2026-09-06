@@ -59,24 +59,24 @@ export const CalculatorShell: React.FC<CalculatorShellProps> = ({ calculator, ch
   return (
     <div className="w-full">
       {/* Breadcrumb Navigation */}
-      <nav aria-label="Breadcrumb" className="mb-4 text-xs text-slate-500 flex items-center gap-1.5 flex-wrap">
-        <Link href="/" className="hover:text-sky-600 transition-colors">
+      <nav aria-label="Breadcrumb" className="mb-4 text-xs text-slate-600 flex items-center gap-1.5 flex-wrap">
+        <Link href="/" className="hover:text-sky-700 transition-colors">
           Home
         </Link>
-        <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-        <Link href="/calculators/" className="hover:text-sky-600 transition-colors">
+        <ChevronRight className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+        <Link href="/calculators/" className="hover:text-sky-700 transition-colors">
           Calculators
         </Link>
-        <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+        <ChevronRight className="w-3.5 h-3.5 text-slate-500 shrink-0" />
         {category && (
           <>
-            <Link href={`/categories/${category.slug}/`} className="hover:text-sky-600 transition-colors">
+            <Link href={`/categories/${category.slug}/`} className="hover:text-sky-700 transition-colors">
               {category.shortName}
             </Link>
-            <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+            <ChevronRight className="w-3.5 h-3.5 text-slate-500 shrink-0" />
           </>
         )}
-        <span className="text-slate-800 font-medium truncate">{calculator.name}</span>
+        <span className="text-slate-900 font-semibold truncate">{calculator.name}</span>
       </nav>
 
       {/* Header Info & Actions */}

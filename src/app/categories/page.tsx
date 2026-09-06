@@ -73,12 +73,12 @@ export default function CategoriesPage() {
 
       <div className="space-y-6">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="text-xs text-slate-500 flex items-center gap-1.5">
-          <Link href="/" className="hover:text-sky-600 transition-colors">
+        <nav aria-label="Breadcrumb" className="text-xs text-slate-600 flex items-center gap-1.5">
+          <Link href="/" className="hover:text-sky-700 transition-colors">
             Home
           </Link>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-          <span className="text-slate-800 font-medium">Categories</span>
+          <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
+          <span className="text-slate-900 font-semibold">Categories</span>
         </nav>
 
         {/* Page Header */}

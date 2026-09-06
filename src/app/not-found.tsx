@@ -43,7 +43,7 @@ export default function NotFound() {
           <h2 className="text-lg font-bold text-slate-900">Popular Calculators You Might Need</h2>
           <Link
             href="/calculators/"
-            className="text-xs font-semibold text-sky-600 hover:underline flex items-center gap-1"
+            className="text-xs font-semibold text-sky-700 hover:text-sky-800 hover:underline flex items-center gap-1"
           >
             View all <ArrowRight className="w-3.5 h-3.5" />
           </Link>

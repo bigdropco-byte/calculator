@@ -116,22 +116,22 @@ export default async function CategoryPage({ params }: Props) {
 
       <div className="space-y-8">
         {/* Breadcrumb Navigation */}
-        <nav aria-label="Breadcrumb" className="text-xs text-slate-500 flex items-center gap-1.5 flex-wrap">
-          <Link href="/" className="hover:text-sky-600 transition-colors">
+        <nav aria-label="Breadcrumb" className="text-xs text-slate-600 flex items-center gap-1.5 flex-wrap">
+          <Link href="/" className="hover:text-sky-700 transition-colors">
             Home
           </Link>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-          <Link href="/categories/" className="hover:text-sky-600 transition-colors">
+          <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
+          <Link href="/categories/" className="hover:text-sky-700 transition-colors">
             Categories
           </Link>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-          <span className="text-slate-800 font-medium">{category.name}</span>
+          <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
+          <span className="text-slate-900 font-semibold">{category.name}</span>
         </nav>
 
         {/* Category Header Hero */}
         <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-2xs">
           <div className="flex items-start gap-4">
-            <div className="p-3 rounded-xl bg-sky-50 text-sky-600 shrink-0">
+            <div className="p-3 rounded-xl bg-sky-50 text-sky-700 shrink-0">
               <CategoryIcon name={category.icon} className="w-8 h-8" />
             </div>
             <div>
@@ -162,7 +162,7 @@ export default async function CategoryPage({ params }: Props) {
             {/* Category FAQ */}
             <section className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 shadow-2xs">
               <h2 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                <HelpCircle className="w-4 h-4 text-sky-600" />
+                <HelpCircle className="w-4 h-4 text-sky-700" />
                 Frequently Asked Questions about {category.shortName} Calculators
               </h2>
               <div className="space-y-4 text-sm">

@@ -21,7 +21,7 @@ export const Footer: React.FC = () => {
                 className="transition-transform group-hover:scale-[1.02] duration-200"
               />
             </Link>
-            <p className="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-sm">
+            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed max-w-sm">
               Free, fast, and accurate online calculator directory. Built with care by an independent student developer to replace ad-cluttered websites with clean tools.
             </p>
             <div className="flex items-center gap-2 text-xs text-sky-800 bg-sky-50 border border-sky-200/80 rounded-md p-2.5 max-w-sm">
@@ -115,7 +115,7 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/categories/" className="text-sky-600 font-medium hover:underline">
+                <Link href="/categories/" className="text-sky-700 font-semibold hover:underline">
                   View All 16 Categories →
                 </Link>
               </li>
@@ -158,7 +158,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom copyright line */}
-        <div className="mt-12 pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+        <div className="mt-12 pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
           <p>© {new Date().getFullYear()} Calculat.dev. Built with ❤️ by an independent student developer.</p>
           <p className="flex items-center gap-1">
             Free forever • Ad-free • Press ⌘D to bookmark

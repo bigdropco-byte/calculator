@@ -17,7 +17,7 @@ export const EditorialSection: React.FC<EditorialSectionProps> = ({ calculator }
       {/* Overview & What is */}
       <section className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 shadow-2xs">
         <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2.5">
-          <BookOpen className="w-5 h-5 text-sky-600" />
+          <BookOpen className="w-5 h-5 text-sky-700" />
           What Is a {calculator.name}?
         </h2>
         <p className="text-slate-600 leading-relaxed text-sm sm:text-base">
@@ -45,7 +45,7 @@ export const EditorialSection: React.FC<EditorialSectionProps> = ({ calculator }
         <section className="bg-white border border-slate-200 rounded-xl p-6 shadow-2xs flex flex-col justify-between">
           <div>
             <h2 className="text-lg font-bold text-slate-900 mb-2 flex items-center gap-2">
-              <CalcIcon className="w-4 h-4 text-sky-600" />
+              <CalcIcon className="w-4 h-4 text-sky-700" />
               {editorial.formula.title}
             </h2>
             <div className="my-4 p-4 bg-slate-50 border border-slate-200 rounded-lg text-center overflow-x-auto">
@@ -83,7 +83,7 @@ export const EditorialSection: React.FC<EditorialSectionProps> = ({ calculator }
       {editorial.tips.length > 0 && (
         <section className="bg-sky-50/70 border border-sky-200/80 rounded-xl p-6">
           <h2 className="text-base font-bold text-sky-950 mb-3 flex items-center gap-2">
-            <Lightbulb className="w-4 h-4 text-sky-600" />
+            <Lightbulb className="w-4 h-4 text-sky-700" />
             Tips &amp; Key Notes
           </h2>
           <ul className="space-y-2 text-xs sm:text-sm text-sky-900 list-disc list-inside">
@@ -100,7 +100,7 @@ export const EditorialSection: React.FC<EditorialSectionProps> = ({ calculator }
       {editorial.faqs.length > 0 && (
         <section className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 shadow-2xs">
           <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2.5">
-            <HelpCircle className="w-5 h-5 text-sky-600" />
+            <HelpCircle className="w-5 h-5 text-sky-700" />
             Frequently Asked Questions
           </h2>
           <div className="divide-y divide-slate-100">
@@ -123,7 +123,7 @@ export const EditorialSection: React.FC<EditorialSectionProps> = ({ calculator }
         <section>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-bold text-slate-900">Related Calculators</h2>
-            <span className="text-xs text-slate-500">Explore similar tools</span>
+            <span className="text-xs text-slate-600">Explore similar tools</span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {related.map(relCalc => (
