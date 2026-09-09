@@ -18,6 +18,7 @@ export const InternationalTaxCalculatorWidget: React.FC = () => {
   const [sourceCountry, setSourceCountry] = useState<string>('GB');
   const [useExpatRegime, setUseExpatRegime] = useState<boolean>(false);
   const [useSourceExpatRegime, setUseSourceExpatRegime] = useState<boolean>(false);
+  const [comparisonType, setComparisonType] = useState<'standard' | 'expat'>('standard');
 
   const numericGross = Number(grossSalary) || 0;
   const currentProfile = COUNTRY_PROFILES[selectedCountry] || COUNTRY_PROFILES.US;
@@ -43,7 +44,8 @@ export const InternationalTaxCalculatorWidget: React.FC = () => {
   // Global Comparison List
   const comparisons = generateGlobalCountryComparisons(
     singleResult.grossIncomeUSD,
-    selectedCountry
+    selectedCountry,
+    comparisonType
   );
 
   const handleReset = () => {
@@ -53,6 +55,7 @@ export const InternationalTaxCalculatorWidget: React.FC = () => {
     setUseExpatRegime(false);
     setUseSourceExpatRegime(false);
     setCalcMode('single');
+    setComparisonType('standard');
   };
 
   const getResultText = () => {
@@ -448,27 +451,55 @@ export const InternationalTaxCalculatorWidget: React.FC = () => {
 
       {/* Global Take-Home Comparison Table */}
       <div className="mt-10 pt-8 border-t border-slate-200">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
           <div>
             <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
               <TrendingUp className="w-4 h-4 text-sky-700" />
               Global Take-Home Pay Comparison (for ${formatNumber(singleResult.grossIncomeUSD, 0)} USD Gross)
             </h3>
             <p className="text-xs text-slate-600 mt-0.5">
-              Ranked by net take-home salary across top expat, digital nomad, and executive destinations.
+              {comparisonType === 'standard'
+                ? 'Standard resident income taxes and mandatory social security contributions based on 2025 brackets.'
+                : 'Inbound expat and digital nomad regimes (e.g. Beckham Law 24%, 30% Ruling, UAE 0% tax shield).'}
             </p>
           </div>
-          <span className="text-[11px] font-semibold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-md shrink-0">
-            Base: ${formatNumber(singleResult.grossIncomeUSD, 0)} USD
-          </span>
+
+          <div className="flex items-center gap-2 shrink-0">
+            <div className="flex rounded-lg bg-slate-100 p-1 border border-slate-200 text-xs font-semibold">
+              <button
+                type="button"
+                onClick={() => setComparisonType('standard')}
+                className={`px-3 py-1.5 rounded-md transition-colors ${
+                  comparisonType === 'standard'
+                    ? 'bg-white text-sky-800 shadow-2xs font-bold'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                Standard Resident
+              </button>
+              <button
+                type="button"
+                onClick={() => setComparisonType('expat')}
+                className={`px-3 py-1.5 rounded-md transition-colors flex items-center gap-1 ${
+                  comparisonType === 'expat'
+                    ? 'bg-white text-sky-800 shadow-2xs font-bold'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                <Sparkles className="w-3 h-3 text-amber-500" />
+                Expat Perks
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div className="overflow-x-auto border border-slate-200 rounded-xl">
+        <div className="overflow-x-auto border border-slate-200 rounded-xl shadow-2xs">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
               <tr className="bg-slate-50 border-b border-slate-200 text-slate-700 font-semibold">
                 <th className="py-2.5 px-3">Country</th>
-                <th className="py-2.5 px-3">Effective Tax %</th>
+                <th className="py-2.5 px-3">Total Tax & Social</th>
+                <th className="py-2.5 px-3">Effective Rate</th>
                 <th className="py-2.5 px-3">Net Annual Pay (USD)</th>
                 <th className="py-2.5 px-3">Net Monthly Pay</th>
                 <th className="py-2.5 px-3">Difference vs {currentProfile.name}</th>
@@ -483,7 +514,7 @@ export const InternationalTaxCalculatorWidget: React.FC = () => {
                   <tr
                     key={item.countryCode}
                     className={`transition-colors ${
-                      isSelected ? 'bg-sky-50/60 font-medium' : 'hover:bg-slate-50/70'
+                      isSelected ? 'bg-sky-50/70 font-medium' : 'hover:bg-slate-50/70'
                     }`}
                   >
                     <td className="py-2.5 px-3 flex items-center gap-2 font-semibold text-slate-900">
@@ -495,9 +526,12 @@ export const InternationalTaxCalculatorWidget: React.FC = () => {
                         </span>
                       )}
                     </td>
+                    <td className="py-2.5 px-3 text-slate-700 font-medium">
+                      ${formatNumber(item.totalTaxUSD, 0)}
+                    </td>
                     <td className="py-2.5 px-3 text-slate-700">
                       <span
-                        className={`inline-block px-1.5 py-0.5 rounded font-semibold text-[11px] ${
+                        className={`inline-block px-2 py-0.5 rounded font-semibold text-[11px] ${
                           item.effectiveTaxRate === 0
                             ? 'bg-emerald-100 text-emerald-800'
                             : item.effectiveTaxRate < 20
@@ -510,7 +544,7 @@ export const InternationalTaxCalculatorWidget: React.FC = () => {
                         {formatPercent(item.effectiveTaxRate, 1)}
                       </span>
                     </td>
-                    <td className="py-2.5 px-3 font-bold text-slate-900">
+                    <td className="py-2.5 px-3 font-bold text-slate-900 text-sm">
                       ${formatNumber(item.netAnnualUSD, 0)}
                     </td>
                     <td className="py-2.5 px-3 text-slate-600 font-medium">
@@ -518,7 +552,7 @@ export const InternationalTaxCalculatorWidget: React.FC = () => {
                     </td>
                     <td className="py-2.5 px-3 font-semibold">
                       {isSelected ? (
-                        <span className="text-slate-500">—</span>
+                        <span className="text-slate-400">—</span>
                       ) : (
                         <span className={isBetter ? 'text-emerald-700' : 'text-rose-700'}>
                           {isBetter ? '+' : ''}${formatNumber(item.differenceVsSelectedUSD, 0)}/yr

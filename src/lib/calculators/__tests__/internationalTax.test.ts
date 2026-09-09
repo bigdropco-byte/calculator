@@ -61,11 +61,27 @@ describe('International Tax Calculator Engine', () => {
   });
 
   it('generates global comparisons ranked by take-home pay', () => {
-    const comparisons = generateGlobalCountryComparisons(100000, 'US');
+    const comparisons = generateGlobalCountryComparisons(100000, 'US', 'standard');
     expect(comparisons.length).toBe(10);
-    // UAE should rank at or near the top due to 0% tax
+    // UAE should rank at the top due to 0% tax
     expect(comparisons[0].countryCode).toBe('AE');
     expect(comparisons[0].netAnnualUSD).toBe(100000);
+    expect(comparisons[0].effectiveTaxRate).toBe(0);
+
+    // US should show realistic standard resident tax (around 25.1% tax, ~$74,911 net), NOT $100k
+    const usItem = comparisons.find((c) => c.countryCode === 'US');
+    expect(usItem).toBeDefined();
+    expect(usItem!.effectiveTaxRate).toBeGreaterThan(20);
+    expect(usItem!.effectiveTaxRate).toBeLessThan(30);
+    expect(usItem!.netAnnualUSD).toBeLessThan(80000);
+    expect(usItem!.netAnnualUSD).toBeGreaterThan(70000);
+    expect(usItem!.totalTaxUSD).toBeGreaterThan(20000);
+
+    // In expat mode, Spain and Netherlands should benefit from expat regimes
+    const expatComparisons = generateGlobalCountryComparisons(100000, 'US', 'expat');
+    const esStandard = comparisons.find((c) => c.countryCode === 'ES')!;
+    const esExpat = expatComparisons.find((c) => c.countryCode === 'ES')!;
+    expect(esExpat.netAnnualUSD).toBeGreaterThan(esStandard.netAnnualUSD);
   });
 
   it('contains valid configurations for all registered countries', () => {

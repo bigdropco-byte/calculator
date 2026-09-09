@@ -862,33 +862,42 @@ export function calculateForeignTaxCredit(
 
 export function generateGlobalCountryComparisons(
   grossUSD: number,
-  selectedCountryCode: string
+  selectedCountryCode: string,
+  comparisonMode: 'standard' | 'expat' = 'standard'
 ): CountryComparisonItem[] {
   const targetCodes = ['AE', 'SG', 'CH', 'US', 'GB', 'ES', 'CA', 'AU', 'DE', 'NL'];
+  const baseProfile = COUNTRY_PROFILES[selectedCountryCode] || COUNTRY_PROFILES.US;
   const baseResult = calculateSingleCountryTax(
     selectedCountryCode,
-    grossUSD / (COUNTRY_PROFILES[selectedCountryCode]?.exchangeRateToUSD || 1.0)
+    grossUSD / baseProfile.exchangeRateToUSD
   );
 
-  return targetCodes.map((code) => {
-    const profile = COUNTRY_PROFILES[code];
-    const localGross = grossUSD / profile.exchangeRateToUSD;
-    const calc = calculateSingleCountryTax(code, localGross, profile.hasExpatRegime);
+  return targetCodes
+    .map((code) => {
+      const profile = COUNTRY_PROFILES[code];
+      const localGross = grossUSD / profile.exchangeRateToUSD;
 
-    return {
-      countryCode: code,
-      countryName: profile.name,
-      flag: profile.flag,
-      currency: profile.currency,
-      currencySymbol: profile.currencySymbol,
-      grossLocal: localGross,
-      netAnnualLocal: calc.netIncomeLocal,
-      netMonthlyLocal: calc.monthlyNetLocal,
-      netAnnualUSD: calc.netIncomeUSD,
-      netMonthlyUSD: calc.monthlyNetUSD,
-      totalTaxUSD: calc.totalDeductionsUSD,
-      effectiveTaxRate: calc.effectiveTaxRate,
-      differenceVsSelectedUSD: calc.netIncomeUSD - baseResult.netIncomeUSD,
-    };
-  }).sort((a, b) => b.netAnnualUSD - a.netAnnualUSD);
+      // In standard mode, show authentic standard resident taxes & social contributions.
+      // In expat mode, enable qualifying inbound expat regimes (e.g. Beckham Law in Spain, 30% Ruling in NL, 0% in UAE).
+      // Note: US FEIE only applies to Americans residing abroad; domestic US residents pay standard federal + state + FICA.
+      const useExpat = comparisonMode === 'expat' && code !== 'US' && profile.hasExpatRegime;
+      const calc = calculateSingleCountryTax(code, localGross, useExpat);
+
+      return {
+        countryCode: code,
+        countryName: profile.name,
+        flag: profile.flag,
+        currency: profile.currency,
+        currencySymbol: profile.currencySymbol,
+        grossLocal: localGross,
+        netAnnualLocal: calc.netIncomeLocal,
+        netMonthlyLocal: calc.monthlyNetLocal,
+        netAnnualUSD: calc.netIncomeUSD,
+        netMonthlyUSD: calc.monthlyNetUSD,
+        totalTaxUSD: calc.totalDeductionsUSD,
+        effectiveTaxRate: calc.effectiveTaxRate,
+        differenceVsSelectedUSD: calc.netIncomeUSD - baseResult.netIncomeUSD,
+      };
+    })
+    .sort((a, b) => b.netAnnualUSD - a.netAnnualUSD);
 }
