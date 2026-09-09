@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import {
@@ -8,6 +8,7 @@ import {
 import { CATEGORIES } from '@/lib/categoryRegistry';
 import { CalculatorShell } from '@/components/calculator/CalculatorShell';
 import { CalculatorRenderer } from '@/components/calculators/CalculatorRenderer';
+import { CalculatorSkeleton } from '@/components/calculator/CalculatorSkeleton';
 import { StudentSupportCard } from '@/components/calculator/StudentSupportCard';
 import { EditorialSection } from '@/components/calculator/EditorialSection';
 import { AdSlot } from '@/components/calculator/AdSlot';
@@ -113,7 +114,9 @@ export default async function CalculatorPage({ params }: Props) {
       <article className="max-w-4xl mx-auto">
         <CalculatorShell calculator={calculator}>
           {/* Interactive Calculator Component (Above The Fold) */}
-          <CalculatorRenderer slug={calculator.slug} />
+          <Suspense fallback={<CalculatorSkeleton />}>
+            <CalculatorRenderer slug={calculator.slug} />
+          </Suspense>
 
           {/* Student Support & Bookmark Action */}
           <StudentSupportCard

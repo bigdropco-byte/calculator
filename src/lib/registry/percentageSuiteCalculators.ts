@@ -386,8 +386,8 @@ export const PERCENTAGE_SUITE_CALCULATORS: CalculatorDefinition[] = [
     relatedCalculators: [
       'hourly-paycheck-calculator',
       'paycheck-calculator',
-      'time-card',
-      'payroll-hours',
+      'time-card-calculator',
+      'payroll-hours-calculator',
     ],
     editorial: {
       whatIs: 'A part time percentage calculator computes an employee\'s Full-Time Equivalent (FTE) ratio and pro-rata annual compensation based on weekly hours worked compared to standard full-time baselines (typically 40, 37.5, or 35 hours per week). It is essential for HR departments, freelancers, and part-time workers calculating holiday entitlements and benefits.',
@@ -474,7 +474,7 @@ export const PERCENTAGE_SUITE_CALCULATORS: CalculatorDefinition[] = [
       'percentage-of-time-calculator',
       'time-calculator',
       'date-difference-calculator',
-      'time-card',
+      'time-card-calculator',
     ],
     editorial: {
       whatIs: 'A time percentage calculator computes the proportion of a timeframe that has been utilized or elapsed. Whether tracking daily productivity, project sprint burn-down, or sports match progress, this tool translates hours and minutes into clean percentage metrics.',

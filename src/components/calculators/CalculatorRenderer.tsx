@@ -282,7 +282,8 @@ interface CalculatorRendererProps {
 }
 
 export const CalculatorRenderer: React.FC<CalculatorRendererProps> = ({ slug }) => {
-  switch (slug) {
+  const normalizedSlug = (slug || '').toLowerCase().trim().replace(/\/+$/, '');
+  switch (normalizedSlug) {
     // Initial 10
     case 'percentage-calculator':
       return <PercentageCalculatorWidget />;
@@ -835,10 +836,7 @@ export const CalculatorRenderer: React.FC<CalculatorRendererProps> = ({ slug }) 
       return <CommonLogarithmWidget />;
 
     default:
-      return (
-        <div className="p-8 bg-white border border-slate-200 rounded-xl text-center">
-          <p className="text-base font-semibold text-slate-800">Calculator module is loading</p>
-        </div>
-      );
+      // Fallback: gracefully render standard calculator so user never encounters a dead loading state
+      return <StandardCalculatorWidget />;
   }
 };
