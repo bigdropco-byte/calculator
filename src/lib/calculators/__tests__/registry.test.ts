@@ -11,9 +11,9 @@ describe('Calculator Registry Integrity', () => {
     expect(slugs.length).toBe(uniqueSlugs.size);
   });
 
-  it('verifies exact total count is 246 calculators', () => {
-    expect(allCalcs.length).toBe(246);
-    expect(published.length).toBe(246);
+  it('verifies exact total count is 247 calculators', () => {
+    expect(allCalcs.length).toBe(247);
+    expect(published.length).toBe(247);
   });
 
   it('contains all 29 construction, wood, masonry, and pocket calculators', () => {
@@ -191,6 +191,21 @@ describe('Calculator Registry Integrity', () => {
       expect(calc?.seo.metaDescription.length).toBeGreaterThan(30);
       expect(calc?.editorial.formula.expression.length).toBeGreaterThan(5);
     }
+  });
+
+  it('verifies international-tax-calculator has full SEO metadata and editorial content', () => {
+    const calc = getCalculatorBySlug('international-tax-calculator');
+    expect(calc).toBeDefined();
+    expect(calc?.name).toBe('International Tax Calculator');
+    expect(calc?.category).toBe('finance');
+    expect(calc?.icon).toBe('Globe');
+    expect(calc?.seo.title).toContain('International Tax Calculator');
+    expect(calc?.seo.metaDescription.length).toBeGreaterThan(50);
+    expect(calc?.editorial.faqs.length).toBe(6);
+    expect(calc?.editorial.tips.length).toBe(5);
+    expect(calc?.editorial.formula.expression.length).toBeGreaterThan(10);
+    expect(calc?.editorial.example.steps.length).toBeGreaterThanOrEqual(4);
+    expect(calc?.relatedCalculators).toContain('us-salary-tax-calculator');
   });
 });
 

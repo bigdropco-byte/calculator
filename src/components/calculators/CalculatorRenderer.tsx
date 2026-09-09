@@ -63,6 +63,7 @@ const YearlyPaycheckWidget = dynamic(() => import('./YearlyPaycheckWidget').then
 const OvertimeCalculatorWidget = dynamic(() => import('./OvertimeCalculatorWidget').then(m => ({ default: m.OvertimeCalculatorWidget })));
 const PayRaiseCalculatorWidget = dynamic(() => import('./PayRaiseCalculatorWidget').then(m => ({ default: m.PayRaiseCalculatorWidget })));
 const EicCalculatorWidget = dynamic(() => import('./EicCalculatorWidget').then(m => ({ default: m.EicCalculatorWidget })));
+const InternationalTaxCalculatorWidget = dynamic(() => import('./InternationalTaxCalculatorWidget').then(m => ({ default: m.InternationalTaxCalculatorWidget })));
 
 const StockCalculatorWidget = dynamic(() => import('./StockCalculatorWidget').then(m => ({ default: m.StockCalculatorWidget })));
 const RoiCalculatorWidget = dynamic(() => import('./RoiCalculatorWidget').then(m => ({ default: m.RoiCalculatorWidget })));
@@ -373,6 +374,8 @@ export const CalculatorRenderer: React.FC<CalculatorRendererProps> = ({ slug }) 
       return <PaycheckTaxCalculatorWidget />;
     case 'us-salary-tax-calculator':
       return <UsSalaryTaxCalculatorWidget />;
+    case 'international-tax-calculator':
+      return <InternationalTaxCalculatorWidget />;
     case 'hourly-paycheck-calculator':
       return <HourlyPaycheckWidget />;
     case 'daily-paycheck-calculator':

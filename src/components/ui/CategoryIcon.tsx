@@ -60,6 +60,7 @@ import {
   MessageSquare,
   Gift,
   Crown,
+  Globe,
   LucideProps,
 } from 'lucide-react';
 
@@ -124,6 +125,7 @@ const ICON_MAP: Record<string, React.FC<LucideProps>> = {
   MessageSquare,
   Gift,
   Crown,
+  Globe,
 };
 
 interface CategoryIconProps extends LucideProps {
