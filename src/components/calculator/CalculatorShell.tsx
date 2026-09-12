@@ -64,8 +64,8 @@ export const CalculatorShell: React.FC<CalculatorShellProps> = ({ calculator, ch
           Home
         </Link>
         <ChevronRight className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-        <Link href="/calculators/" className="hover:text-sky-700 transition-colors">
-          Calculators
+        <Link href="/tools/" className="hover:text-sky-700 transition-colors">
+          Tools
         </Link>
         <ChevronRight className="w-3.5 h-3.5 text-slate-500 shrink-0" />
         {category && (
@@ -91,9 +91,13 @@ export const CalculatorShell: React.FC<CalculatorShellProps> = ({ calculator, ch
                 Popular Tool
               </span>
             )}
-            <span className="text-xs text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200/80 flex items-center gap-1">
-              <ShieldCheck className="w-3 h-3 text-emerald-600" /> Runs Locally
-            </span>
+            <Link
+              href="/privacy-policy/"
+              className="text-xs text-emerald-800 bg-emerald-50 hover:bg-emerald-100/80 px-2 py-0.5 rounded-md border border-emerald-200/80 flex items-center gap-1 transition-colors font-medium"
+              title="100% Client-Side Privacy. Read our Privacy Policy."
+            >
+              <ShieldCheck className="w-3 h-3 text-emerald-600" /> Runs Locally (Privacy Policy)
+            </Link>
           </div>
 
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">

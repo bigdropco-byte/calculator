@@ -20,9 +20,10 @@ export const Header: React.FC = () => {
 
   const navLinks = [
     { href: '/calculators/', label: 'Calculators' },
+    { href: '/tools/', label: 'Tools' },
     { href: '/categories/', label: 'Categories' },
+    { href: '/about/', label: 'About' },
     { href: '/calculators/?sort=popular', label: 'Popular' },
-    { href: '/calculators/?sort=newest', label: 'New' },
   ];
 
   return (

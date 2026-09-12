@@ -40,6 +40,7 @@ export default function CategoriesPage() {
 
   const breadcrumbs = [
     { name: 'Home', url: '/' },
+    { name: 'Tools', url: '/tools/' },
     { name: 'Categories', url: '/categories/' },
   ];
 
@@ -76,6 +77,10 @@ export default function CategoriesPage() {
         <nav aria-label="Breadcrumb" className="text-xs text-slate-600 flex items-center gap-1.5">
           <Link href="/" className="hover:text-sky-700 transition-colors">
             Home
+          </Link>
+          <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
+          <Link href="/tools/" className="hover:text-sky-700 transition-colors">
+            Tools
           </Link>
           <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
           <span className="text-slate-900 font-semibold">Categories</span>

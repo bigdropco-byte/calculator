@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { X, Sparkles } from 'lucide-react';
 
 export const StudentBanner: React.FC = () => {
@@ -40,11 +41,14 @@ export const StudentBanner: React.FC = () => {
             <Sparkles className="w-3.5 h-3.5 text-amber-400" /> Made by a student developer:
           </span>
           <span className="text-slate-200">
-            Building a clean, ad-free calculator directory for everyone. If this helps you today, press{' '}
+            Building a clean, ad-free calculator directory for everyone.{' '}
+            <Link href="/about/" className="underline hover:text-white font-medium text-sky-200">
+              Read our mission
+            </Link>. If this helps you today, press{' '}
             <kbd className="px-1.5 py-0.5 rounded bg-white/20 text-white font-mono font-bold text-[11px] border border-white/20">
               {isMac ? '⌘ + D' : 'Ctrl + D'}
             </kbd>{' '}
-            to bookmark so you never have to search through ad-cluttered sites again!
+            to bookmark!
           </span>
         </div>
 

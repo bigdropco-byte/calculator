@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
-import { getAllPublishedCalculators, getCalculatorsByCategory } from '@/lib/calculatorRegistry';
-import { getAllCategories } from '@/lib/categoryRegistry';
-import { getCanonicalUrl } from '@/lib/seo';
+import { getAllPublishedCalculators, getCalculatorsByCategory } from '../lib/calculatorRegistry';
+import { getAllCategories } from '../lib/categoryRegistry';
+import { getCanonicalUrl } from '../lib/seo';
 
 export const dynamic = 'force-static';
 
@@ -18,6 +18,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
+      url: getCanonicalUrl('/about'),
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9, // Direct signal to Googlebot to prioritize indexing
+    },
+    {
+      url: getCanonicalUrl('/privacy-policy'),
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9, // Direct signal to Googlebot to prioritize indexing
+    },
+    {
+      url: getCanonicalUrl('/tools'),
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.9, // Direct signal to Googlebot to prioritize indexing
+    },
+    {
       url: getCanonicalUrl('/calculators'),
       lastModified: new Date(),
       changeFrequency: 'daily',
@@ -30,34 +48,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: getCanonicalUrl('/about'),
+      url: getCanonicalUrl('/privacy'),
       lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.4,
+      changeFrequency: 'weekly',
+      priority: 0.9,
     },
     {
       url: getCanonicalUrl('/contact'),
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.4,
-    },
-    {
-      url: getCanonicalUrl('/privacy'),
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.3,
+      priority: 0.8,
     },
     {
       url: getCanonicalUrl('/terms'),
       lastModified: new Date(),
       changeFrequency: 'yearly',
-      priority: 0.3,
+      priority: 0.5,
     },
     {
       url: getCanonicalUrl('/disclaimer'),
       lastModified: new Date(),
       changeFrequency: 'yearly',
-      priority: 0.3,
+      priority: 0.5,
     },
   ];
 

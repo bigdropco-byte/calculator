@@ -92,7 +92,10 @@ export default function AboutPage() {
             </div>
             <h3 className="font-bold text-slate-900 text-sm">Client-Side Privacy</h3>
             <p className="text-xs text-slate-500 mt-1">
-              Your numbers are your business. Calculations run locally in your web browser whenever feasible. We do not store or monetize your private financial or health inputs.
+              Your numbers are your business. Calculations run locally in your web browser whenever feasible. We do not store or monetize your private financial or health inputs. Read our{' '}
+              <Link href="/privacy-policy/" className="text-sky-700 underline font-medium">
+                Privacy Policy
+              </Link>.
             </p>
           </div>
 
@@ -141,12 +144,18 @@ export default function AboutPage() {
           <SocialLinks size="md" showLabels />
         </div>
 
-        <div className="pt-6 border-t border-slate-200 flex items-center gap-4">
+        <div className="pt-6 border-t border-slate-200 flex items-center gap-4 flex-wrap">
           <Link
-            href="/calculators/"
+            href="/tools/"
             className="px-4 py-2 bg-sky-700 text-white rounded-lg text-xs font-semibold hover:bg-sky-800 transition-colors"
           >
-            Explore Directory
+            Explore 240+ Calculation Tools
+          </Link>
+          <Link
+            href="/privacy-policy/"
+            className="px-4 py-2 bg-white border border-slate-200 text-slate-700 rounded-lg text-xs font-semibold hover:bg-slate-50 transition-colors"
+          >
+            Privacy Policy
           </Link>
           <Link
             href="/contact/"

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { ShieldCheck } from 'lucide-react';
 import {
   SITE_CONFIG,
@@ -102,6 +103,28 @@ export default function PrivacyPage() {
       <p>
         We may update this Privacy Policy from time to time to reflect changes in our platform. Any modifications will be posted on this page with an updated revision date.
       </p>
+
+      {/* Navigation Links */}
+      <div className="pt-6 border-t border-slate-200 flex items-center gap-4 flex-wrap">
+        <Link
+          href="/privacy-policy/"
+          className="px-4 py-2 bg-sky-700 text-white rounded-lg text-xs font-semibold hover:bg-sky-800 transition-colors"
+        >
+          View Full Privacy Policy
+        </Link>
+        <Link
+          href="/tools/"
+          className="px-4 py-2 bg-white border border-slate-200 text-slate-700 rounded-lg text-xs font-semibold hover:bg-slate-50 transition-colors"
+        >
+          Browse Calculation Tools
+        </Link>
+        <Link
+          href="/about/"
+          className="px-4 py-2 bg-white border border-slate-200 text-slate-700 rounded-lg text-xs font-semibold hover:bg-slate-50 transition-colors"
+        >
+          About Calculat
+        </Link>
+      </div>
     </div>
     </>
   );

@@ -33,7 +33,10 @@ export const Footer: React.FC = () => {
             <div className="flex items-center gap-2 text-xs text-emerald-700 bg-emerald-50 border border-emerald-200/60 rounded-md p-2.5 max-w-sm">
               <ShieldCheck className="w-4 h-4 shrink-0 text-emerald-600" />
               <span>
-                Calculations are performed locally in your browser. Zero tracking of your numbers.
+                Calculations are performed locally in your browser. Read our{' '}
+                <Link href="/privacy-policy/" className="font-semibold underline hover:text-emerald-800">
+                  Privacy Policy
+                </Link>.
               </span>
             </div>
 
@@ -51,8 +54,13 @@ export const Footer: React.FC = () => {
             </p>
             <ul className="space-y-2 text-xs sm:text-sm">
               <li>
+                <Link href="/tools/" className="hover:text-sky-700 transition-colors font-medium text-sky-700">
+                  All Calculation Tools
+                </Link>
+              </li>
+              <li>
                 <Link href="/calculators/" className="hover:text-sky-600 transition-colors">
-                  All Calculators
+                  Calculators Directory
                 </Link>
               </li>
               <li>
@@ -129,18 +137,28 @@ export const Footer: React.FC = () => {
             </p>
             <ul className="space-y-2 text-xs sm:text-sm">
               <li>
-                <Link href="/about/" className="hover:text-sky-600 transition-colors">
+                <Link href="/about/" className="hover:text-sky-700 transition-colors font-medium">
                   About Calculat
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy-policy/" className="hover:text-sky-700 transition-colors font-medium">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/tools/" className="hover:text-sky-700 transition-colors">
+                  Tools Directory
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy/" className="hover:text-sky-600 transition-colors">
+                  Client-Side Privacy Pledge
                 </Link>
               </li>
               <li>
                 <Link href="/contact/" className="hover:text-sky-600 transition-colors">
                   Contact &amp; Suggestion
-                </Link>
-              </li>
-              <li>
-                <Link href="/privacy/" className="hover:text-sky-600 transition-colors">
-                  Privacy Policy
                 </Link>
               </li>
               <li>

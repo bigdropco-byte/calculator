@@ -135,6 +135,30 @@ export default function HomePage() {
           <div className="pt-4">
             <HeroSearch />
           </div>
+
+          <div className="pt-2 flex items-center justify-center gap-3 text-xs text-slate-600 flex-wrap">
+            <span className="text-slate-500 font-medium">Quick Directory:</span>
+            <Link
+              href="/tools/"
+              className="text-sky-700 hover:text-sky-800 font-semibold hover:underline"
+            >
+              240+ Calculation Tools
+            </Link>
+            <span className="text-slate-300">•</span>
+            <Link
+              href="/about/"
+              className="text-sky-700 hover:text-sky-800 font-semibold hover:underline"
+            >
+              About Calculat
+            </Link>
+            <span className="text-slate-300">•</span>
+            <Link
+              href="/privacy-policy/"
+              className="text-emerald-700 hover:text-emerald-800 font-semibold hover:underline"
+            >
+              Privacy Policy
+            </Link>
+          </div>
         </section>
 
         {/* Recently Used & Favorited Tray (Client-side localStorage) */}
@@ -253,7 +277,10 @@ export default function HomePage() {
               </div>
               <h3 className="text-sm font-bold text-slate-900">100% Privacy Friendly</h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                Your financial, health, and personal numbers stay exclusively inside your browser. No data logging.
+                Your calculations stay exclusively inside your browser. Read our{' '}
+                <Link href="/privacy-policy/" className="text-sky-700 hover:underline font-semibold">
+                  Privacy Policy
+                </Link>.
               </p>
             </div>
 
@@ -263,7 +290,11 @@ export default function HomePage() {
               </div>
               <h3 className="text-sm font-bold text-slate-900">Directory First</h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                Organized logically by topic. Search by name, formula, keyword, or browse by domain category.
+                Organized logically by topic. Search by name or explore our complete{' '}
+                <Link href="/tools/" className="text-sky-700 hover:underline font-semibold">
+                  Calculation Tools
+                </Link>{' '}
+                index.
               </p>
             </div>
 
@@ -273,7 +304,10 @@ export default function HomePage() {
               </div>
               <h3 className="text-sm font-bold text-slate-900">Always Free</h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                No accounts, no paywalls, and no deceptive ads placed over inputs or results.
+                No accounts, paywalls, or deceptive ads.{' '}
+                <Link href="/about/" className="text-sky-700 hover:underline font-semibold">
+                  About Calculat
+                </Link>.
               </p>
             </div>
           </div>

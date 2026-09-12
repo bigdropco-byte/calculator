@@ -113,7 +113,7 @@ export const CookieConsent: React.FC = () => {
           <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
           100% Client-Side Privacy
         </span>
-        <Link href="/privacy" className="hover:underline text-slate-700 font-medium">
+        <Link href="/privacy-policy/" className="hover:underline text-slate-700 font-medium">
           Privacy Policy
         </Link>
       </div>
