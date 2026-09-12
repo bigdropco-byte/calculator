@@ -102,14 +102,31 @@ export default async function CalculatorPage({ params }: Props) {
 
   return (
     <>
+      {/* 1. WebApplication Schema (Interactive Tool Rich Results) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            [appSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])]
-          ),
+          __html: JSON.stringify(appSchema),
         }}
       />
+
+      {/* 2. BreadcrumbList Schema (Hierarchy & Navigation) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+
+      {/* 3. FAQPage Schema (Google FAQ Rich Snippets) */}
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqSchema),
+          }}
+        />
+      )}
 
       <article className="max-w-4xl mx-auto">
         <CalculatorShell calculator={calculator}>

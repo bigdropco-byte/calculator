@@ -1,4 +1,4 @@
-import { CalculatorDefinition } from './types';
+import { CalculatorDefinition, CategorySlug } from './types';
 import { CATEGORIES } from './categoryRegistry';
 
 export const SOCIAL_LINKS = {
@@ -120,13 +120,32 @@ export function generateWebSiteSchema() {
   };
 }
 
+export function getApplicationCategory(category: CategorySlug | string): string {
+  switch (category) {
+    case 'math':
+    case 'education':
+    case 'statistics':
+    case 'probability':
+    case 'science':
+      return 'EducationalApplication';
+    case 'finance':
+    case 'business':
+      return 'FinanceApplication';
+    case 'health':
+    case 'fitness':
+      return 'HealthApplication';
+    default:
+      return 'UtilitiesApplication';
+  }
+}
+
 export function generateCalculatorSchema(calculator: CalculatorDefinition) {
-  const categoryName = CATEGORIES[calculator.category]?.name || calculator.category;
   const canonicalUrl = getCanonicalUrl(`/calculators/${calculator.slug}`);
+  const appCategory = getApplicationCategory(calculator.category);
 
   return {
     '@context': 'https://schema.org',
-    '@type': ['WebApplication', 'SoftwareApplication'],
+    '@type': 'WebApplication',
     '@id': `${canonicalUrl}#software`,
     name: calculator.name,
     url: canonicalUrl,
@@ -142,7 +161,7 @@ export function generateCalculatorSchema(calculator: CalculatorDefinition) {
       url: `${SITE_CONFIG.url}/`,
     },
     description: calculator.shortDescription,
-    applicationCategory: categoryName,
+    applicationCategory: appCategory,
     operatingSystem: 'All',
     browserRequirements: 'Requires JavaScript. Requires HTML5.',
     softwareVersion: '1.0',

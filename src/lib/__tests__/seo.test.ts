@@ -6,6 +6,7 @@ import {
   generateCollectionPageSchema,
   generateWebPageSchema,
   generateBreadcrumbSchema,
+  getApplicationCategory,
   SITE_CONFIG,
 } from '../seo';
 
@@ -65,10 +66,24 @@ describe('SEO & Canonical URL Utilities', () => {
     };
 
     const schema: any = generateCalculatorSchema(mockCalc);
+    expect(schema['@context']).toBe('https://schema.org');
+    expect(schema['@type']).toBe('WebApplication');
     expect(schema['@id']).toBe('https://calculat.dev/calculators/percentage-calculator/#software');
     expect(schema.url).toBe('https://calculat.dev/calculators/percentage-calculator/');
+    expect(schema.operatingSystem).toBe('All');
+    expect(schema.applicationCategory).toBe('EducationalApplication');
+    expect(schema.offers['@type']).toBe('Offer');
+    expect(schema.offers.price).toBe('0');
+    expect(schema.offers.priceCurrency).toBe('USD');
     expect(schema.mainEntityOfPage['@id']).toBe('https://calculat.dev/calculators/percentage-calculator/#webpage');
     expect(schema.isPartOf['@id']).toBe('https://calculat.dev/#website');
+  });
+
+  it('maps application categories to Google-supported Schema.org types', () => {
+    expect(getApplicationCategory('math')).toBe('EducationalApplication');
+    expect(getApplicationCategory('finance')).toBe('FinanceApplication');
+    expect(getApplicationCategory('health')).toBe('HealthApplication');
+    expect(getApplicationCategory('everyday')).toBe('UtilitiesApplication');
   });
 
   it('generates breadcrumbs with canonical URLs', () => {
