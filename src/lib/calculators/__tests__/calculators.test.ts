@@ -135,6 +135,30 @@ describe('Compound Interest Calculator', () => {
     expect(res.totalContributions).toBe(2400);
     expect(res.futureValue).toBeGreaterThan(3500);
   });
+
+  it('calculates with monthly deposits and beginning vs end timing correctly', () => {
+    // End of period deposit (ordinary annuity)
+    const endRes = calculateCompoundInterest(5000, 8, 10, 250, 12, 'end');
+    expect(endRes.totalPrincipal).toBe(5000);
+    expect(endRes.totalContributions).toBe(30000); // 250 * 12 * 10
+    expect(endRes.futureValue).toBeGreaterThan( endRes.totalPrincipal + endRes.totalContributions );
+
+    // Beginning of period deposit (annuity due) should produce higher future value
+    const begRes = calculateCompoundInterest(5000, 8, 10, 250, 12, 'beginning');
+    expect(begRes.futureValue).toBeGreaterThan(endRes.futureValue);
+    expect(begRes.totalInterest).toBeGreaterThan(endRes.totalInterest);
+  });
+
+  it('provides detailed interest breakdown and percentage breakdown for monthly contributions', () => {
+    const res = calculateCompoundInterest(5000, 7, 20, 300, 12, 'end');
+    expect(res.interestFromPrincipalOnly).toBeGreaterThan(0);
+    expect(res.interestFromMonthlyDeposits).toBeGreaterThan(0);
+    expect(res.totalInterest).toBeCloseTo(
+      res.interestFromPrincipalOnly + res.interestFromMonthlyDeposits,
+      1
+    );
+    expect(res.principalPercent + res.contributionsPercent + res.interestPercent).toBeCloseTo(100, 0);
+  });
 });
 
 describe('Loan Calculator', () => {

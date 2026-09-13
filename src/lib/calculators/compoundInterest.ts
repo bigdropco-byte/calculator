@@ -1,4 +1,5 @@
 export type CompoundFrequency = 1 | 2 | 4 | 12 | 365;
+export type DepositTiming = 'beginning' | 'end';
 
 export interface CompoundYearSchedule {
   year: number;
@@ -14,6 +15,11 @@ export interface CompoundInterestResult {
   totalPrincipal: number;
   totalContributions: number;
   totalInterest: number;
+  interestFromPrincipalOnly: number;
+  interestFromMonthlyDeposits: number;
+  principalPercent: number;
+  contributionsPercent: number;
+  interestPercent: number;
   schedule: CompoundYearSchedule[];
 }
 
@@ -22,7 +28,8 @@ export function calculateCompoundInterest(
   annualRatePercent: number,
   years: number,
   monthlyContribution: number = 0,
-  frequency: CompoundFrequency = 12
+  frequency: CompoundFrequency = 12,
+  depositTiming: DepositTiming = 'end'
 ): CompoundInterestResult {
   const p = Math.max(0, principal || 0);
   const r = Math.max(0, annualRatePercent || 0) / 100;
@@ -37,7 +44,7 @@ export function calculateCompoundInterest(
 
   const ratePerPeriod = r / n;
   const periodsPerYear = n;
-  // If monthly contribution, we convert monthly contribution to match frequency
+  // If monthly contribution, we convert monthly contribution to match compounding frequency
   const contributionPerPeriod = (pmt * 12) / periodsPerYear;
 
   for (let year = 1; year <= t; year++) {
@@ -45,10 +52,18 @@ export function calculateCompoundInterest(
     let yearInterest = 0;
 
     for (let period = 1; period <= periodsPerYear; period++) {
-      const interestInPeriod = currentBalance * ratePerPeriod;
-      yearInterest += interestInPeriod;
-      currentBalance += interestInPeriod + contributionPerPeriod;
-      totalContributed += contributionPerPeriod;
+      if (depositTiming === 'beginning') {
+        currentBalance += contributionPerPeriod;
+        totalContributed += contributionPerPeriod;
+        const interestInPeriod = currentBalance * ratePerPeriod;
+        yearInterest += interestInPeriod;
+        currentBalance += interestInPeriod;
+      } else {
+        const interestInPeriod = currentBalance * ratePerPeriod;
+        yearInterest += interestInPeriod;
+        currentBalance += interestInPeriod + contributionPerPeriod;
+        totalContributed += contributionPerPeriod;
+      }
     }
 
     cumulativeInterest += yearInterest;
@@ -68,11 +83,28 @@ export function calculateCompoundInterest(
   const totalAdditionalContributions = Math.round((totalContributed - p) * 100) / 100;
   const totalInterest = Math.round(cumulativeInterest * 100) / 100;
 
+  // Calculate growth on principal alone to isolate monthly deposit compounding power
+  const principalFutureValue = Math.round(p * Math.pow(1 + ratePerPeriod, n * t) * 100) / 100;
+  const interestFromPrincipalOnly = Math.round(Math.max(0, principalFutureValue - p) * 100) / 100;
+  const interestFromMonthlyDeposits = Math.round(
+    Math.max(0, totalInterest - interestFromPrincipalOnly) * 100
+  ) / 100;
+
+  const principalPercent = futureValue > 0 ? (totalPrincipal / futureValue) * 100 : 0;
+  const contributionsPercent =
+    futureValue > 0 ? (totalAdditionalContributions / futureValue) * 100 : 0;
+  const interestPercent = futureValue > 0 ? (totalInterest / futureValue) * 100 : 0;
+
   return {
     futureValue,
     totalPrincipal,
     totalContributions: totalAdditionalContributions,
     totalInterest,
+    interestFromPrincipalOnly,
+    interestFromMonthlyDeposits,
+    principalPercent: Math.round(principalPercent * 10) / 10,
+    contributionsPercent: Math.round(contributionsPercent * 10) / 10,
+    interestPercent: Math.round(interestPercent * 10) / 10,
     schedule,
   };
 }

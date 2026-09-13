@@ -448,14 +448,17 @@ export const CALCULATORS: CalculatorDefinition[] = [
   },
   {
     slug: 'compound-interest-calculator',
-    name: 'Compound Interest Calculator',
-    shortDescription: 'Calculate investment growth over time with compound interest, regular monthly additions, and detailed yearly amortization schedules.',
+    name: 'Compound Interest Calculator with Monthly Deposits',
+    shortDescription: 'Calculate investment growth over time with compound interest, regular monthly deposits, custom compounding schedules, and visual breakdowns.',
     category: 'finance',
     secondaryCategories: ['business', 'education', 'math'],
     keywords: [
+      'compound interest monthly deposit calculator',
+      'compound interest calculator with monthly deposits',
       'compound interest calculator',
-      'investment calculator',
-      'interest calculator',
+      'monthly deposit compound interest',
+      'investment calculator with monthly contribution',
+      'monthly savings compound interest',
       'future value calculator',
       'compound growth rate',
       'wealth calculator',
@@ -467,9 +470,16 @@ export const CALCULATORS: CalculatorDefinition[] = [
     popular: true,
     addedDate: '2025-02-15',
     seo: {
-      title: 'Compound Interest Calculator – Future Value & Investment Growth',
-      metaDescription: 'Free compound interest calculator. Calculate future investment value with recurring monthly contributions, custom compounding frequencies, and growth tables.',
-      keywords: ['compound interest calculator', 'investment calculator', 'compound interest formula'],
+      title: 'Compound Interest Monthly Deposit Calculator – Investment Growth & Savings',
+      metaDescription: 'Free compound interest calculator with monthly deposits. Calculate future investment value with regular monthly additions, deposit timing, and compounding schedules.',
+      keywords: [
+        'compound interest monthly deposit calculator',
+        'compound interest calculator with monthly deposits',
+        'monthly deposit compound interest',
+        'investment calculator with monthly contribution',
+        'compound interest calculator',
+        'compound interest formula',
+      ],
     },
     relatedCalculators: [
       'loan-calculator',
@@ -478,45 +488,71 @@ export const CALCULATORS: CalculatorDefinition[] = [
     ],
     editorial: {
       whatIs:
-        'A compound interest calculator calculates the exponential growth of money when interest earned in each period is reinvested to generate additional interest in subsequent periods. Albert Einstein famously described compound interest as the eighth wonder of the world.',
+        'A compound interest monthly deposit calculator helps you project the exponential growth of your wealth when you combine an initial principal investment with regular recurring monthly deposits. By reinvesting earned interest and consistently contributing each month, compounding accelerates your returns over time through the power of dollar-cost averaging and exponential growth.',
       howToUse: [
-        'Enter your starting initial investment (Principal).',
-        'Specify expected Annual Interest Rate (e.g. 7% for index funds).',
-        'Set investment duration in years.',
-        'Optionally add regular Monthly Contributions.',
-        'Select compounding frequency (Daily, Monthly, Quarterly, or Annually).',
-        'Examine your total balance, principal vs. interest breakdown, and annual growth schedule.',
+        'Enter your initial starting principal balance (or start from $0).',
+        'Specify your planned Recurring Monthly Deposit amount (e.g., $100, $250, $500, or $1,000).',
+        'Select whether monthly deposits are made at the Beginning of the Month or End of the Month.',
+        'Enter your expected Annual Interest Rate (e.g., 7% to 10% for broad stock market index funds).',
+        'Choose your investment timeframe in years.',
+        'Pick your compounding frequency (Monthly, Annually, or Daily).',
+        'Review the instant breakdown of Future Value, Principal vs. Monthly Contributions vs. Total Interest earned, and check the annual growth table.',
       ],
       formula: {
-        title: 'Compound Interest Formula',
-        expression: 'A = P\\left(1 + \\frac{r}{n}\\right)^{nt} + PMT \\times \\left[ \\frac{\\left(1 + \\frac{r}{n}\\right)^{nt} - 1}{\\frac{r}{n}} \\right]',
+        title: 'Compound Interest Formula with Monthly Deposits',
+        expression: 'A = P\\left(1 + \\frac{r}{n}\\right)^{nt} + PMT \\times \\left[ \\frac{\\left(1 + \\frac{r}{n}\\right)^{nt} - 1}{\\frac{r}{n}} \\right] \\times \\left(1 + \\frac{r}{n}\\right)^{\\text{timing}}',
         explanation:
-          'Where A is future value, P is initial principal, r is annual nominal interest rate, n is compounding frequency per year, t is time in years, and PMT is periodic deposit.',
+          'Where A is the future accumulated value, P is initial principal, PMT is the monthly contribution amount, r is annual nominal interest rate (decimal), n is compounding periods per year, t is duration in years, and timing equals 1 if deposits occur at the beginning of each period (annuity due) or 0 if at the end of each period (ordinary annuity).',
       },
       example: {
-        scenario: 'Invest $10,000 at 7% annual interest for 10 years compounded monthly with no extra additions.',
+        scenario: 'You start with an initial deposit of $5,000 and invest $300 every month at an 8% annual return compounded monthly for 20 years.',
         steps: [
-          'Initial Principal: $10,000.',
-          'Monthly rate: 0.07 / 12 = 0.005833.',
-          'Periods: 10 × 12 = 120 months.',
-          'Formula: 10,000 × (1.005833)^120 = $20,096.61.',
+          'Initial Principal (P): $5,000.',
+          'Monthly Deposit (PMT): $300/month (total contributions over 20 years = $72,000).',
+          'Interest Rate: 8% annual (0.08 / 12 = 0.00667 per month).',
+          'Investment Duration: 20 years (240 monthly compounding cycles).',
+          'Principal Growth alone: $5,000 × (1 + 0.08/12)^240 = $24,634.05.',
+          'Monthly Deposits Growth: $300 × [((1 + 0.08/12)^240 - 1) / (0.08/12)] = $176,694.02.',
+          'Total Accumulated Wealth: $24,634.05 + $176,694.02 = $201,328.07.',
         ],
-        result: 'Future Balance is $20,096.61, representing $10,096.61 in compound interest earnings (more than doubling your money).',
+        result: 'Your total out-of-pocket investment is $77,000 ($5,000 initial + $72,000 monthly deposits), and compound interest generates $124,328.07 in pure profit — more than 61% of your total $201,328.07 ending balance!',
       },
       tips: [
-        'The Rule of 72 provides a mental shortcut: divide 72 by your annual interest rate to approximate how many years it takes for your investment to double (e.g., 72 / 7% ≈ 10.3 years).',
-        'Starting early is vastly more impactful than investing large sums later, thanks to the compounding duration.',
+        'Automate your monthly deposit: Setting up an automatic bank transfer on payday ensures consistent dollar-cost averaging regardless of short-term market fluctuations.',
+        'Deposit at the beginning of the month: Making your contribution on the 1st rather than the 30th gives each deposit an extra month of compounding, which can yield thousands in additional interest over decades.',
+        'Rule of 72 mental check: Divide 72 by your annual expected return (e.g., 72 / 8% = 9 years) to know roughly how quickly your invested balances double.',
+        'Increase deposits with pay raises: Increasing your monthly contribution by even 1% or $50 per year drastically compounds over long horizons.',
       ],
       faqs: [
         {
-          question: 'What is the difference between simple interest and compound interest?',
+          question: 'How does a monthly deposit compound interest calculator work?',
           answer:
-            'Simple interest is computed solely on the original principal amount. Compound interest is computed on the initial principal plus all accrued interest from previous compounding cycles.',
+            'A compound interest monthly deposit calculator computes future balance by adding two compounding components: the exponential growth of your initial principal lump sum, plus the accumulated future value of an ordinary annuity (your monthly contributions) compounded at your chosen interest rate and frequency.',
         },
         {
-          question: 'How does compounding frequency affect total return?',
+          question: 'Does making monthly deposits at the beginning vs. end of the month matter?',
           answer:
-            'Higher compounding frequencies (e.g. daily vs. annual) generate slightly more interest over time because earnings start earning interest sooner.',
+            'Yes. Deposits made at the beginning of each period (annuity due) earn an extra period of compound interest compared to deposits made at the end (ordinary annuity). Over a 20- or 30-year horizon, this timing advantage can add thousands of dollars to your final portfolio balance.',
+        },
+        {
+          question: 'What is a realistic annual rate of return for monthly investments?',
+          answer:
+            'Historically, broad stock market index funds like the S&P 500 have averaged approximately 9% to 10% annual nominal returns before inflation over long horizons (or 7% after inflation). High-yield savings accounts or fixed deposits typically yield between 3% and 5%.',
+        },
+        {
+          question: 'What is the formula for compound interest with recurring monthly additions?',
+          answer:
+            'The total future value combines lump-sum compounding and annuity future value: A = P*(1 + r/n)^(nt) + PMT * [((1 + r/n)^(nt) - 1) / (r/n)], where P is initial principal, PMT is monthly deposit, r is annual interest rate, n is compounding frequency per year, and t is years.',
+        },
+        {
+          question: 'Can I use this calculator if I have $0 initial principal?',
+          answer:
+            'Yes! You can enter $0 for the starting principal. The calculator will calculate the future wealth generated purely from your recurring monthly deposits and compound interest.',
+        },
+        {
+          question: 'How does compounding frequency (monthly vs. daily vs. annual) impact monthly deposits?',
+          answer:
+            'More frequent compounding (such as monthly or daily compounding versus annual) yields a slightly higher effective annual rate because interest is credited and begins earning interest on itself sooner throughout the year.',
         },
       ],
     },
