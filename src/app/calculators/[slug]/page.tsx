@@ -135,6 +135,43 @@ export default async function CalculatorPage({ params }: Props) {
             <CalculatorRenderer slug={calculator.slug} />
           </Suspense>
 
+          {/* HTML Examples Table (Percentage Increase Examples & Quick Reference) */}
+          {calculator.slug === 'percentage-increase-calculator' && (
+            <div className="my-8 overflow-x-auto">
+              <h2 className="text-xl font-bold mb-4">Percentage Increase Examples & Quick Reference</h2>
+              <table className="min-w-full border-collapse border border-gray-200 text-left text-sm">
+                <thead className="bg-gray-100">
+                  <tr>
+                    <th className="border border-gray-200 px-4 py-2">Original Value</th>
+                    <th className="border border-gray-200 px-4 py-2">New Value</th>
+                    <th className="border border-gray-200 px-4 py-2">Formula Applied</th>
+                    <th className="border border-gray-200 px-4 py-2">Percentage Increase</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-gray-200 px-4 py-2">$50</td>
+                    <td className="border border-gray-200 px-4 py-2">$75</td>
+                    <td className="border border-gray-200 px-4 py-2">((75 - 50) / 50) × 100</td>
+                    <td className="border border-gray-200 px-4 py-2 font-semibold text-green-600">+50%</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-200 px-4 py-2">80</td>
+                    <td className="border border-gray-200 px-4 py-2">100</td>
+                    <td className="border border-gray-200 px-4 py-2">((100 - 80) / 80) × 100</td>
+                    <td className="border border-gray-200 px-4 py-2 font-semibold text-green-600">+25%</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-200 px-4 py-2">$200</td>
+                    <td className="border border-gray-200 px-4 py-2">$250</td>
+                    <td className="border border-gray-200 px-4 py-2">((250 - 200) / 200) × 100</td>
+                    <td className="border border-gray-200 px-4 py-2 font-semibold text-green-600">+25%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          )}
+
           {/* Student Support & Bookmark Action */}
           <StudentSupportCard
             calculatorName={calculator.name}

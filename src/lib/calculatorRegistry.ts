@@ -115,8 +115,8 @@ export const CALCULATORS: CalculatorDefinition[] = [
     popular: true,
     addedDate: '2025-01-20',
     seo: {
-      title: 'Percentage Increase Calculator – Calculate Percent Growth & Decrease',
-      metaDescription: 'Calculate percentage increase or decrease between any two values. Find growth rate, absolute difference, and multiplier instantly.',
+      title: 'Percentage Increase Calculator (Formula & Examples)',
+      metaDescription: 'Calculate percent growth instantly with our free tool. Includes step-by-step formula, worked examples, and quick reference tables.',
       keywords: ['percentage increase calculator', 'percent decrease', 'calculate growth percentage'],
     },
     relatedCalculators: [
