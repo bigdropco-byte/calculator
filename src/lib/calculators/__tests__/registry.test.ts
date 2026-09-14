@@ -11,9 +11,19 @@ describe('Calculator Registry Integrity', () => {
     expect(slugs.length).toBe(uniqueSlugs.size);
   });
 
-  it('verifies exact total count is 247 calculators', () => {
-    expect(allCalcs.length).toBe(247);
-    expect(published.length).toBe(247);
+  it('verifies exact total count is 248 calculators', () => {
+    expect(allCalcs.length).toBe(248);
+    expect(published.length).toBe(248);
+  });
+
+  it('contains valid air-fryer-calculator definition with rich editorial and FAQs', () => {
+    const calc = getCalculatorBySlug('air-fryer-calculator');
+    expect(calc).toBeDefined();
+    expect(calc?.name).toBe('Air Fryer Cooking Time Calculator');
+    expect(calc?.category).toBe('everyday');
+    expect(calc?.editorial.faqs.length).toBe(6);
+    expect(calc?.seo.title).toContain('Air Fryer Cooking Time Calculator');
+    expect(calc?.seo.metaDescription.length).toBeGreaterThan(50);
   });
 
   it('contains all 29 construction, wood, masonry, and pocket calculators', () => {

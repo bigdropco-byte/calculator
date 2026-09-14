@@ -19,6 +19,7 @@ const CompoundInterestCalculatorWidget = dynamic(() => import('./CompoundInteres
 const LoanCalculatorWidget = dynamic(() => import('./LoanCalculatorWidget').then(m => ({ default: m.LoanCalculatorWidget })));
 const MortgageCalculatorWidget = dynamic(() => import('./MortgageCalculatorWidget').then(m => ({ default: m.MortgageCalculatorWidget })));
 const TipCalculatorWidget = dynamic(() => import('./TipCalculatorWidget').then(m => ({ default: m.TipCalculatorWidget })));
+const AirFryerCalculatorWidget = dynamic(() => import('./AirFryerCalculatorWidget').then(m => ({ default: m.AirFryerCalculatorWidget })));
 
 // 15 Numerology & Twin Flame Widgets
 const LifePathCalculatorWidget = dynamic(() => import('./LifePathCalculatorWidget').then(m => ({ default: m.LifePathCalculatorWidget })));
@@ -305,6 +306,8 @@ export const CalculatorRenderer: React.FC<CalculatorRendererProps> = ({ slug }) 
       return <MortgageCalculatorWidget />;
     case 'tip-calculator':
       return <TipCalculatorWidget />;
+    case 'air-fryer-calculator':
+      return <AirFryerCalculatorWidget />;
 
     // 15 Numerology & Twin Flame
     case 'life-path-number-calculator':

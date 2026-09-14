@@ -776,6 +776,113 @@ export const CALCULATORS: CalculatorDefinition[] = [
       ],
     },
   },
+  {
+    slug: 'air-fryer-calculator',
+    name: 'Air Fryer Cooking Time Calculator',
+    shortDescription: 'Convert conventional oven cooking times and temperatures to air fryer settings with instant presets for chicken, fries, steaks, and veggies.',
+    category: 'everyday',
+    secondaryCategories: ['conversion', 'health'],
+    keywords: [
+      'air fryer cooking time calculator',
+      'air fryer calculator',
+      'oven to air fryer conversion',
+      'air fryer time and temperature calculator',
+      'air fryer converter',
+      'air fryer cook time',
+      'convert oven recipe to air fryer',
+      'air fryer chicken time',
+      'air fryer cooking chart',
+    ],
+    tags: ['Everyday', 'Cooking', 'Kitchen', 'Conversion', 'Food'],
+    icon: 'Flame',
+    status: 'published',
+    featured: true,
+    popular: true,
+    addedDate: '2025-03-01',
+    seo: {
+      title: 'Air Fryer Cooking Time Calculator – Oven to Air Fryer Conversion',
+      metaDescription: 'Free air fryer cooking time calculator. Convert conventional oven time and temperature to air fryer with 1 click. Includes food presets, shake reminders, and internal temp guide.',
+      keywords: [
+        'air fryer cooking time calculator',
+        'oven to air fryer calculator',
+        'air fryer conversion calculator',
+        'air fryer temperature converter',
+        'air fryer cooking times',
+      ],
+    },
+    relatedCalculators: [
+      'tip-calculator',
+      'percentage-calculator',
+      'average-calculator',
+    ],
+    editorial: {
+      whatIs:
+        'An air fryer cooking time calculator converts traditional conventional oven recipes into accurate air fryer temperatures and durations. Air fryers work via rapid convection currents inside a compact cooking chamber, transferring heat significantly faster than radiant home ovens. As a result, food cooks 20% to 25% faster and requires an average temperature reduction of 25°F (15°C) to prevent burning while achieving optimal exterior crispiness.',
+      howToUse: [
+        'Select your preferred temperature scale: Fahrenheit (°F) or Celsius (°C).',
+        'Enter the conventional oven temperature called for in your recipe (or select a quick preset).',
+        'Enter the recipe\'s stated oven baking time in minutes.',
+        'Choose your desired crispiness level (Tender, Standard, or Extra Crispy) and toggle the Frozen switch if cooking straight from the freezer.',
+        'View your converted air fryer temperature, cooking time range, time saved, and the exact midpoint minute to shake or flip your food.',
+        'Explore the 20+ item Food Preset Guide for verified times, temperatures, and safe USDA internal doneness ratings.',
+      ],
+      formula: {
+        title: 'Oven to Air Fryer 20/20 Conversion Formula',
+        expression: 'T_{\\text{air fryer}} = T_{\\text{oven}} - 25^\\circ\\text{F} \\quad (\\text{or } -15^\\circ\\text{C}) \\quad \\text{and} \\quad t_{\\text{air fryer}} = t_{\\text{oven}} \\times 0.80',
+        explanation:
+          'Because rapid convection air circulation cooks food more intensely, the industry-standard cooking rule reduces temperature by 25°F (15°C) and reduces cook time by 20% (multiply oven minutes by 0.80). For extra crispiness, cook for up to 85% of oven time.',
+      },
+      example: {
+        scenario: 'A recipe calls for baking bone-in chicken thighs in a conventional oven at 400°F for 40 minutes.',
+        steps: [
+          'Calculate temperature: 400°F - 25°F = 375°F (or ~190°C).',
+          'Calculate cook time: 40 minutes × 0.80 = 32 minutes (Range: 30 to 34 minutes).',
+          'Calculate shake/flip checkpoint: 32 minutes ÷ 2 = 16 minutes.',
+          'Verify doneness: Check thickest part of the thigh with a digital meat thermometer until it reads 165°F (74°C).',
+        ],
+        result: 'Cook chicken thighs at 375°F for 32 minutes, flipping at the 16-minute mark. You save 8 minutes of cook time and eliminate 15 minutes of oven preheating!',
+      },
+      tips: [
+        'Do not overcrowd the basket: Leave space between food items so circulating vortex air can reach all surfaces. Cook in multiple batches if necessary for genuine crispiness.',
+        'Always shake or flip at the halfway mark: Flipping ensures even browning and prevents moisture from pooling at the bottom.',
+        'Use the right oil spray: Use a pump oil mister with high-smoke-point oils like avocado or canola oil. Avoid aerosol non-stick cooking sprays with propellants like lecithin, which degrade non-stick basket coatings.',
+        'Preheating is optional but recommended for meats: A 2-to-3 minute preheat gives steaks, pork chops, and chicken an immediate sear.',
+        'Reheat pizza like a pro: Reheating cold pizza at 350°F (175°C) for 3 to 4 minutes delivers a crispy crust with melted cheese, far superior to a microwave.',
+      ],
+      faqs: [
+        {
+          question: 'What is the golden rule for converting oven recipes to an air fryer?',
+          answer:
+            'The standard rule of thumb is the 20/20 or 25/20 rule: reduce the conventional oven temperature by 25°F (15°C) and decrease the cooking time by 20% to 25%. Always check food 5 minutes before the estimated time finishes to avoid overcooking.',
+        },
+        {
+          question: 'Do you need to preheat an air fryer?',
+          answer:
+            'While not strictly required, preheating for 2 to 3 minutes helps achieve maximum crispiness on items like steaks, breaded chicken, and french fries. For baked goods or delicate vegetables, preheating is usually unnecessary.',
+        },
+        {
+          question: 'Why is my air fryer food not crispy?',
+          answer:
+            'The most common causes of soggy air fryer food are overcrowding the basket (which traps steam instead of circulating dry heat), not patting foods dry with paper towels before seasoning, or forgetting to shake/flip the food halfway through.',
+        },
+        {
+          question: 'Can you put aluminum foil or parchment paper in an air fryer?',
+          answer:
+            'Yes, but ensure the food weighs down the foil or parchment paper so it doesn\'t get sucked into the heating element, which creates a fire hazard. Perforated parchment liners designed specifically for air fryers allow optimal airflow.',
+        },
+        {
+          question: 'How do you convert Celsius oven recipes to air fryer?',
+          answer:
+            'For Celsius recipes, reduce the oven temperature by 15°C (e.g. 200°C oven becomes 185°C air fryer) and multiply the cooking time by 0.80 (a 20% time reduction).',
+        },
+        {
+          question: 'How much electricity and money does an air fryer save compared to an oven?',
+          answer:
+            'A typical air fryer uses 1,400 to 1,700 watts and requires no extensive 15-minute preheat, whereas a standard electric oven draws 3,000 to 5,000 watts. Because air fryers also cook 20% faster, they use roughly 50% to 70% less energy per meal.',
+        },
+      ],
+    },
+  },
   ...NUMEROLOGY_CALCULATORS,
   ...PAYROLL_CALCULATORS,
   ...INVESTMENT_CALCULATORS,
