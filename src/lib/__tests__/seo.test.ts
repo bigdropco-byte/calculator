@@ -6,6 +6,7 @@ import {
   generateCollectionPageSchema,
   generateWebPageSchema,
   generateBreadcrumbSchema,
+  generateVideoSchema,
   getApplicationCategory,
   SITE_CONFIG,
 } from '../seo';
@@ -100,4 +101,18 @@ describe('SEO & Canonical URL Utilities', () => {
     expect(schema.itemListElement[2].item).toBe('https://calculat.dev/categories/math/');
     expect(schema.itemListElement[3].item).toBe('https://calculat.dev/calculators/percentage-calculator/');
   });
+
+  it('generates valid Google VideoObject schema for the homepage explainer video', () => {
+    const videoSchema = generateVideoSchema();
+    expect(videoSchema['@context']).toBe('https://schema.org');
+    expect(videoSchema['@type']).toBe('VideoObject');
+    expect(videoSchema['@id']).toBe('https://calculat.dev/#how-it-works-video');
+    expect(videoSchema.name).toContain('How Calculat Works');
+    expect(videoSchema.duration).toBe('PT18S');
+    expect(videoSchema.contentUrl).toBe('https://calculat.dev/how-calculat-works.mp4');
+    expect(videoSchema.embedUrl).toBe('https://calculat.dev/#how-it-works');
+    expect(videoSchema.thumbnailUrl).toContain('https://calculat.dev/how-calculat-works-poster.jpg');
+    expect(videoSchema.publisher['@type']).toBe('Organization');
+  });
 });
+

@@ -269,3 +269,35 @@ export function generateFaqSchema(faqs: { question: string; answer: string }[]) 
   };
 }
 
+export function generateVideoSchema() {
+  const canonicalUrl = `${SITE_CONFIG.url}/#how-it-works`;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    '@id': `${canonicalUrl}-video`,
+    name: 'How Calculat Works – 6 Easy Steps to Instant & Private Calculations',
+    description:
+      'Learn how Calculat.dev works in 6 simple steps: Search or browse 240+ free calculators, input values, get instant step-by-step results, and save calculations with 100% client-side privacy.',
+    thumbnailUrl: [
+      `${SITE_CONFIG.url}/how-calculat-works-poster.jpg`,
+      `${SITE_CONFIG.url}/how-calculat-works.jpg`,
+    ],
+    uploadDate: '2026-09-18T00:00:00Z',
+    duration: 'PT18S',
+    contentUrl: `${SITE_CONFIG.url}/how-calculat-works.mp4`,
+    embedUrl: `${SITE_CONFIG.url}/#how-it-works`,
+    inLanguage: 'en',
+    publisher: {
+      '@type': 'Organization',
+      '@id': `${SITE_CONFIG.url}/#organization`,
+      name: SITE_CONFIG.name,
+      url: `${SITE_CONFIG.url}/`,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_CONFIG.url}/android-chrome-192x192.png`,
+      },
+    },
+  };
+}
+
+

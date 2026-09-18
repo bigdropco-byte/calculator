@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Image from 'next/image';
 import {
   Sparkles,
@@ -12,6 +14,10 @@ import {
   ShieldCheck,
   Smartphone,
   RefreshCw,
+  Play,
+  ImageIcon,
+  Clock,
+  Lock,
 } from 'lucide-react';
 
 const STEPS = [
@@ -88,6 +94,8 @@ const HIGHLIGHTS = [
 ];
 
 export const HowItWorksSection: React.FC = () => {
+  const [activeView, setActiveView] = useState<'video' | 'infographic'>('video');
+
   return (
     <section
       id="how-it-works"
@@ -111,30 +119,125 @@ export const HowItWorksSection: React.FC = () => {
         </p>
       </div>
 
-      {/* Infographic Graphic with SEO Alt Text and Semantic Schema Reference */}
-      <figure className="relative w-full aspect-[2/1] rounded-xl sm:rounded-2xl overflow-hidden border border-slate-200/80 bg-slate-50 shadow-xs">
-        <Image
-          src="/how-calculat-works.jpg"
-          alt="How Calculat.dev Works: 6-step infographic guide explaining how to search or browse calculators, enter values, calculate instantly, view accurate results, and save or share calculations for math, finance, health, and everyday use"
-          title="Calculat.dev - How It Works: Powerful Calculators, Instant Results, 100% Free"
-          width={1024}
-          height={512}
-          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1024px"
-          className="w-full h-auto object-contain block select-none"
-          loading="eager"
-          decoding="async"
-        />
-        <figcaption className="sr-only">
-          Calculat.dev How It Works 6-step process: 
-          1. Search or Browse: Find the calculator you need using search or explore categories and popular tools. 
-          2. Choose a Calculator: Select any calculator that matches your need. Each tool is designed to be simple and easy to use. 
-          3. Enter Your Values: Input the required numbers or details. Our calculators support real-time validation for accuracy. 
-          4. Calculate Instantly: Click the calculate button and get instant, accurate results in a fraction of a second. 
-          5. View Results: See your results clearly displayed with explanations to help you understand better. 
-          6. Use, Save &amp; Share: Use the results, reset for new calculations, or share with others if needed. 
-          Highlights: 100% Free, Fast &amp; Accurate, Privacy Friendly, Mobile Friendly, and Always Updated.
-        </figcaption>
-      </figure>
+      {/* Media Selector Tabs & Badges */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+        <div className="flex items-center gap-2" role="tablist" aria-label="Media format">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeView === 'video'}
+            aria-controls="how-it-works-video-panel"
+            onClick={() => setActiveView('video')}
+            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-colors ${
+              activeView === 'video'
+                ? 'bg-sky-600 text-white shadow-xs'
+                : 'bg-slate-100 text-slate-600 hover:bg-slate-200/80 hover:text-slate-900'
+            }`}
+          >
+            <Play className="w-3.5 h-3.5 fill-current" />
+            <span>Video Guide</span>
+            <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${activeView === 'video' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'}`}>
+              18s
+            </span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeView === 'infographic'}
+            aria-controls="how-it-works-infographic-panel"
+            onClick={() => setActiveView('infographic')}
+            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-colors ${
+              activeView === 'infographic'
+                ? 'bg-sky-600 text-white shadow-xs'
+                : 'bg-slate-100 text-slate-600 hover:bg-slate-200/80 hover:text-slate-900'
+            }`}
+          >
+            <ImageIcon className="w-3.5 h-3.5" />
+            <span>Infographic Diagram</span>
+          </button>
+        </div>
+
+        <div className="flex items-center gap-3 text-xs text-slate-500 font-medium">
+          <span className="inline-flex items-center gap-1">
+            <Clock className="w-3.5 h-3.5 text-sky-600" />
+            18s Quick Walkthrough
+          </span>
+          <span className="hidden sm:inline text-slate-300">•</span>
+          <span className="inline-flex items-center gap-1">
+            <Lock className="w-3.5 h-3.5 text-emerald-600" />
+            Zero Tracking &amp; Complete Privacy
+          </span>
+        </div>
+      </div>
+
+      {/* Video View Panel */}
+      <div
+        id="how-it-works-video-panel"
+        role="tabpanel"
+        aria-labelledby="how-it-works-title"
+        className={activeView === 'video' ? 'block' : 'hidden'}
+      >
+        <figure className="relative w-full aspect-video rounded-xl sm:rounded-2xl overflow-hidden border border-slate-200/80 bg-slate-950 shadow-xs">
+          <video
+            controls
+            playsInline
+            preload="metadata"
+            poster="/how-calculat-works-poster.jpg"
+            className="w-full h-full object-contain"
+            aria-label="How Calculat Works - Official 6-Step Video Guide"
+          >
+            <source src="/how-calculat-works.mp4" type="video/mp4" />
+            <p className="p-4 text-sm text-slate-200">
+              Your browser does not support HTML5 video. You can view our step-by-step instructions below or download the video directly:{' '}
+              <a href="/how-calculat-works.mp4" className="text-sky-400 underline">
+                how-calculat-works.mp4
+              </a>.
+            </p>
+          </video>
+          <figcaption className="sr-only">
+            How Calculat.dev Works (18 seconds video guide):
+            00:00 - Welcome: Fast, accurate calculations in 6 easy steps with 100% privacy and 240+ calculators.
+            00:03 - Step 1: Search or browse by category (Math, Finance, Health, Everyday, Dates &amp; Time, Conversion).
+            00:06 - Steps 2 &amp; 3: Open any calculator and enter your numbers with live validation and presets.
+            00:09 - Steps 4 &amp; 5: Get instant calculation results and step-by-step breakdown with transparent formulas.
+            00:12 - Step 6: Copy results, bookmark tools, and enjoy zero tracking and complete privacy.
+            00:15 - Outro: Ready to calculate? Visit https://calculat.dev.
+          </figcaption>
+        </figure>
+      </div>
+
+      {/* Infographic View Panel */}
+      <div
+        id="how-it-works-infographic-panel"
+        role="tabpanel"
+        aria-labelledby="how-it-works-title"
+        className={activeView === 'infographic' ? 'block' : 'hidden'}
+      >
+        <figure className="relative w-full aspect-[2/1] rounded-xl sm:rounded-2xl overflow-hidden border border-slate-200/80 bg-slate-50 shadow-xs">
+          <Image
+            src="/how-calculat-works.jpg"
+            alt="How Calculat.dev Works: 6-step infographic guide explaining how to search or browse calculators, enter values, calculate instantly, view accurate results, and save or share calculations for math, finance, health, and everyday use"
+            title="Calculat.dev - How It Works: Powerful Calculators, Instant Results, 100% Free"
+            width={1024}
+            height={512}
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1024px"
+            className="w-full h-auto object-contain block select-none"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption className="sr-only">
+            Calculat.dev How It Works 6-step process: 
+            1. Search or Browse: Find the calculator you need using search or explore categories and popular tools. 
+            2. Choose a Calculator: Select any calculator that matches your need. Each tool is designed to be simple and easy to use. 
+            3. Enter Your Values: Input the required numbers or details. Our calculators support real-time validation for accuracy. 
+            4. Calculate Instantly: Click the calculate button and get instant, accurate results in a fraction of a second. 
+            5. View Results: See your results clearly displayed with explanations to help you understand better. 
+            6. Use, Save &amp; Share: Use the results, reset for new calculations, or share with others if needed. 
+            Highlights: 100% Free, Fast &amp; Accurate, Privacy Friendly, Mobile Friendly, and Always Updated.
+          </figcaption>
+        </figure>
+      </div>
+
 
       {/* 6-Step Accessible Grid */}
       <div>

@@ -17,6 +17,7 @@ import { StudentRoadmapWidget } from '@/components/directory/StudentRoadmapWidge
 import {
   SITE_CONFIG,
   generateWebSiteSchema,
+  generateVideoSchema,
   getCanonicalUrl,
   getCanonicalAlternates,
 } from '@/lib/seo';
@@ -55,9 +56,10 @@ export default function HomePage() {
   const recentCalculators = getRecentCalculatorsList(4);
   const activeCategories = getActiveCategoriesWithCount();
 
-  // Structured Data for WebSite with SearchAction and HowTo visual guide
+  // Structured Data for WebSite with SearchAction, VideoObject, and HowTo visual guide
   const jsonLd = [
     generateWebSiteSchema(),
+    generateVideoSchema(),
     {
       '@context': 'https://schema.org',
       '@type': 'HowTo',
